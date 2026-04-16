@@ -8,11 +8,11 @@ export default function TraditionPage() {
       {/* Hero Section */}
       <div className="tradition-hero">
         <img
-          src="/logo.png"
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="Logo Trung đoàn 4"
           className="tradition-hero-logo"
         />
-        <h2>{traditionData.heroTitle}</h2>
+        <h2 style={{ whiteSpace: 'pre-line' }}>{traditionData.heroTitle}</h2>
         <p className="tradition-division">{traditionData.division}</p>
         <p className="tradition-motto">
           <span className="motto-label">{traditionData.mottoSource}:</span>

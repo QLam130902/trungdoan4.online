@@ -5,10 +5,9 @@ export const traditionData = {
   foundedDate: "03/02/1965",
   foundedPlace:
     "Ngã ba Cổng Xanh, huyện Tân Uyên, tỉnh Phước Thành (nay thuộc tỉnh Bình Dương)",
-  motto: "Kiên cường bám trụ, lẫy lừng chiến công",
+  motto: "KIÊN CƯỜNG BÁM TRỤ, LẪY LỪNG CHIẾN CÔNG",
   mottoSource: "Bộ Tư lệnh Miền tặng 8 chữ vàng",
-  heroTitle:
-    "60 NĂM XÂY DỰNG, CHIẾN ĐẤU, TRƯỞNG THÀNH CỦA TRUNG ĐOÀN BỘ BINH 4 ANH HÙNG",
+  heroTitle: "60 NĂM XÂY DỰNG, CHIẾN ĐẤU VÀ TRƯỞNG THÀNH CỦA TRUNG ĐOÀN BỘ BINH 4 ANH HÙNG",
   heroAwards: [
     "2 lần tuyên dương danh hiệu Anh hùng Lực lượng vũ trang nhân dân (năm 1973 và 1979)",
   ],

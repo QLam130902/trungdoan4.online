@@ -15,7 +15,7 @@ export default function Header() {
     <header className="header">
       <div className="header-inner">
         <img
-          src="/logof.png"
+          src={`${import.meta.env.BASE_URL}logof.png`}
           alt="Logo đơn vị"
           className="header-logo header-logo-left"
         />
@@ -24,7 +24,7 @@ export default function Header() {
           <p>TRUNG ĐOÀN BB4 — SƯ ĐOÀN BB5</p>
         </div>
         <img
-          src="/logo.png"
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="Logo Trung đoàn 4 - Sư đoàn 5"
           className="header-logo header-logo-right"
         />

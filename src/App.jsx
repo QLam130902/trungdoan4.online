@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import ClientLayout from "./layouts/ClientLayout";
 import AdminLayout from "./layouts/AdminLayout";
 import FeedbackPage from "./pages/client/FeedbackPage";
@@ -10,7 +10,7 @@ import FeedbackListPage from "./pages/admin/FeedbackListPage";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         {/* Client pages */}
         <Route element={<ClientLayout />}>
@@ -25,6 +25,6 @@ export default function App() {
           <Route path="gop-y" element={<FeedbackListPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

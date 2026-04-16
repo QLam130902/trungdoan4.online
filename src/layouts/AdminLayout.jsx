@@ -14,7 +14,7 @@ export default function AdminLayout() {
     <div className="admin-layout">
       <aside className="admin-sidebar">
         <div className="admin-sidebar-header">
-          <img src="/logo.png" alt="Logo" className="admin-logo" />
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="admin-logo" />
           <div>
             <h2>QUẢN TRỊ</h2>
             <p>Trung đoàn 4</p>
