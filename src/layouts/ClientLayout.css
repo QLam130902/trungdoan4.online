@@ -1,0 +1,30 @@
+.client-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(180deg, #FFFDF0 0%, #FFF9E6 40%, #FFF5D6 100%);
+}
+
+.client-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.client-content {
+  width: 100%;
+  max-width: 640px;
+  padding: 20px 16px 24px;
+}
+
+@media (max-width: 480px) {
+  .client-content {
+    padding: 12px 8px 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .client-content {
+    padding: 10px 6px 16px;
+  }
+}

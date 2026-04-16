@@ -1,0 +1,136 @@
+/* ===== Feedback Page ===== */
+.feedback-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== Panels ===== */
+.panels-wrapper {
+  position: relative;
+  min-height: 420px;
+}
+
+.panel {
+  display: none;
+  animation: panelFadeIn 250ms ease;
+}
+
+.panel.visible {
+  display: block;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Identity Toggle ===== */
+.identity-toggle {
+  display: flex;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--gray-50);
+}
+
+.identity-option {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--gray-500);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.identity-option:first-child {
+  border-right: 1.5px solid var(--gray-200);
+}
+
+.identity-option.active {
+  background: var(--white);
+  color: var(--red-500);
+  box-shadow: var(--shadow-sm);
+}
+
+.identity-option:hover:not(.active) {
+  background: var(--gray-100);
+  color: var(--gray-700);
+}
+
+/* ===== Sender slide ===== */
+.sender-slide {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 300ms ease, opacity 200ms ease;
+}
+
+.sender-slide.visible {
+  max-height: 100px;
+  opacity: 1;
+}
+
+/* ===== Lookup intro ===== */
+.lookup-intro {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  background: var(--sky-50);
+  border: 1px solid var(--sky-100);
+  border-radius: var(--radius-md);
+}
+
+.lookup-intro p {
+  font-size: 13px;
+  color: var(--sky-600);
+  line-height: 1.6;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .panels-wrapper {
+    min-height: 380px;
+  }
+
+  .identity-option {
+    padding: 10px 8px;
+    min-height: 44px;
+    font-size: 12px;
+  }
+
+  .lookup-intro {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+  }
+
+  .lookup-intro p {
+    font-size: 12px;
+  }
+
+  .error-msg {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+
+  .status-result {
+    font-size: 13px;
+    padding: 10px 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}

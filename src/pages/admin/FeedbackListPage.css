@@ -1,0 +1,145 @@
+.feedback-list-page {
+  max-width: 1000px;
+}
+
+.page-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--gray-800);
+}
+
+.page-subtitle {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+
+/* Table */
+.feedback-table-wrapper {
+  overflow-x: auto;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+}
+
+.feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.feedback-table th {
+  background: var(--gray-50);
+  padding: 12px 14px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--gray-600);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid var(--gray-200);
+  white-space: nowrap;
+}
+
+.feedback-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-700);
+}
+
+.feedback-table tr:last-child td {
+  border-bottom: none;
+}
+
+.feedback-table tr:hover td {
+  background: var(--gray-50);
+}
+
+.td-code {
+  font-family: 'Courier New', monospace;
+  font-weight: 600;
+  color: var(--red-500) !important;
+  white-space: nowrap;
+}
+
+.td-content {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.td-date {
+  white-space: nowrap;
+  color: var(--gray-400) !important;
+  font-size: 12px;
+}
+
+/* Status Select */
+.status-select {
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--gray-200);
+  font-size: 12px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-new {
+  background: var(--sky-50);
+  color: var(--sky-600);
+  border-color: var(--sky-100);
+}
+
+.status-progress {
+  background: var(--gold-50);
+  color: var(--gold-600);
+  border-color: var(--gold-100);
+}
+
+.status-done {
+  background: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success-border);
+}
+
+/* Delete button */
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background var(--transition-fast);
+}
+
+.btn-delete:hover {
+  background: var(--danger-bg);
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: var(--gray-500);
+}
+
+@media (max-width: 768px) {
+  .feedback-table {
+    font-size: 12px;
+  }
+
+  .feedback-table th,
+  .feedback-table td {
+    padding: 8px 10px;
+  }
+
+  .td-content {
+    max-width: 150px;
+  }
+}

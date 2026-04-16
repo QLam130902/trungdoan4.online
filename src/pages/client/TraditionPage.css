@@ -1,0 +1,342 @@
+/* ===== Tradition Page ===== */
+.tradition-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ===== Hero ===== */
+.tradition-hero {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.tradition-hero-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--gold-400);
+  box-shadow: 0 0 0 4px rgba(240, 200, 80, 0.2);
+  margin-bottom: 14px;
+}
+
+.tradition-hero h2 {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--red-600);
+  margin-bottom: 8px;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.tradition-division {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin-bottom: 12px;
+}
+
+.tradition-motto {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold-600);
+  font-style: italic;
+  padding: 10px 16px;
+  background: var(--gold-50);
+  border: 1px solid var(--gold-100);
+  border-radius: var(--radius-md);
+  display: inline-block;
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
+
+.motto-label {
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--gray-500);
+}
+
+.tradition-date {
+  font-size: 13px;
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.tradition-date strong {
+  color: var(--red-500);
+  font-size: 14px;
+}
+
+.tradition-place {
+  font-size: 12px;
+  color: var(--gray-400);
+  line-height: 1.5;
+  padding: 0 10px;
+}
+
+/* ===== Overview Card ===== */
+.tradition-overview-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  padding-left: 18px;
+}
+
+.tradition-card-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.tradition-overview-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 10px;
+}
+
+.tradition-overview-card p {
+  font-size: 14px;
+  color: var(--gray-600);
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* ===== Section Headers ===== */
+.tradition-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+  border-radius: var(--radius-lg);
+  margin-top: 4px;
+}
+
+.tradition-section-header h3 {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tradition-section-header--gold {
+  background: linear-gradient(135deg, #b8860b, #daa520);
+}
+
+.section-star {
+  font-size: 14px;
+}
+
+.tradition-subsection-header {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red-600);
+  padding: 10px 14px;
+  background: var(--red-50, #fef2f2);
+  border-left: 3px solid var(--red-500);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+/* ===== Recent Achievements ===== */
+.tradition-recent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tradition-year-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 14px 14px 14px 56px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.year-badge {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  width: 36px;
+  height: 22px;
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.achievement-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.achievement-list li {
+  font-size: 13px;
+  color: var(--gray-700);
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.achievement-bullet {
+  color: var(--gold-500);
+  font-size: 10px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* ===== Heroes Grid ===== */
+.tradition-heroes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tradition-hero-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 14px 14px 14px 48px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+}
+
+.hero-card-badge {
+  position: absolute;
+  left: 12px;
+  top: 14px;
+  width: 26px;
+  height: 26px;
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500, #d4a017));
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.individual-badge {
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+}
+
+.tradition-hero-card h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 4px;
+}
+
+.tradition-hero-card p {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+.hero-date {
+  font-style: italic;
+}
+
+.collective-card {
+  border-left: 3px solid var(--gold-400);
+}
+
+.individual-card {
+  border-left: 3px solid var(--red-400);
+}
+
+/* ===== Documentary Link ===== */
+.tradition-documentary-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-top: 4px;
+}
+
+.tradition-documentary-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.doc-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+}
+
+.doc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.doc-text strong {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.doc-sub {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 480px) {
+  .tradition-hero {
+    padding: 20px 14px;
+  }
+
+  .tradition-hero-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .tradition-hero h2 {
+    font-size: 15px;
+  }
+
+  .tradition-section-header h3 {
+    font-size: 12px;
+  }
+
+  .tradition-hero-card {
+    padding: 12px 12px 12px 42px;
+  }
+
+  .hero-card-badge {
+    left: 10px;
+    top: 12px;
+    width: 22px;
+    height: 22px;
+    font-size: 11px;
+  }
+}
