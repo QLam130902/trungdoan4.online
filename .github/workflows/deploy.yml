@@ -1,0 +1,54 @@
+name: Deploy Vite App to GitHub Pages
+
+on:
+  # Lệnh này sẽ tự động chạy khi bạn push code lên các nhánh dưới đây:
+  push:
+    branches: ["main", "master", "chore/setup-github-pages"]
+  
+  # Cho phép bạn chạy thủ công kịch bản này từ giao diện GitHub
+  workflow_dispatch:
+
+# Cấp quyền cho GitHub Actions có thể xuất bản lên môi trường Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Tránh việc chạy 2 lần deploy cùng lúc khi có nhiều người push dồn dập
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Lấy mã nguồn về máy chủ GitHub
+        uses: actions/checkout@v4
+
+      - name: 2. Cài đặt Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 3. Cài đặt các thư viện (Dependencies)
+        run: npm ci
+
+      - name: 4. Build mã nguồn ra thư mục dist
+        run: npm run build
+
+      - name: 5. Cấu hình môi trường Pages
+        uses: actions/configure-pages@v4
+
+      - name: 6. Đóng gói thư mục dist thành Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+      - name: 7. Bấm nút Deploy xuất bản lên Web chính thức
+        id: deployment
+        uses: actions/deploy-pages@v4
