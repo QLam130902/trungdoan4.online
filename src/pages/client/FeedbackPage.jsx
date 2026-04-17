@@ -49,7 +49,7 @@ export default function FeedbackPage() {
       };
 
       // 2. Giao tiếp với API Backend qua fetch
-      const response = await fetch("http://160.187.229.25/suggestions", {
+      const response = await fetch("http://160.187.229.25:8080/suggestions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ export default function FeedbackPage() {
     setIsLookupLoading(true);
 
     try {
-      const response = await fetch(`http://160.187.229.25/suggestions/lookup/${code}`);
+      const response = await fetch(`http://160.187.229.25:8080/suggestions/lookup/${code}`);
       
       if (response.status === 404) {
         throw new Error("Không tìm thấy mã góp ý. Vui lòng kiểm tra lại.");
