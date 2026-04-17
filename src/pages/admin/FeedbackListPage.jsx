@@ -10,7 +10,7 @@ export default function FeedbackListPage() {
 
   // 1. Lấy dữ liệu thực từ API
   const fetchFeedbacks = () => {
-    fetch("http://localhost:8080/suggestions")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions`)
       .then((res) => res.json())
       .then((data) => setFeedbacks(data))
       .catch((err) => console.error("Lỗi khi tải danh sách góp ý", err));
@@ -24,7 +24,7 @@ export default function FeedbackListPage() {
   const deleteFeedback = async (id) => {
     if (window.confirm("Bạn có chắc muốn xóa góp ý này? Sự kiện gọi Soft Delete ở Backend.")) {
       try {
-        const res = await fetch(`http://localhost:8080/suggestions/${id}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${id}`, {
           method: "DELETE",
         });
         if (res.ok) {
@@ -52,7 +52,7 @@ export default function FeedbackListPage() {
     }
     setIsSubmitting(true);
     try {
-      const res = await fetch(`http://localhost:8080/suggestions/${replyModalData.id}/reply`, {
+      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${replyModalData.id}/reply`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ response: replyText }),
