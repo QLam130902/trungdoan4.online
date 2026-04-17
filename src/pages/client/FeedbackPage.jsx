@@ -18,12 +18,13 @@ export default function FeedbackPage() {
   const [feedback, setFeedback] = useState("");
   const [error, setError] = useState("");
   const [submittedCode, setSubmittedCode] = useState("");
-  const [records, setRecords] = useState({});
+  const [isLoading, setIsLoading] = useState(false); // State quản lý loading khi gọi API POST
+  const [isLookupLoading, setIsLookupLoading] = useState(false); // State loading cho API GET Lookup
   const [lookupCode, setLookupCode] = useState("");
-  const [lookupResult, setLookupResult] = useState("");
+  const [lookupResult, setLookupResult] = useState(null); // Thay đổi thành null vì kết quả nhận về là Object
   const [lookupError, setLookupError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
 
@@ -37,30 +38,52 @@ export default function FeedbackPage() {
       return;
     }
 
-    const newCode = createFeedbackCode();
-    const statuses = [
-      "Đã tiếp nhận",
-      "Đang xử lý",
-      "Đã phản hồi và hoàn tất",
-    ];
-    const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+    setIsLoading(true);
 
-    setSubmittedCode(newCode);
-    setRecords((prev) => ({
-      ...prev,
-      [newCode]: randomStatus,
-    }));
+    try {
+      // 1. Chuẩn bị dữ liệu gửi lên API Backend
+      const payload = {
+        body: feedback,
+        suggestedBy: isAnonymous ? "Ẩn danh" : senderName,
+        handledBy: selectedOfficer || null,
+      };
 
-    setFeedback("");
-    setSenderName("");
-    setSelectedOfficer("");
-    setIsAnonymous(true);
+      // 2. Giao tiếp với API Backend qua fetch
+      const response = await fetch("http://localhost:8080/suggestions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Lỗi khi gọi API, vui lòng kiểm tra server Backend!");
+      }
+
+      const data = await response.json();
+
+      // 3. Lấy trackingCode do Backend cung cấp thay vì random frontend
+      setSubmittedCode(data.trackingCode);
+
+      // (Tạm thời không cập nhật records ảo nữa mà nên có phần gọi api GET để tra cứu sau)
+
+      // Xóa trắng form
+      setFeedback("");
+      setSenderName("");
+      setSelectedOfficer("");
+      setIsAnonymous(true);
+    } catch (err) {
+      setError(err.message || "Lỗi không xác định");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const handleLookup = (event) => {
+  const handleLookup = async (event) => {
     event.preventDefault();
     setLookupError("");
-    setLookupResult("");
+    setLookupResult(null);
 
     const code = lookupCode.trim().toUpperCase();
     if (!code) {
@@ -68,12 +91,26 @@ export default function FeedbackPage() {
       return;
     }
 
-    if (!records[code]) {
-      setLookupError("Không tìm thấy mã góp ý. Vui lòng kiểm tra lại.");
-      return;
-    }
+    setIsLookupLoading(true);
 
-    setLookupResult(records[code]);
+    try {
+      const response = await fetch(`http://localhost:8080/suggestions/lookup/${code}`);
+      
+      if (response.status === 404) {
+        throw new Error("Không tìm thấy mã góp ý. Vui lòng kiểm tra lại.");
+      }
+      
+      if (!response.ok) {
+        throw new Error("Lỗi kết nối tới Backend!");
+      }
+
+      const data = await response.json();
+      setLookupResult(data);
+    } catch (err) {
+      setLookupError(err.message || "Đã xảy ra lỗi hệ thống.");
+    } finally {
+      setIsLookupLoading(false);
+    }
   };
 
   return (
@@ -166,8 +203,8 @@ export default function FeedbackPage() {
                 </div>
               )}
 
-              <button type="submit" className="btn-primary">
-                Gửi góp ý
+              <button type="submit" className="btn-primary" disabled={isLoading}>
+                {isLoading ? "Đang gửi..." : "Gửi góp ý"}
               </button>
             </form>
           </div>
@@ -206,15 +243,24 @@ export default function FeedbackPage() {
 
               {lookupResult && (
                 <div className="status-result">
-                  <span>✅</span>
-                  <span>
-                    Trạng thái: <strong>{lookupResult}</strong>
-                  </span>
+                  <div className="status-header">
+                    <span>✅</span>
+                    <span>
+                      Trạng thái: <strong>{lookupResult.status === "PENDING" ? "Đang chờ xử lý" : (lookupResult.status === "RESOLVED" ? "Đã phản hồi và hoàn tất" : lookupResult.status)}</strong>
+                    </span>
+                  </div>
+                  
+                  {lookupResult.status === "RESOLVED" && lookupResult.response && (
+                    <div className="response-box" style={{ marginTop: "15px", padding: "10px", backgroundColor: "#f9f9f9", borderLeft: "4px solid #4CAF50", borderRadius: "4px" }}>
+                      <strong>Kết quả xử lý / Phản hồi:</strong>
+                      <p style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>{lookupResult.response}</p>
+                    </div>
+                  )}
                 </div>
               )}
 
-              <button type="submit" className="btn-secondary">
-                Tra cứu
+              <button type="submit" className="btn-secondary" disabled={isLookupLoading}>
+                {isLookupLoading ? "Đang tra cứu..." : "Tra cứu"}
               </button>
             </form>
           </div>

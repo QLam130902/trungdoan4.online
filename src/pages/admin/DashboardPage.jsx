@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./DashboardPage.css";
 
 export default function DashboardPage() {
-  // Mock data
-  const stats = [
-    { label: "Tổng góp ý", value: 128, icon: "📝", color: "red" },
-    { label: "Đã xử lý", value: 95, icon: "✅", color: "green" },
-    { label: "Đang xử lý", value: 23, icon: "⏳", color: "gold" },
-    { label: "Chờ tiếp nhận", value: 10, icon: "📥", color: "sky" },
-  ];
+  const [stats, setStats] = useState([
+    { label: "Tổng góp ý", value: 0, icon: "📝", color: "red" },
+    { label: "Đã xử lý", value: 0, icon: "✅", color: "green" },
+    { label: "Chờ tiếp nhận", value: 0, icon: "⏳", color: "gold" },
+  ]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/suggestions")
+      .then((res) => res.json())
+      .then((data) => {
+        const total = data.length;
+        const resolved = data.filter((d) => d.status === "RESOLVED").length;
+        const pending = data.filter((d) => d.status === "PENDING").length;
+
+        setStats([
+          { label: "Tổng góp ý", value: total, icon: "📝", color: "red" },
+          { label: "Đã xử lý", value: resolved, icon: "✅", color: "green" },
+          { label: "Chờ tiếp nhận", value: pending, icon: "⏳", color: "gold" },
+        ]);
+      })
+      .catch((err) => console.error("Lỗi tải thống kê:", err));
+  }, []);
 
   return (
     <div className="dashboard-page">
