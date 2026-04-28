@@ -9,7 +9,7 @@ export default function DashboardPage() {
   ]);
 
   useEffect(() => {
-    fetch("http://localhost:8080/suggestions")
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions`)
       .then((res) => res.json())
       .then((data) => {
         const total = data.length;
