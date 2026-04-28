@@ -95,11 +95,11 @@ export default function FeedbackPage() {
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/lookup/${code}`);
-      
+
       if (response.status === 404) {
         throw new Error("Không tìm thấy mã góp ý. Vui lòng kiểm tra lại.");
       }
-      
+
       if (!response.ok) {
         throw new Error("Lỗi kết nối tới Backend!");
       }
@@ -162,7 +162,7 @@ export default function FeedbackPage() {
                 </div>
               </div>
 
-              <div className="field">
+              <div className="field" style={{ display: "none" }}>
                 <label className="label" htmlFor="officer">
                   Cán bộ xử lý
                   <span className="optional-tag">không bắt buộc</span>
@@ -249,7 +249,7 @@ export default function FeedbackPage() {
                       Trạng thái: <strong>{lookupResult.status === "PENDING" ? "Đang chờ xử lý" : (lookupResult.status === "RESOLVED" ? "Đã phản hồi và hoàn tất" : lookupResult.status)}</strong>
                     </span>
                   </div>
-                  
+
                   {lookupResult.status === "RESOLVED" && lookupResult.response && (
                     <div className="response-box" style={{ marginTop: "15px", padding: "10px", backgroundColor: "#f9f9f9", borderLeft: "4px solid #4CAF50", borderRadius: "4px" }}>
                       <strong>Kết quả xử lý / Phản hồi:</strong>
