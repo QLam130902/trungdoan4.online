@@ -23,7 +23,7 @@ export default function FeedbackPage() {
   const [lookupCode, setLookupCode] = useState("");
   const [lookupResult, setLookupResult] = useState(null); // Thay đổi thành null vì kết quả nhận về là Object
   const [lookupError, setLookupError] = useState("");
-
+  const [isCopied, setIsCopied] = useState(false);
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
@@ -64,8 +64,17 @@ export default function FeedbackPage() {
       const data = await response.json();
 
       // 3. Lấy trackingCode do Backend cung cấp thay vì random frontend
-      setSubmittedCode(data.trackingCode);
+      const code = data.trackingCode;
+      setSubmittedCode(code);
+      setIsCopied(false);
 
+      // Tự động copy vào clipboard
+      try {
+        await navigator.clipboard.writeText(code);
+        setIsCopied(true);
+      } catch (err) {
+        console.error("Không thể copy tự động", err);
+      }
       // (Tạm thời không cập nhật records ảo nữa mà nên có phần gọi api GET để tra cứu sau)
 
       // Xóa trắng form
@@ -271,8 +280,34 @@ export default function FeedbackPage() {
       <Modal show={!!submittedCode} onClose={() => setSubmittedCode("")}>
         <div className="modal-icon">✓</div>
         <h2>Góp ý đã được ghi nhận</h2>
-        <div className="modal-code">{submittedCode}</div>
+        <div className="modal-code-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', margin: '15px 0' }}>
+          <div className="modal-code" style={{ margin: 0 }}>{submittedCode}</div>
+          <button 
+            type="button" 
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(submittedCode);
+                setIsCopied(true);
+              } catch (e) {
+                console.error("Copy failed", e);
+              }
+            }}
+            style={{ 
+              padding: '8px 12px', 
+              cursor: 'pointer', 
+              borderRadius: '4px', 
+              border: 'none',
+              backgroundColor: isCopied ? '#4CAF50' : '#e0e0e0', 
+              color: isCopied ? 'white' : '#333',
+              fontWeight: 'bold',
+              transition: 'all 0.2s'
+            }}
+          >
+            {isCopied ? "✓ Đã copy" : "📋 Copy"}
+          </button>
+        </div>
         <p className="modal-hint">
+          {isCopied ? <span style={{color: '#4CAF50', fontWeight: 'bold'}}>Mã tra cứu đã được tự động sao chép! </span> : ""}
           Lưu mã này để tra cứu trạng thái xử lý tại tab "Tra cứu trạng thái".
         </p>
         <button
