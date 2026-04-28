@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-  // Đặt base trùng với tên repository của bạn trên GitHub
-  base: '/trungdoan4.online/'
-})
+  // Tự nhận biết: build (lên Github Pages) thì dùng /trungdoan4.online/, chạy dev (local) thì dùng /
+  base: command === 'build' ? '/trungdoan4.online/' : '/'
+}))

@@ -3,7 +3,7 @@ name: Deploy Vite App to GitHub Pages
 on:
   # Lệnh này sẽ tự động chạy khi bạn push code lên các nhánh dưới đây:
   push:
-    branches: ["main", "master", "chore/setup-github-pages"]
+    branches: ["deploy/*"]
   
   # Cho phép bạn chạy thủ công kịch bản này từ giao diện GitHub
   workflow_dispatch:
