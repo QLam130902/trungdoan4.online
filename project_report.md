@@ -33,81 +33,65 @@
 
 ## II. Những gì đã hoàn thành ✅
 
-### Frontend
+### Hệ thống Đăng nhập & Phân quyền (Mới)
 | Hạng mục | Chi tiết |
 |---|---|
-| Kiến trúc trang | Multi-page với React Router: `/`, `/truyen-thong`, `/faq`, `/admin`, `/admin/gop-y` |
-| Layout phân tách | `ClientLayout` (Header + Footer) và `AdminLayout` (Sidebar + Header) riêng biệt |
-| Trang Góp ý | Form gửi (Ẩn danh / Công khai), chọn cán bộ xử lý, tra cứu bằng mã GY-XXXXXX |
-| Trang Truyền thống | Hiển thị thông tin lịch sử, anh hùng cá nhân/tập thể, link phim tài liệu |
-| Trang FAQ | Accordion hỏi đáp, dùng dữ liệu từ `faqData.js` |
-| Trang Admin | Dashboard thống kê (Tổng/Đã xử lý/Chờ) + Bảng danh sách góp ý |
-| Biến môi trường | `.env.development` → `localhost:8080`, `.env.production` → `https://trungdoan4.io.vn` |
-| CI/CD | GitHub Actions (`deploy.yml`) tự động build và deploy lên GitHub Pages |
-| Tích hợp API | `FeedbackListPage.jsx` và `FeedbackPage.jsx` đã dùng `import.meta.env.VITE_API_BASE_URL` |
+| Xác thực JWT | Backend sử dụng Spring Security + JWT. Token có thời hạn, bảo mật cao. |
+| Phân quyền Role-based | Chia 2 cấp độ: `ROLE_ADMIN` (Toàn quyền) và `ROLE_OFFICER` (Chỉ xử lý góp ý). |
+| Quản lý Cán bộ | Admin có trang riêng để tạo/xóa tài khoản cán bộ trong Modal. |
+| Protected Route | Frontend tự động chặn truy cập trái phép, đá về trang Login nếu chưa xác thực. |
+| Bảo mật | Ràng buộc không thể tự xóa tài khoản của chính mình. |
 
-### Backend
+### Tối ưu giao diện (UX/UI)
 | Hạng mục | Chi tiết |
 |---|---|
-| REST API | `POST /suggestions`, `GET /suggestions`, `GET /suggestions/lookup/{code}`, `PUT /suggestions/{id}/reply`, `DELETE /suggestions/{id}` |
-| Entity | `Suggestion` có đầy đủ: body, suggestedBy, handledBy, response, status, trackingCode, soft delete |
-| Service Layer | Đầy đủ logic: tạo mã định dạng ngày tháng, lọc soft delete, sắp xếp mới nhất lên đầu |
-| CORS | Đã mở `allowedOrigins("*")` để Frontend từ GitHub Pages gọi được |
-| Spring Profiles | `application-dev.properties` (local) / `application-prod.properties` (VPS) |
-| Systemd Service | `todoapp.service` giúp app chạy ngầm 24/7 và tự khởi động khi VPS reboot |
-| Nginx | Đã cài đặt, cấu hình Reverse Proxy chuyển cổng 80 → 8080 |
+| Responsive Triệt để | Layout Card List chuyên nghiệp trên Mobile, Table trên Desktop (Breakpoint 768px). |
+| Card Mật độ cao | Giao diện mobile tối ưu với icon (`💬`, `👤`, `🕒`), hiển thị đầy đủ thông tin trên một màn hình. |
+| Bộ lọc trạng thái | Thanh Tab Filter (Tất cả/Chưa xử lý/Đã xử lý) giúp quản lý công việc nhanh chóng. |
+| Desktop Layout | Nới rộng 1200px, căn chỉnh cột hợp lý, nút thao tác không bị ngắt dòng. |
+
+### Các tính năng cốt lõi khác
+| Hạng mục | Chi tiết |
+|---|---|
+| Trang Góp ý | Form gửi (Ẩn danh / Công khai), chọn cán bộ xử lý, tra cứu bằng mã GY-XXXXXX |
+| CI/CD | GitHub Actions tự động build và deploy lên GitHub Pages |
 
 ---
 
 ## III. Những việc còn dở dang ⚠️
 
-### 🔴 Ưu tiên Cao (Đã xử lý hoàn tất)
-*Ghi chú: Toàn bộ các vấn đề chặn Production dưới đây đã được chúng ta giải quyết triệt để sau khi báo cáo này được lập.*
-- [x] Kích hoạt HTTPS bằng Certbot
-- [x] Cấu hình Nginx proxy và sửa lỗi xung đột Iptables
-- [x] Thay thế URL cứng trong Dashboard bằng biến môi trường
-- [x] Triển khai luồng Release Branching qua Github Actions
-- [x] Tối ưu hóa Tracking Code (Định dạng ngày tháng + Ký tự: 280426A) và copy tự động ở Frontend.
+### 🔴 Ưu tiên Cao (Cần làm sớm)
+- [ ] **Backend Pagination (Phân trang)**: Khi số lượng góp ý vượt quá 100, cần phân trang để tránh lag máy.
+- [ ] **Dữ liệu thống kê Dashboard**: Hiện tại Dashboard cần được kết nối API thực tế để hiển thị biểu đồ tăng trưởng góp ý theo tháng.
 
-### 🟡 Ưu tiên Trung bình (Nên làm tiếp theo)
+### 🟡 Ưu tiên Trung bình
+- [ ] **Thông báo Realtime**: Gửi thông báo cho Admin khi có góp ý mới qua Telegram Bot hoặc Email.
+- [ ] **Xuất báo cáo**: Tính năng xuất danh sách góp ý ra file Excel để báo cáo chỉ huy định kỳ.
 
-**1. Không có cơ chế xác thực Admin**
-- Trang `/admin` và `/admin/gop-y` không có trang đăng nhập, không có bảo vệ bằng mật khẩu.
-- Bất kỳ ai biết đường dẫn đều có thể truy cập, xóa, phản hồi góp ý.
-- **Giải pháp đề xuất:** Thêm trang Login đơn giản với mật khẩu cứng hoặc tích hợp Spring Security.
-
-**2. Admin Dashboard thiếu tính năng lọc/tìm kiếm**
-- Hiện tại chỉ hiển thị toàn bộ danh sách theo thứ tự mới nhất lên đầu.
-- Không có chức năng lọc theo trạng thái (PENDING / RESOLVED), tìm kiếm theo tên người gửi.
+### 🟢 Ưu tiên Thấp
+- [ ] **Nhật ký hệ thống (Audit Log)**: Ghi lại lịch sử ai đã phản hồi góp ý nào để tăng tính minh bạch.
+- [ ] **Đổi mật khẩu**: Trang cá nhân cho cán bộ tự đổi mật khẩu định kỳ.
 
 ---
 
-### 🟢 Ưu tiên Thấp (Cải thiện về sau)
+## IV. Quy mô và Luồng dự án
 
-**3. Backend chưa có Pagination (Phân trang)**
-- API `GET /suggestions` trả về toàn bộ danh sách.
-- Khi số lượng góp ý lớn, hiệu năng sẽ giảm rõ rệt.
+### 1. Quy mô
+Dự án được thiết kế cho quy mô cấp Trung đoàn (Regiment), phục vụ hàng nghìn cán bộ chiến sĩ và thân nhân. Hệ thống có khả năng mở rộng lên cấp Sư đoàn nhờ kiến trúc Microservices-ready và Database quan hệ chặt chẽ.
 
-**4. Không có thông báo Email / Realtime**
-- Khi admin phản hồi, người gửi không được thông báo.
-- Người dùng phải chủ động vào tra cứu mã để biết kết quả.
-
-**5. Chưa có log quản lý hành động Admin**
-- Không ghi lại ai đã phản hồi góp ý nào, vào lúc nào.
+### 2. Luồng dữ liệu chính
+1. **Gửi góp ý**: Người dùng (Bộ đội/Thân nhân) -> Form Client -> Backend lưu DB -> Trả về mã Tra cứu.
+2. **Xử lý**: Admin/Cán bộ đăng nhập -> Xem danh sách (Lọc theo trạng thái) -> Phản hồi nội dung -> Status chuyển sang RESOLVED.
+3. **Tra cứu**: Người dùng nhập mã -> Hệ thống hiển thị nội dung phản hồi của Cán bộ (nếu có).
 
 ---
 
-## IV. Thông tin kỹ thuật cần lưu ý
+## V. Thông tin kỹ thuật cần lưu ý
 
 | Thông số | Giá trị |
 |---|---|
 | VPS IP | `160.187.229.25` |
-| VPS User | `root` |
-| VPS DB User | `admin` |
-| DB Name | `db_homthugopy` |
 | Tên miền | `trungdoan4.io.vn` |
-| Backend Port | `8080` |
-| Frontend GitHub | `QLam130902/trungdoan4.online` |
-| Backend Service | `todoapp` (systemd) |
-| Lệnh kiểm tra sống | `curl localhost:8080/suggestions` (trên SSH) |
-| Lệnh xem log | `journalctl -u todoapp -f` (trên SSH) |
+| Tài khoản Admin mặc định | `admin` / `admin123` (Cần đổi ngay sau khi triển khai) |
+| Backend Service | `todoapp` (Spring Boot 3.4) |
+| Frontend Host | GitHub Pages |
