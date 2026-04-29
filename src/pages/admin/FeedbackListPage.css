@@ -1,5 +1,6 @@
 .feedback-list-page {
-  max-width: 1000px;
+  max-width: 1200px;
+  width: 100%;
 }
 
 .page-title {
@@ -18,9 +19,9 @@
 /* Table */
 .feedback-table-wrapper {
   overflow-x: auto;
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--gold-300);
   border-radius: var(--radius-lg);
-  background: var(--white);
+  background: var(--gold-50);
   box-shadow: var(--shadow-sm);
 }
 
@@ -31,7 +32,7 @@
 }
 
 .feedback-table th {
-  background: var(--gray-50);
+  background: var(--gold-100);
   padding: 12px 14px;
   text-align: left;
   font-weight: 600;
@@ -54,7 +55,7 @@
 }
 
 .feedback-table tr:hover td {
-  background: var(--gray-50);
+  background: var(--gold-100);
 }
 
 .td-code {
@@ -65,7 +66,8 @@
 }
 
 .td-content {
-  max-width: 250px;
+  max-width: 1px;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -77,34 +79,168 @@
   font-size: 12px;
 }
 
-/* Status Select */
-.status-select {
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--gray-200);
+/* Status Badges (new consolidated style) */
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 6px;
   font-size: 12px;
-  font-family: inherit;
+  font-weight: 700;
+  white-space: nowrap;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.status-pending {
+  background: #FFF3E0;
+  color: #E65100;
+  border-color: #FF8C00;
+}
+
+.status-resolved {
+  background: #E8F5E9;
+  color: #1B5E20;
+  border-color: #388E3C;
+}
+
+
+
+/* Admin Actions Bar */
+.admin-actions-bar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+/* Status Filter Tabs */
+.status-filter-tabs {
+  display: flex;
+  background: var(--gold-100);
+  padding: 4px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gold-300);
+}
+
+.filter-tab {
+  padding: 6px 16px;
+  border: none;
+  background: none;
+  font-size: 13px;
   font-weight: 600;
+  color: var(--gray-500);
   cursor: pointer;
-  outline: none;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
 }
 
-.status-new {
-  background: var(--sky-50);
-  color: var(--sky-600);
-  border-color: var(--sky-100);
+.filter-tab.active {
+  background: var(--white);
+  color: var(--red-600);
+  box-shadow: var(--shadow-sm);
 }
 
-.status-progress {
+/* Mobile Card List */
+.feedback-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.feedback-card.compact {
+  background: var(--white);
+  border: 1px solid var(--gold-300);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.feedback-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.feedback-card-id {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--red-600);
+  font-size: 14px;
+}
+
+.status-badge.small {
+  padding: 3px 8px;
+  font-size: 11px;
+}
+
+.feedback-card-main {
   background: var(--gold-50);
-  color: var(--gold-600);
-  border-color: var(--gold-100);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--gold-400);
 }
 
-.status-done {
-  background: var(--success-bg);
-  color: var(--success);
-  border-color: var(--success-border);
+.feedback-card-body-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.icon-wrap {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.feedback-card-body {
+  font-size: 14px;
+  color: var(--gray-800);
+  margin: 0;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feedback-card-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--gray-500);
+  padding: 0 4px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.feedback-card-footer-compact {
+  margin-top: 5px;
+}
+
+.feedback-card-action-btn-compact {
+  width: 100%;
+  background: var(--red-600);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.feedback-card-action-btn-compact:active {
+  background: var(--red-700);
+  transform: scale(0.98);
 }
 
 /* Delete button */
@@ -129,17 +265,4 @@
   color: var(--gray-500);
 }
 
-@media (max-width: 768px) {
-  .feedback-table {
-    font-size: 12px;
-  }
 
-  .feedback-table th,
-  .feedback-table td {
-    padding: 8px 10px;
-  }
-
-  .td-content {
-    max-width: 150px;
-  }
-}

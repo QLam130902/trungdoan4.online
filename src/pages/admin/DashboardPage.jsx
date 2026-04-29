@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 import "./DashboardPage.css";
 
 export default function DashboardPage() {
+  const { getAuthHeaders } = useAuth();
   const [stats, setStats] = useState([
     { label: "Tổng góp ý", value: 0, icon: "📝", color: "red" },
     { label: "Đã xử lý", value: 0, icon: "✅", color: "green" },
@@ -9,7 +11,9 @@ export default function DashboardPage() {
   ]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions`)
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions`, {
+      headers: getAuthHeaders()
+    })
       .then((res) => res.json())
       .then((data) => {
         const total = data.length;

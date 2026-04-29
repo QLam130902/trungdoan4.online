@@ -24,8 +24,8 @@
 }
 
 .stat-card {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
+  background: var(--gold-50);
+  border: 1px solid var(--gold-300);
   border-radius: var(--radius-lg);
   padding: 18px;
   display: flex;

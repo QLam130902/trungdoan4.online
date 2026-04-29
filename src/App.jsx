@@ -7,24 +7,48 @@ import TraditionPage from "./pages/client/TraditionPage";
 import FAQPage from "./pages/client/FAQPage";
 import DashboardPage from "./pages/admin/DashboardPage";
 import FeedbackListPage from "./pages/admin/FeedbackListPage";
+import LoginPage from "./pages/admin/LoginPage";
+import UserManagementPage from "./pages/admin/UserManagementPage";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <HashRouter>
-      <Routes>
-        {/* Client pages */}
-        <Route element={<ClientLayout />}>
-          <Route path="/" element={<FeedbackPage />} />
-          <Route path="/truyen-thong" element={<TraditionPage />} />
-          <Route path="/faq" element={<FAQPage />} />
-        </Route>
+    <AuthProvider>
+      <HashRouter>
+        <Routes>
+          {/* Client pages */}
+          <Route element={<ClientLayout />}>
+            <Route path="/" element={<FeedbackPage />} />
+            <Route path="/truyen-thong" element={<TraditionPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+          </Route>
 
-        {/* Admin pages */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<DashboardPage />} />
-          <Route path="gop-y" element={<FeedbackListPage />} />
-        </Route>
-      </Routes>
-    </HashRouter>
+          {/* Admin Login */}
+          <Route path="/admin/login" element={<LoginPage />} />
+
+          {/* Admin pages */}
+          <Route 
+            path="/admin" 
+            element={
+              <ProtectedRoute>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
+            <Route index element={<DashboardPage />} />
+            <Route path="gop-y" element={<FeedbackListPage />} />
+            <Route 
+              path="can-bo" 
+              element={
+                <ProtectedRoute requireAdmin={true}>
+                  <UserManagementPage />
+                </ProtectedRoute>
+              } 
+            />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </AuthProvider>
   );
 }

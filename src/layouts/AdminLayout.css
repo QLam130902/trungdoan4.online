@@ -1,18 +1,24 @@
 .admin-layout {
   min-height: 100vh;
   display: flex;
-  background: var(--gray-50);
+  background: #FFF9E6;
 }
 
 /* ===== Sidebar ===== */
 .admin-sidebar {
   width: 240px;
-  background: var(--white);
-  border-right: 1px solid var(--gray-200);
+  background: var(--gold-100);
+  border-right: 1px solid var(--gold-300);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
 }
+
+.admin-mobile-user {
+  display: none; /* Hide on desktop */
+}
+
+
 
 .admin-sidebar-header {
   padding: 18px 16px;
@@ -64,12 +70,12 @@
 }
 
 .admin-nav-link:hover {
-  background: var(--gray-50);
-  color: var(--gray-800);
+  background: var(--gold-300);
+  color: var(--gray-900);
 }
 
 .admin-nav-link.active {
-  background: var(--red-50);
+  background: var(--red-100);
   color: var(--red-600);
   font-weight: 600;
 }
@@ -97,6 +103,18 @@
   overflow-y: auto;
 }
 
+/* User Management Form Grid */
+.user-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .admin-layout {
@@ -105,36 +123,55 @@
 
   .admin-sidebar {
     width: 100%;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     border-right: none;
     border-bottom: 1px solid var(--gray-200);
   }
 
+  .admin-sidebar-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--gold-300);
+    padding-right: 16px;
+  }
+
   .admin-sidebar-header {
     border-bottom: none;
-    padding: 10px 12px;
+    padding: 12px 16px;
+    justify-content: flex-start;
+  }
+
+  .admin-mobile-user {
+    display: block; /* Show on mobile */
   }
 
   .admin-nav {
     flex-direction: row;
-    padding: 0 8px;
-    gap: 4px;
-    flex: 1;
+    flex-wrap: wrap;
+    padding: 8px;
+    gap: 8px;
     justify-content: center;
   }
 
   .admin-nav-link {
-    padding: 8px 12px;
+    padding: 8px 14px;
     font-size: 13px;
+    flex: 1;
+    justify-content: center;
+    white-space: nowrap;
   }
 
   .admin-sidebar-footer {
-    border-top: none;
-    padding: 10px 12px;
+    display: none;
   }
 
   .admin-main {
     padding: 16px;
+  }
+
+  .user-form-grid {
+    grid-template-columns: 1fr;
   }
 }

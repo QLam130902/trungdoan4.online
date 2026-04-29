@@ -116,7 +116,7 @@ body {
 
 .input {
   width: 100%;
-  background: var(--white);
+  background: var(--gold-50);
   border: 1.5px solid var(--gray-200);
   border-radius: var(--radius-md);
   padding: 11px 14px;
@@ -210,7 +210,7 @@ select.input {
 
 /* ===== Shared Card ===== */
 .card {
-  background: var(--white);
+  background: var(--gold-50);
   border: 1px solid var(--gray-200);
   border-radius: var(--radius-lg);
   padding: 20px;
@@ -309,5 +309,23 @@ select.input {
   .card {
     padding: 14px;
     border-radius: var(--radius-md);
+  }
+}
+/* ===== Responsive Utilities ===== */
+.desktop-only {
+  display: block !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
   }
 }
