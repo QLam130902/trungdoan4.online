@@ -2,6 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import WelcomeModal from "../components/WelcomeModal";
 import "./ClientLayout.css";
 
 export default function ClientLayout() {
@@ -14,6 +15,7 @@ export default function ClientLayout() {
         </div>
       </main>
       <Footer />
+      <WelcomeModal />
     </div>
   );
 }

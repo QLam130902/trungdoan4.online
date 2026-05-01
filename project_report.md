@@ -49,6 +49,10 @@
 | Card Mật độ cao | Giao diện mobile tối ưu với icon (`💬`, `👤`, `🕒`), hiển thị đầy đủ thông tin trên một màn hình. |
 | Bộ lọc trạng thái | Thanh Tab Filter (Tất cả/Chưa xử lý/Đã xử lý) giúp quản lý công việc nhanh chóng. |
 | Desktop Layout | Nới rộng 1200px, căn chỉnh cột hợp lý, nút thao tác không bị ngắt dòng. |
+| Welcome Modal | Modal giới thiệu (localStorage) kèm nút bong bóng hỗ trợ người dùng mới hiểu về hệ thống. |
+| FAQ Hướng dẫn | Nhóm câu hỏi tập trung vào hướng dẫn sử dụng và khẳng định tính chính thống của trang web. |
+| SĐT Liên hệ | Tính năng cho phép người dùng để lại SĐT và nhận thông báo cán bộ sẽ liên lạc lại ngay trong Modal thành công. |
+| Auto-assign | Hệ thống tự động gán cán bộ mặc định (Trung tá Nguyễn Văn Tuấn) khi người dùng yêu cầu liên hệ lại. |
 
 ### Các tính năng cốt lõi khác
 | Hạng mục | Chi tiết |
@@ -91,7 +95,8 @@ Dự án được thiết kế cho quy mô cấp Trung đoàn (Regiment), phục
 | Thông số | Giá trị |
 |---|---|
 | VPS IP | `160.187.229.25` |
-| Tên miền | `trungdoan4.io.vn` |
-| Tài khoản Admin mặc định | `admin` / `admin123` (Cần đổi ngay sau khi triển khai) |
+| Tên miền | `https://trungdoan4.io.vn` |
+| Tài khoản Admin | `admin` / `aATrungdoan4aA@` |
+| Tài khoản Cán bộ | `tuannvt` / `Trungdoan4@2026` |
 | Backend Service | `todoapp` (Spring Boot 3.4) |
 | Frontend Host | GitHub Pages |

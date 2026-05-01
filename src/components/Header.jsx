@@ -23,11 +23,13 @@ export default function Header() {
           <h1>HÒM THƯ GÓP Ý TRỰC TUYẾN</h1>
           <p>TRUNG ĐOÀN BB4 — SƯ ĐOÀN BB5</p>
         </div>
-        <img
-          src={`${import.meta.env.BASE_URL}logo.png`}
-          alt="Logo Trung đoàn 4 - Sư đoàn 5"
-          className="header-logo header-logo-right"
-        />
+        <Link to="/admin/login" className="header-logo-link" title="Dành cho cán bộ">
+          <img
+            src={`${import.meta.env.BASE_URL}logo.png`}
+            alt="Logo Trung đoàn 4 - Sư đoàn 5"
+            className="header-logo header-logo-right"
+          />
+        </Link>
       </div>
       <div className="header-bar" />
       <nav className="nav-bar">

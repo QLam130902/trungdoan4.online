@@ -24,6 +24,43 @@ export default function FeedbackPage() {
   const [lookupResult, setLookupResult] = useState(null); // Thay đổi thành null vì kết quả nhận về là Object
   const [lookupError, setLookupError] = useState("");
   const [isCopied, setIsCopied] = useState(false);
+  const [wantsContact, setWantsContact] = useState(false); // Muốn được liên lạc qua SĐT
+  const [contactPhone, setContactPhone] = useState(""); // SĐT người gửi
+  const [handlerPhone, setHandlerPhone] = useState(""); // SĐT cán bộ sẽ liên lạc lại
+
+  // Hàm hỗ trợ copy vào clipboard (có fallback cho trình duyệt cũ/không an toàn)
+  const copyToClipboard = async (text) => {
+    if (!text) return false;
+    
+    // Cách 1: Clipboard API (hiện đại, yêu cầu HTTPS/localhost)
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        console.error("Clipboard API failed:", err);
+      }
+    }
+
+    // Cách 2: Fallback dùng textarea (cho HTTP hoặc trình duyệt cũ)
+    try {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      // Tránh làm nhảy màn hình
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      textArea.style.top = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      const successful = document.execCommand("copy");
+      document.body.removeChild(textArea);
+      return successful;
+    } catch (err) {
+      console.error("Fallback copy failed:", err);
+      return false;
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
@@ -46,6 +83,7 @@ export default function FeedbackPage() {
         body: feedback,
         suggestedBy: isAnonymous ? "Ẩn danh" : senderName,
         handledBy: selectedOfficer || null,
+        contactPhone: (!isAnonymous && wantsContact && contactPhone.length === 10) ? contactPhone : null,
       };
 
       // 2. Giao tiếp với API Backend qua fetch
@@ -66,15 +104,12 @@ export default function FeedbackPage() {
       // 3. Lấy trackingCode do Backend cung cấp thay vì random frontend
       const code = data.trackingCode;
       setSubmittedCode(code);
+      setHandlerPhone(data.handlerPhone || ""); // Lưu SĐT cán bộ
       setIsCopied(false);
 
       // Tự động copy vào clipboard
-      try {
-        await navigator.clipboard.writeText(code);
-        setIsCopied(true);
-      } catch (err) {
-        console.error("Không thể copy tự động", err);
-      }
+      const success = await copyToClipboard(code);
+      setIsCopied(success);
       // (Tạm thời không cập nhật records ảo nữa mà nên có phần gọi api GET để tra cứu sau)
 
       // Xóa trắng form
@@ -82,6 +117,8 @@ export default function FeedbackPage() {
       setSenderName("");
       setSelectedOfficer("");
       setIsAnonymous(true);
+      setWantsContact(false);
+      setContactPhone("");
     } catch (err) {
       setError(err.message || "Lỗi không xác định");
     } finally {
@@ -170,6 +207,32 @@ export default function FeedbackPage() {
                   />
                 </div>
               </div>
+
+              {/* Tính năng SĐT liên hệ: chỉ hiện khi gửi công khai */}
+              {!isAnonymous && (
+                <div className="contact-phone-section">
+                  <label className="contact-checkbox-label">
+                    <input
+                      type="checkbox"
+                      checked={wantsContact}
+                      onChange={(e) => setWantsContact(e.target.checked)}
+                    />
+                    <span>Tôi muốn được đơn vị liên hệ qua điện thoại</span>
+                  </label>
+                  {wantsContact && (
+                    <input
+                      className="input"
+                      type="tel"
+                      inputMode="numeric"
+                      maxLength={10}
+                      pattern="[0-9]{10}"
+                      placeholder="Nhập số điện thoại (10 số)..."
+                      value={contactPhone}
+                      onChange={(e) => setContactPhone(e.target.value.replace(/\D/g, ""))}
+                    />
+                  )}
+                </div>
+              )}
 
               <div className="field" style={{ display: "none" }}>
                 <label className="label" htmlFor="officer">
@@ -285,12 +348,8 @@ export default function FeedbackPage() {
           <button 
             type="button" 
             onClick={async () => {
-              try {
-                await navigator.clipboard.writeText(submittedCode);
-                setIsCopied(true);
-              } catch (e) {
-                console.error("Copy failed", e);
-              }
+              const success = await copyToClipboard(submittedCode);
+              if (success) setIsCopied(true);
             }}
             style={{ 
               padding: '8px 12px', 
@@ -310,6 +369,15 @@ export default function FeedbackPage() {
           {isCopied ? <span style={{color: '#4CAF50', fontWeight: 'bold'}}>Mã tra cứu đã được tự động sao chép! </span> : ""}
           Lưu mã này để tra cứu trạng thái xử lý tại tab "Tra cứu trạng thái".
         </p>
+        {handlerPhone && (
+          <div className="modal-contact-info">
+            <span>📞</span>
+            <span>
+              Bạn sẽ nhận được liên lạc từ số: <strong>{handlerPhone}</strong> –
+              Trung tá Nguyễn Văn Tuấn – Trưởng Ban Dân vận, Sư đoàn 5 trong thời gian sớm nhất.
+            </span>
+          </div>
+        )}
         <button
           type="button"
           className="btn-primary"

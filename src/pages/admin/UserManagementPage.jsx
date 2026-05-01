@@ -16,6 +16,7 @@ const UserManagementPage = () => {
   const [rank, setRank] = useState('');
   const [position, setPosition] = useState('');
   const [role, setRole] = useState('ROLE_OFFICER');
+  const [phone, setPhone] = useState('');
 
   const { user: currentUser, getAuthHeaders } = useAuth();
   const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
@@ -47,7 +48,7 @@ const UserManagementPage = () => {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({
-          username, password, fullName, rank, position, role
+          username, password, fullName, rank, position, role, phone
         })
       });
       
@@ -59,7 +60,7 @@ const UserManagementPage = () => {
       // Refresh list and clear form
       fetchUsers();
       setUsername(''); setPassword(''); setFullName('');
-      setRank(''); setPosition(''); setRole('ROLE_OFFICER');
+      setRank(''); setPosition(''); setRole('ROLE_OFFICER'); setPhone('');
       setIsCreateModalOpen(false); // Đóng modal sau khi tạo thành công
     } catch (err) {
       alert('Lỗi tạo tài khoản: ' + err.message);
@@ -143,6 +144,10 @@ const UserManagementPage = () => {
               <option value="ROLE_ADMIN">Quản trị viên (Admin)</option>
             </select>
           </div>
+          <div className="field">
+            <label className="label">Số điện thoại</label>
+            <input type="tel" placeholder="Nhập SĐT liên hệ" value={phone} onChange={e => setPhone(e.target.value)} className="input" />
+          </div>
           <div style={{ gridColumn: '1 / -1', display: 'flex', gap: '10px', marginTop: '10px' }}>
             <button type="button" className="btn-secondary" onClick={() => setIsCreateModalOpen(false)} style={{ flex: 1 }}>Hủy</button>
             <button type="submit" className="btn-primary" style={{ flex: 2 }}>Tạo tài khoản</button>
@@ -207,6 +212,7 @@ const UserManagementPage = () => {
               <div><strong>Họ và tên:</strong> {selectedUser.fullName}</div>
               <div><strong>Cấp bậc:</strong> {selectedUser.rank}</div>
               <div><strong>Chức vụ:</strong> {selectedUser.position}</div>
+              <div><strong>Số điện thoại:</strong> {selectedUser.phone || 'Chưa cập nhật'}</div>
               <div>
                 <strong>Quyền: </strong> 
                 <span style={{ 

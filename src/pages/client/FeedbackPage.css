@@ -134,3 +134,44 @@
     gap: 4px;
   }
 }
+/* ===== Contact Phone Section ===== */
+.contact-phone-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--sky-50);
+  border: 1px solid var(--sky-100);
+  border-radius: var(--radius-md);
+}
+
+.contact-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray-700);
+  cursor: pointer;
+}
+
+.contact-checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--red-500);
+}
+
+/* ===== Modal Contact Info ===== */
+.modal-contact-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--sky-50);
+  border: 1px solid var(--sky-100);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  color: var(--sky-600);
+  line-height: 1.6;
+  margin-top: 6px;
+}

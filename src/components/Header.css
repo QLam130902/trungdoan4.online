@@ -33,6 +33,18 @@
   box-shadow: 0 0 0 3px rgba(240, 200, 80, 0.3);
   flex-shrink: 0;
   background: var(--white);
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+
+.header-logo-link {
+  display: flex;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.header-logo-link:hover .header-logo {
+  transform: scale(1.05);
+  filter: brightness(1.1);
 }
 
 .header-text h1 {
