@@ -1,5 +1,5 @@
 # Báo cáo Tổng hợp Dự án: "Hòm thư góp ý trực tuyến"
-*Trung đoàn BB4 – Sư đoàn BB5 | Ngày khảo sát: 28/04/2026*
+*Trung đoàn BB4 – Sư đoàn BB5 | Cập nhật: 01/05/2026*
 
 ---
 
@@ -49,10 +49,12 @@
 | Card Mật độ cao | Giao diện mobile tối ưu với icon (`💬`, `👤`, `🕒`), hiển thị đầy đủ thông tin trên một màn hình. |
 | Bộ lọc trạng thái | Thanh Tab Filter (Tất cả/Chưa xử lý/Đã xử lý) giúp quản lý công việc nhanh chóng. |
 | Desktop Layout | Nới rộng 1200px, căn chỉnh cột hợp lý, nút thao tác không bị ngắt dòng. |
-| Welcome Modal | Modal giới thiệu (localStorage) kèm nút bong bóng hỗ trợ người dùng mới hiểu về hệ thống. |
-| FAQ Hướng dẫn | Nhóm câu hỏi tập trung vào hướng dẫn sử dụng và khẳng định tính chính thống của trang web. |
+| Welcome Modal | Modal giới thiệu (localStorage) kèm nút bong bóng hỗ trợ người dùng mới hiểu về hệ thống. Nội dung cuộn được, nút đóng cố định. |
+| FAQ Hướng dẫn | Nhóm câu hỏi tập trung vào hướng dẫn sử dụng và khẳng định tính chính thống của trang web. Phân loại theo Tab (Sinh hoạt, Nghỉ phép, Thân nhân...). |
 | SĐT Liên hệ | Tính năng cho phép người dùng để lại SĐT và nhận thông báo cán bộ sẽ liên lạc lại ngay trong Modal thành công. |
 | Auto-assign | Hệ thống tự động gán cán bộ mặc định (Trung tá Nguyễn Văn Tuấn) khi người dùng yêu cầu liên hệ lại. |
+| Tải tài liệu | Tích hợp thư viện văn bản pháp quy (Thông tư 56/2025, 98/2025, Nghị định 27/2016...) cho phép tải về trực tiếp. |
+| Đăng nhập ngầm | Lối tắt đăng nhập dành cho cán bộ được tích hợp tinh tế tại Logo Trung đoàn 4 trên Header. |
 
 ### Các tính năng cốt lõi khác
 | Hạng mục | Chi tiết |
