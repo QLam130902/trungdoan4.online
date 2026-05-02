@@ -15,10 +15,102 @@
   margin-bottom: 20px;
 }
 
+/* ===== Dashboard Toolbar ===== */
+.dashboard-toolbar {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.time-filter-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.time-filter-btn {
+  padding: 7px 14px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.time-filter-btn:hover {
+  border-color: var(--gray-300);
+  color: var(--gray-700);
+}
+
+.time-filter-btn.active {
+  background: var(--red-600);
+  color: var(--white);
+  border-color: var(--red-600);
+}
+
+.quarter-selector {
+  display: flex;
+  gap: 6px;
+}
+
+.quarter-chip {
+  padding: 6px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.quarter-chip.active {
+  border-color: var(--red-500);
+  background: var(--red-500);
+  color: var(--white);
+}
+
+.custom-date-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-date-row input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: inherit;
+  color: var(--gray-700);
+  flex: 1;
+}
+
+.custom-date-row input[type="date"]:focus {
+  outline: none;
+  border-color: var(--red-400);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.custom-date-row span {
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
 /* Stats */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -61,10 +153,72 @@
 .stat-gold { border-left: 3px solid var(--gold-500); }
 .stat-sky { border-left: 3px solid var(--sky-500); }
 
+/* ===== Charts Grid ===== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr; /* Điều chỉnh lại tỉ lệ để biểu đồ tròn có nhiều không gian hơn */
+  gap: 20px;
+}
+
+.chart-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container {
+  position: relative;
+  height: 320px; /* Tăng độ cao một chút */
+  width: 100%;
+}
+
 /* Placeholder */
 .dashboard-placeholder {
   text-align: center;
-  padding: 40px 20px;
+  padding: 60px 20px;
   color: var(--gray-500);
-  font-size: 14px;
+  font-size: 15px;
+  background: var(--gray-50);
+  border: 2px dashed var(--gray-200);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .charts-grid {
+    grid-template-columns: 1fr; /* Trên màn hình nhỏ hơn desktop lớn, chuyển sang 1 cột */
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 12px;
+  }
+
+  .chart-container {
+    height: 280px;
+  }
+
+  .dashboard-toolbar {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-date-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .custom-date-row span {
+    display: none;
+  }
 }

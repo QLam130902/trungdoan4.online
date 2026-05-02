@@ -18,18 +18,17 @@ const UserManagementPage = () => {
   const [role, setRole] = useState('ROLE_OFFICER');
   const [phone, setPhone] = useState('');
 
-  const { user: currentUser, getAuthHeaders } = useAuth();
+  const { user: currentUser, authFetch } = useAuth();
   const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
 
   const fetchUsers = async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/users`, {
-        headers: getAuthHeaders()
-      });
-      if (!response.ok) throw new Error('Không thể tải danh sách cán bộ');
-      const data = await response.json();
-      setUsers(data);
+      const response = await authFetch(`${apiUrl}/users`);
+      if (response && response.ok) {
+        const data = await response.json();
+        setUsers(data);
+      }
     } catch (err) {
       setError(err.message);
     } finally {
@@ -44,44 +43,48 @@ const UserManagementPage = () => {
   const handleCreateUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${apiUrl}/users`, {
+      const response = await authFetch(`${apiUrl}/users`, {
         method: 'POST',
-        headers: getAuthHeaders(),
         body: JSON.stringify({
           username, password, fullName, rank, position, role, phone
         })
       });
       
-      if (!response.ok) {
+      if (response && response.ok) {
+        // Refresh list and clear form
+        fetchUsers();
+        setUsername(''); setPassword(''); setFullName('');
+        setRank(''); setPosition(''); setRole('ROLE_OFFICER'); setPhone('');
+        setIsCreateModalOpen(false); // Đóng modal sau khi tạo thành công
+      } else if (response) {
         const errText = await response.text();
         throw new Error(errText);
       }
-      
-      // Refresh list and clear form
-      fetchUsers();
-      setUsername(''); setPassword(''); setFullName('');
-      setRank(''); setPosition(''); setRole('ROLE_OFFICER'); setPhone('');
-      setIsCreateModalOpen(false); // Đóng modal sau khi tạo thành công
     } catch (err) {
       alert('Lỗi tạo tài khoản: ' + err.message);
     }
   };
 
   const handleDeleteUser = async (id) => {
-    if (currentUser && id === currentUser.id) {
+    // Chặn ngay tại Frontend
+    if (currentUser && (id == currentUser.id || currentUser.username === users.find(u => u.id == id)?.username)) {
       alert('Bạn không thể tự xóa tài khoản của chính mình!');
       return;
     }
+
     if (!window.confirm('Bạn có chắc chắn muốn xóa tài khoản này?')) return;
     try {
-      const response = await fetch(`${apiUrl}/users/${id}`, {
-        method: 'DELETE',
-        headers: getAuthHeaders()
+      const response = await authFetch(`${apiUrl}/users/${id}`, {
+        method: 'DELETE'
       });
-      if (!response.ok) throw new Error('Xóa thất bại');
-      setUsers(users.filter(u => u.id !== id));
-      if (selectedUser && selectedUser.id === id) {
-        setSelectedUser(null);
+      if (response && response.ok) {
+        setUsers(users.filter(u => u.id !== id));
+        if (selectedUser && selectedUser.id === id) {
+          setSelectedUser(null);
+        }
+      } else if (response && response.status === 400) {
+        const errorMsg = await response.text();
+        alert(errorMsg);
       }
     } catch (err) {
       alert('Lỗi xóa tài khoản: ' + err.message);

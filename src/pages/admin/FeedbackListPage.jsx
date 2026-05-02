@@ -1,42 +1,86 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Modal from "../../components/Modal";
+import ExportModal from "../../components/ExportModal";
 import { useAuth } from "../../contexts/AuthContext";
+import { toApiDateTime } from "../../utils/exportUtils";
 import "./FeedbackListPage.css";
 
 export default function FeedbackListPage() {
-  const { getAuthHeaders } = useAuth();
+  const { authFetch } = useAuth();
   const [feedbacks, setFeedbacks] = useState([]);
-  const [replyModalData, setReplyModalData] = useState(null); // Góp ý đang được chọn để phản hồi
+  const [replyModalData, setReplyModalData] = useState(null);
   const [replyText, setReplyText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [filterStatus, setFilterStatus] = useState("ALL"); // ALL, PENDING, RESOLVED
+  const [filterStatus, setFilterStatus] = useState("ALL");
+  const [showExportModal, setShowExportModal] = useState(false);
 
-  // 1. Lấy dữ liệu thực từ API
-  const fetchFeedbacks = () => {
-    fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions`, {
-      headers: getAuthHeaders()
-    })
-      .then((res) => res.json())
-      .then((data) => setFeedbacks(data))
-      .catch((err) => console.error("Lỗi khi tải danh sách góp ý", err));
-  };
+  // === Phân trang ===
+  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
+
+  // === Lọc ngày ===
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+
+  // 1. Lấy dữ liệu phân trang từ API
+  const fetchFeedbacks = useCallback(async () => {
+    const params = new URLSearchParams();
+    params.append("page", currentPage);
+    params.append("size", pageSize);
+    params.append("status", filterStatus);
+    if (dateFrom) params.append("from", toApiDateTime(new Date(dateFrom + "T00:00:00")));
+    if (dateTo) params.append("to", toApiDateTime(new Date(dateTo + "T23:59:59")));
+
+    try {
+      const res = await authFetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/paged?${params.toString()}`);
+      if (res && res.ok) {
+        const data = await res.json();
+        setFeedbacks(data.content || []);
+        setTotalPages(data.totalPages || 0);
+        setTotalElements(data.totalElements || 0);
+      }
+    } catch (err) {
+      console.error("Lỗi khi tải danh sách góp ý", err);
+    }
+  }, [currentPage, pageSize, filterStatus, dateFrom, dateTo, authFetch]);
 
   useEffect(() => {
     fetchFeedbacks();
-  }, []);
+  }, [fetchFeedbacks]);
 
-  // 2. Api thao tác: Xóa mềm
+  // Reset về trang đầu khi đổi bộ lọc
+  const handleFilterChange = (newStatus) => {
+    setFilterStatus(newStatus);
+    setCurrentPage(0);
+  };
+
+  const handlePageSizeChange = (newSize) => {
+    setPageSize(Number(newSize));
+    setCurrentPage(0);
+  };
+
+  const handleDateFilter = () => {
+    setCurrentPage(0);
+    fetchFeedbacks();
+  };
+
+  const clearDateFilter = () => {
+    setDateFrom("");
+    setDateTo("");
+    setCurrentPage(0);
+  };
+
+  // 2. Xóa mềm
   const deleteFeedback = async (id) => {
-    if (window.confirm("Bạn có chắc muốn xóa góp ý này? Sự kiện gọi Soft Delete ở Backend.")) {
+    if (window.confirm("Bạn có chắc muốn xóa góp ý này?")) {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${id}`, {
-          method: "DELETE",
-          headers: getAuthHeaders()
+        const res = await authFetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${id}`, {
+          method: "DELETE"
         });
-        if (res.ok) {
-          fetchFeedbacks(); // Tải lại danh sách
-        } else {
-          alert("Lỗi khi kết nối với máy chủ!");
+        if (res && res.ok) {
+          fetchFeedbacks();
         }
       } catch (err) {
         alert("Lỗi hệ thống.");
@@ -44,13 +88,12 @@ export default function FeedbackListPage() {
     }
   };
 
-  // Mở Popup
   const openReplyModal = (fb) => {
     setReplyModalData(fb);
     setReplyText(fb.response || "");
   };
 
-  // 3. Xử lý lưu phản hồi
+  // 3. Lưu phản hồi
   const submitReply = async () => {
     if (!replyText.trim()) {
       alert("Vui lòng nhập nội dung phản hồi.");
@@ -58,28 +101,19 @@ export default function FeedbackListPage() {
     }
     setIsSubmitting(true);
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${replyModalData.id}/reply`, {
+      const res = await authFetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${replyModalData.id}/reply`, {
         method: "PUT",
-        headers: getAuthHeaders(),
         body: JSON.stringify({ response: replyText }),
       });
-      if (res.ok) {
+      if (res && res.ok) {
         setReplyModalData(null);
-        fetchFeedbacks(); // Cập nhật danh sách với trạng thái mới
-      } else {
-        alert("Lỗi khi lưu phản hồi!");
+        fetchFeedbacks();
       }
     } catch (err) {
       alert("Lỗi hệ thống.");
     } finally {
       setIsSubmitting(false);
     }
-  };
-
-  const getStatusClass = (status) => {
-    if (status === "PENDING") return "status-progress";
-    if (status === "RESOLVED") return "status-done";
-    return "";
   };
 
   const formatDateShort = (dateStr) => {
@@ -92,38 +126,60 @@ export default function FeedbackListPage() {
     return `${day}/${month} ${hours}:${mins}`;
   };
 
-  const filteredFeedbacks = feedbacks.filter(fb => {
-    if (filterStatus === "ALL") return true;
-    return fb.status === filterStatus;
-  });
-
   return (
     <div className="feedback-list-page">
       <h1 className="page-title">Quản lý góp ý</h1>
-      <div className="admin-actions-bar">
-        <p className="page-subtitle" style={{ margin: 0 }}>
-          {filteredFeedbacks.length} góp ý được hiển thị
-        </p>
-        
-        <div className="status-filter-tabs">
-          <button 
-            className={`filter-tab ${filterStatus === 'ALL' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('ALL')}
-          >
-            Tất cả
-          </button>
-          <button 
-            className={`filter-tab ${filterStatus === 'PENDING' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('PENDING')}
-          >
-            Chưa xử lý
-          </button>
-          <button 
-            className={`filter-tab ${filterStatus === 'RESOLVED' ? 'active' : ''}`}
-            onClick={() => setFilterStatus('RESOLVED')}
-          >
-            Đã xử lý
-          </button>
+
+      {/* ===== TOOLBAR ===== */}
+      <div className="admin-toolbar">
+        {/* Hàng 1: Bộ lọc trạng thái + PageSize + Xuất Excel */}
+        <div className="toolbar-row">
+          <div className="status-filter-tabs">
+            {['ALL', 'PENDING', 'RESOLVED'].map(status => (
+              <button key={status}
+                className={`filter-tab ${filterStatus === status ? 'active' : ''}`}
+                onClick={() => handleFilterChange(status)}
+              >
+                {status === 'ALL' ? 'Tất cả' : status === 'PENDING' ? 'Chưa xử lý' : 'Đã xử lý'}
+              </button>
+            ))}
+          </div>
+          <div className="toolbar-right">
+            <div className="page-size-selector">
+              <label>Hiển thị</label>
+              <select value={pageSize} onChange={e => handlePageSizeChange(e.target.value)}>
+                <option value={10}>10</option>
+                <option value={25}>25</option>
+                <option value={50}>50</option>
+              </select>
+            </div>
+            <button className="btn-export" onClick={() => setShowExportModal(true)}>
+              📥 Xuất Excel
+            </button>
+          </div>
+        </div>
+
+        {/* Hàng 2: Lọc ngày */}
+        <div className="toolbar-row date-filter-row">
+          <div className="date-filter-group">
+            <label>Từ ngày</label>
+            <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} />
+          </div>
+          <div className="date-filter-group">
+            <label>Đến ngày</label>
+            <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} />
+          </div>
+          <div className="date-filter-actions">
+            <button className="btn-filter-apply" onClick={handleDateFilter}>Lọc</button>
+            {(dateFrom || dateTo) && (
+              <button className="btn-filter-clear" onClick={clearDateFilter}>Xóa lọc</button>
+            )}
+          </div>
+        </div>
+
+        {/* Thông tin tổng hợp */}
+        <div className="toolbar-info">
+          <span>{totalElements} góp ý • Trang {currentPage + 1}/{totalPages || 1}</span>
         </div>
       </div>
 
@@ -141,7 +197,7 @@ export default function FeedbackListPage() {
             </tr>
           </thead>
           <tbody>
-            {filteredFeedbacks.map((fb) => (
+            {feedbacks.map((fb) => (
               <tr key={fb.id}>
                 <td className="td-code" title={fb.trackingCode}>{fb.id}</td>
                 <td className="td-date">{formatDateShort(fb.suggestAt)}</td>
@@ -172,7 +228,7 @@ export default function FeedbackListPage() {
 
       {/* ===== MOBILE CARD LIST ===== */}
       <div className="feedback-card-list mobile-only">
-        {filteredFeedbacks.map((fb) => (
+        {feedbacks.map((fb) => (
           <div key={fb.id} className="feedback-card compact">
             <div className="feedback-card-top">
               <span className="feedback-card-id">#{fb.id}</span>
@@ -182,14 +238,12 @@ export default function FeedbackListPage() {
                 <span className="status-badge status-resolved small">Đã xử lý</span>
               )}
             </div>
-            
             <div className="feedback-card-main">
               <div className="feedback-card-body-wrap">
                 <span className="icon-wrap">💬</span>
                 <p className="feedback-card-body">{fb.body}</p>
               </div>
             </div>
-
             <div className="feedback-card-info-row">
               <div className="info-item">
                 <span className="icon-wrap">👤</span> {fb.suggestedBy || "Ẩn danh"}
@@ -198,7 +252,6 @@ export default function FeedbackListPage() {
                 <span className="icon-wrap">🕒</span> {formatDateShort(fb.suggestAt)}
               </div>
             </div>
-            
             <div className="feedback-card-footer-compact">
               <button onClick={() => openReplyModal(fb)} className="feedback-card-action-btn-compact">
                 {fb.status === 'RESOLVED' ? '✎ Chỉnh sửa' : '✎ Phản hồi'}
@@ -208,13 +261,37 @@ export default function FeedbackListPage() {
         ))}
       </div>
 
-      {filteredFeedbacks.length === 0 && (
+      {feedbacks.length === 0 && (
         <div className="empty-state card">
           <p>Chưa có góp ý nào.</p>
         </div>
       )}
 
-      {/* Hiển thị Popup Modal Chi tiết và Nhập câu trả lời */}
+      {/* ===== PAGINATION ===== */}
+      {totalPages > 1 && (
+        <div className="pagination-bar">
+          <button className="pagination-btn" onClick={() => setCurrentPage(0)} disabled={currentPage === 0}>
+            «
+          </button>
+          <button className="pagination-btn" onClick={() => setCurrentPage(p => Math.max(0, p - 1))} disabled={currentPage === 0}>
+            ‹ Trước
+          </button>
+          <span className="pagination-info">
+            Trang {currentPage + 1} / {totalPages}
+          </span>
+          <button className="pagination-btn" onClick={() => setCurrentPage(p => Math.min(totalPages - 1, p + 1))} disabled={currentPage >= totalPages - 1}>
+            Sau ›
+          </button>
+          <button className="pagination-btn" onClick={() => setCurrentPage(totalPages - 1)} disabled={currentPage >= totalPages - 1}>
+            »
+          </button>
+        </div>
+      )}
+
+      {/* ===== EXPORT MODAL ===== */}
+      <ExportModal show={showExportModal} onClose={() => setShowExportModal(false)} />
+
+      {/* ===== REPLY MODAL ===== */}
       <Modal show={!!replyModalData} onClose={() => setReplyModalData(null)}>
         <h2 style={{ marginBottom: "15px", color: "var(--red-600)" }}>
           {replyModalData?.status === 'RESOLVED' ? `Chỉnh sửa phản hồi #${replyModalData?.id}` : `Chi tiết góp ý #${replyModalData?.id}`}
@@ -253,32 +330,15 @@ export default function FeedbackListPage() {
 
             <div style={{ display: "flex", gap: "10px", justifyContent: "space-between", flexWrap: "wrap" }}>
               <button
-                onClick={() => {
-                  deleteFeedback(replyModalData.id);
-                  setReplyModalData(null);
-                }}
+                onClick={() => { deleteFeedback(replyModalData.id); setReplyModalData(null); }}
                 title="Xóa Góp Ý"
-                style={{
-                  padding: "10px 16px", backgroundColor: "var(--danger)", color: "white",
-                  border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer", fontWeight: "bold"
-                }}
+                style={{ padding: "10px 16px", backgroundColor: "var(--danger)", color: "white", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer", fontWeight: "bold" }}
               >
                 🗑️ Xóa Góp Ý
               </button>
-
               <div style={{ display: "flex", gap: "10px" }}>
-                <button
-                  className="btn-secondary"
-                  onClick={() => setReplyModalData(null)}
-                  disabled={isSubmitting}
-                >
-                  Đóng
-                </button>
-                <button 
-                  className="btn-primary" 
-                  onClick={submitReply}
-                  disabled={isSubmitting}
-                >
+                <button className="btn-secondary" onClick={() => setReplyModalData(null)} disabled={isSubmitting}>Đóng</button>
+                <button className="btn-primary" onClick={submitReply} disabled={isSubmitting}>
                   {isSubmitting ? "Đang lưu..." : (replyModalData?.status === 'RESOLVED' ? "Cập nhật" : "Xác nhận gửi")}
                 </button>
               </div>

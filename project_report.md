@@ -56,6 +56,14 @@
 | Tải tài liệu | Tích hợp thư viện văn bản pháp quy (Thông tư 56/2025, 98/2025, Nghị định 27/2016...) cho phép tải về trực tiếp. |
 | Đăng nhập ngầm | Lối tắt đăng nhập dành cho cán bộ được tích hợp tinh tế tại Logo Trung đoàn 4 trên Header. |
 
+### Quản trị & Phân tích Dữ liệu (Mới hoàn thành)
+| Hạng mục | Chi tiết |
+|---|---|
+| Phân trang (Pagination) | Phân trang trực tiếp từ Backend (10/25/50 items). Kết hợp mượt mà với bộ lọc trạng thái và thời gian. |
+| Dashboard & Biểu đồ | Tích hợp Chart.js (Cột & Tròn). Hiển thị thống kê thực tế, tự động co giãn 100% cực nét trên Mobile và tối ưu không gian Desktop. |
+| Xuất Báo cáo Excel | Tích hợp ExcelJS. Xuất file chuẩn quân đội (Times New Roman 14, in đậm header, viền bảng). Có Modal chọn thời gian (Tuần/Tháng/Quý/Tùy chọn). |
+| Quản lý Phiên (Session) | Hàm `authFetch` bắt lỗi 401 toàn cục. Bật Modal cảnh báo hết hạn phiên (z-index cực đại), tự động dọn dẹp và chuyển hướng về Login qua HashRouter. |
+
 ### Các tính năng cốt lõi khác
 | Hạng mục | Chi tiết |
 |---|---|
@@ -66,13 +74,8 @@
 
 ## III. Những việc còn dở dang ⚠️
 
-### 🔴 Ưu tiên Cao (Cần làm sớm)
-- [ ] **Backend Pagination (Phân trang)**: Khi số lượng góp ý vượt quá 100, cần phân trang để tránh lag máy.
-- [ ] **Dữ liệu thống kê Dashboard**: Hiện tại Dashboard cần được kết nối API thực tế để hiển thị biểu đồ tăng trưởng góp ý theo tháng.
-
 ### 🟡 Ưu tiên Trung bình
 - [ ] **Thông báo Realtime**: Gửi thông báo cho Admin khi có góp ý mới qua Telegram Bot hoặc Email.
-- [ ] **Xuất báo cáo**: Tính năng xuất danh sách góp ý ra file Excel để báo cáo chỉ huy định kỳ.
 
 ### 🟢 Ưu tiên Thấp
 - [ ] **Nhật ký hệ thống (Audit Log)**: Ghi lại lịch sử ai đã phản hồi góp ý nào để tăng tính minh bạch.
