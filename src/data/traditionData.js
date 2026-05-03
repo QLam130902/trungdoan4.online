@@ -4,7 +4,7 @@ export const traditionData = {
   division: "Sư đoàn Bộ binh 5 — Quân khu 7",
   foundedDate: "03/02/1965",
   foundedPlace:
-    "Ngã ba Cổng Xanh, huyện Tân Uyên, tỉnh Phước Thành (nay thuộc tỉnh Bình Dương)",
+    "Ngã ba Cổng Xanh, huyện Tân Uyên, tỉnh Phước Thành (nay thuộc Thành phố Hồ Chí Minh)",
   motto: "KIÊN CƯỜNG BÁM TRỤ, LẪY LỪNG CHIẾN CÔNG",
   mottoSource: "Bộ Tư lệnh Miền tặng 8 chữ vàng",
   heroTitle: "60 NĂM XÂY DỰNG, CHIẾN ĐẤU VÀ TRƯỞNG THÀNH CỦA TRUNG ĐOÀN BỘ BINH 4 ANH HÙNG",
