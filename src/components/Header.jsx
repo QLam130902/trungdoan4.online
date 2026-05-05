@@ -15,18 +15,18 @@ export default function Header() {
     <header className="header">
       <div className="header-inner">
         <img
-          src={`${import.meta.env.BASE_URL}logof.png`}
+          src={`${import.meta.env.BASE_URL}logoqk.png`}
           alt="Logo đơn vị"
           className="header-logo header-logo-left"
         />
         <div className="header-text">
           <h1>HÒM THƯ GÓP Ý TRỰC TUYẾN</h1>
-          <p>TRUNG ĐOÀN BB4 — SƯ ĐOÀN BB5</p>
+          <p>SƯ ĐOÀN BỘ BINH 5 -  QUÂN KHU 7</p>
         </div>
         <Link to="/admin/login" className="header-logo-link" title="Dành cho cán bộ">
           <img
-            src={`${import.meta.env.BASE_URL}logo.png`}
-            alt="Logo Trung đoàn 4 - Sư đoàn 5"
+            src={`${import.meta.env.BASE_URL}logof.png`}
+            alt="Logo Sư đoàn 5"
             className="header-logo header-logo-right"
           />
         </Link>

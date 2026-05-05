@@ -12,7 +12,7 @@ export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  
+
   // Render menu động theo Role
   const menuItems = [...baseMenuItems];
   if (user && user.role === 'ROLE_ADMIN') {
@@ -29,13 +29,13 @@ export default function AdminLayout() {
       <aside className="admin-sidebar">
         <div className="admin-sidebar-top">
           <div className="admin-sidebar-header">
-            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="admin-logo" />
+            <img src={`${import.meta.env.BASE_URL}logof.png`} alt="Logo" className="admin-logo" />
             <div className="admin-title-wrap">
               <h2>QUẢN TRỊ</h2>
-              <p>Trung đoàn 4</p>
+              <p>Sư đoàn 5</p>
             </div>
           </div>
-          
+
           <div className="admin-mobile-user">
             {user && (
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -68,8 +68,8 @@ export default function AdminLayout() {
               <div style={{ fontSize: '11px', marginTop: '4px', color: 'var(--gray-400)' }}>{user.role === 'ROLE_ADMIN' ? 'Quản trị viên' : 'Cán bộ xử lý'}</div>
             </div>
           )}
-          
-          <button 
+
+          <button
             onClick={handleLogout}
             className="btn-secondary"
             style={{ width: '100%', marginBottom: '12px' }}

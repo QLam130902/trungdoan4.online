@@ -58,7 +58,7 @@ export const faqData = [
   {
     category: "he-thong",
     question: "Trang web này có chính thống không?",
-    answer: "Đây là kênh Hòm thư góp ý trực tuyến chính thức của Trung đoàn 4, Sư đoàn 5. Trang web phục vụ mục đích phát huy dân chủ, tiếp nhận ý kiến đóng góp của cán bộ, chiến sĩ và thân nhân nhằm xây dựng đơn vị vững mạnh.",
+    answer: "Đây là kênh Hòm thư góp ý trực tuyến chính thức của Sư đoàn 5, Quân khu 7. Trang web phục vụ mục đích phát huy dân chủ, tiếp nhận ý kiến đóng góp của cán bộ, chiến sĩ và thân nhân nhằm xây dựng đơn vị vững mạnh.",
     docRef: "",
     fileName: ""
   },

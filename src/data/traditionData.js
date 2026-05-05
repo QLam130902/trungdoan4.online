@@ -1,92 +1,109 @@
 export const traditionData = {
-  unitName: "Trung đoàn Bộ binh 4",
-  unitNickname: "Trung đoàn Đồng Nai",
-  division: "Sư đoàn Bộ binh 5 — Quân khu 7",
-  foundedDate: "03/02/1965",
-  foundedPlace:
-    "Ngã ba Cổng Xanh, huyện Tân Uyên, tỉnh Phước Thành (nay thuộc Thành phố Hồ Chí Minh)",
-  motto: "KIÊN CƯỜNG BÁM TRỤ, LẪY LỪNG CHIẾN CÔNG",
-  mottoSource: "Bộ Tư lệnh Miền tặng 8 chữ vàng",
-  heroTitle: "60 NĂM XÂY DỰNG, CHIẾN ĐẤU VÀ TRƯỞNG THÀNH CỦA TRUNG ĐOÀN BỘ BINH 4 ANH HÙNG",
+  unitName: "Sư đoàn Bộ binh 5",
+  unitNickname: "",
+  division: "Quân khu 7",
+  traditionalDate: "23/11/1965",
+  foundedDate: "02/09/1965",
+  foundedPlace: "Mây Tàu, tỉnh Bà Rịa - Vũng Tàu (nay là xã Xuân Lộc, tỉnh Đồng Nai)",
+  motto: "Đoàn kết, trung dũng, cơ động linh hoạt, tự lực tự cường, đánh thắng mọi kẻ thù",
+  mottoSource: "Quân ủy - Bộ Tư lệnh Miền tặng 17 chữ vàng",
+  heroTitle: "60 NĂM XÂY DỰNG, CHIẾN ĐẤU,\nTRƯỞNG THÀNH CỦA SƯ ĐOÀN BỘ BINH 5 ANH HÙNG",
   heroAwards: [
-    "2 lần tuyên dương danh hiệu Anh hùng Lực lượng vũ trang nhân dân (năm 1973 và 1979)",
+    "2 lần được Đảng, Nhà nước tuyên dương danh hiệu Anh hùng LLVTND (Lần 1: tháng 01/1976, Lần 2: tháng 12/1979)",
+    "01 Huân chương Hồ Chí Minh",
+    "02 Huân chương Bảo vệ Tổ quốc (01 hạng Nhì, 01 hạng Ba)",
+    "Nhà nước Campuchia tặng Huân chương Ăng Co"
   ],
 
   // Nội dung chính
-  overview:
-    'Trung đoàn bộ binh 4 (Trung đoàn Đồng Nai) là Trung đoàn chủ lực đầu tiên của Quân khu 7, được thành lập vào ngày 3-2-1965, tại ngã ba Cổng Xanh, huyện Tân Uyên, tỉnh Phước Thành (nay thuộc tỉnh Bình Dương). Trong những năm tháng ác liệt, thử thách gian lao nhất của cuộc kháng chiến chống Mỹ, cứu nước của dân tộc, dấu chân của lớp lớp thế hệ cán bộ, chiến sĩ Trung đoàn bộ binh 4 đã in đậm trên khắp chiến trường miền Đông Nam Bộ, lập được nhiều chiến công và thành tích nổi bật, góp phần vào thắng lợi chung của sự nghiệp đấu tranh giải phóng dân tộc, thống nhất đất nước và bảo vệ Tổ quốc Việt Nam xã hội chủ nghĩa. Trải qua 10 năm kháng chiến chống Mỹ, cứu nước, 2 năm chiến đấu bảo vệ biên giới Tây Nam của Tổ quốc và 10 năm làm nghĩa vụ quốc tế cả ở chiến trường Campuchia, Trung đoàn bộ binh 4 đã hoàn thành xuất sắc mọi nhiệm vụ được giao. Tháng 9-1989, Trung đoàn rút quân về nước trong đội hình của Sư đoàn bộ binh 5, Quân khu 7. Mặc dù gặp rất nhiều khó khăn, thiếu thốn trong việc ổn định và xây dựng đơn vị, nhưng với sự nỗ lực quyết tâm, cố gắng rất cao, các thế hệ cán bộ, chiến sĩ đã xây dựng Trung đoàn bộ binh 4 ngày càng vững mạnh, trở thành đơn vị điểm của Sư đoàn bộ binh 5, Trung đoàn chủ lực cơ động của Quân khu 7. Trải qua 60 năm xây dựng, chiến đấu và trưởng thành, Trung đoàn bộ binh 4 đã được Đảng, Nhà nước 2 lần tuyên dương danh hiệu Anh hùng Lực lượng vũ trang nhân dân (năm 1973 và 1979) và các huân, huy chương, cùng nhiều phần thưởng cao quý khác, được Bộ Tư lệnh Miền tặng 8 chữ vàng "Kiên cường bám trụ, lẫy lừng chiến công".',
+  overview: "Sư đoàn bộ binh 5 là một trong hai sư đoàn chủ lực đầu tiên ra đời trong cuộc kháng chiến chống Mỹ, cứu nước tại chiến trường miền Đông Nam Bộ và cực Nam Trung Bộ. Dưới sự lãnh đạo của cấp ủy Đảng và chỉ huy cấp trên, sự giúp đỡ của đảng bộ, chính quyền và sự yêu thương đùm bọc của Nhân dân trên địa bàn hoạt động, các thế hệ cán bộ, chiến sĩ của Sư đoàn đã vượt qua muôn vàn khó khăn, gian khổ, lần lượt lập nên những thành tích xuất sắc, góp phần vào thắng lợi chung của sự nghiệp đấu tranh giải phóng dân tộc, thống nhất đất nước.\n\nSau ngày miền Nam hoàn toàn giải phóng, thực hiện nhiệm vụ khắc phục hậu quả chiến tranh, huấn luyện sẵn sàng chiến đấu trong điều kiện thời bình chưa được bao lâu, Sư đoàn khẩn trương hành quân ra biên giới chiến đấu bảo vệ Tổ quốc, sau đó chuyển sang giúp Nhân dân Campuchia truy quét tàn quân địch, khắc phục hậu quả chế độ diệt chủng gây ra, xây dựng lại đất nước.\n\nHoàn thành nhiệm vụ quốc tế tại Campuchia, Sư đoàn trở về Tổ quốc, chuyển sang thực hiện nhiệm vụ huấn luyện, sẵn sàng chiến đấu. Trong những thập niên đầu thế kỷ XXI, Sư đoàn triển khai thực hiện nhiều bước đi đột phá, trở thành một trong những đơn vị điển hình của toàn quân trong huấn luyện nâng cao khả năng sẵn sàng cơ động chiến đấu; xây dựng đơn vị vững mạnh toàn diện “mẫu mực, tiêu biểu”, góp phần xứng đáng vào sự nghiệp xây dựng và bảo vệ Tổ quốc.\n\nSư đoàn trưởng đầu tiên là đồng chí Nguyễn Hòa, Chính ủy đầu tiên là đồng chí Lê Xuân Lựu. Ngày 23/11/1965, tại căn cứ Mây Tàu, tỉnh Bà Rịa - Vũng Tàu, Đảng ủy Sư đoàn 5 họp phiên đầu tiên, hội nghị Đảng Ủy Sư đoàn thống nhất lấy ngày 23/11/1965 làm ngày truyền thống Sư đoàn BB5.",
 
-  // Thành tích gần đây
+  // Những trận đánh tiêu biểu
+  battles: [
+    {
+      period: "Kháng chiến chống Mỹ",
+      items: [
+        "Chiến thắng Võ Su",
+        "Chiến thắng Tầm Bó",
+        "Chiến thắng Ngã ba Ông Đồn",
+        "Chiến thắng Vạn Kiếp",
+        "Chiến thắng Lộc Ninh",
+        "Chiến thắng chiến dịch Hồ Chí Minh lịch sử"
+      ]
+    },
+    {
+      period: "Bảo vệ biên giới Tây Nam",
+      items: [
+        "Chiến thắng Crôchê",
+        "Chiến dịch phản công giải phóng Campuchia",
+        "Chiến thắng căn cứ Nông Chăn"
+      ]
+    }
+  ],
+
+  // Thành tích tiêu biểu (Hiện tại)
   recentAchievements: [
     {
-      year: 2023,
+      year: "Thành tích Huấn luyện",
       items: [
-        "Được Bộ Tư lệnh Quân khu tặng danh hiệu ĐƠN VỊ QUYẾT THẮNG",
-      ],
-    },
-    {
-      year: 2024,
-      items: [
-        "Được Bộ Tư lệnh Quân khu tặng danh hiệu ĐƠN VỊ QUYẾT THẮNG",
-        'Danh hiệu đơn vị Vững mạnh toàn diện "Mẫu mực, tiêu biểu"',
         "Bộ Quốc Phòng tặng: Cờ đơn vị huấn luyện Giỏi",
-        "Bộ Quốc Phòng tặng: Đơn vị huấn luyện thể lực giỏi",
+        "Bộ Quốc Phòng tặng: Đơn vị huấn luyện thể lực giỏi"
       ],
-    },
+    }
   ],
 
-  // Tập thể anh hùng
-  heroCollectives: [
-    {
-      name: "Trung đoàn 4",
-      detail:
-        "Được Nhà nước phong tặng 2 lần Anh hùng LLVT nhân dân. Lần 1: Tháng 9/1973. Lần 2: Tháng 12/1979.",
-    },
-    {
-      name: "Tiểu đoàn 1",
-      detail:
-        "Được Nhà nước phong tặng 2 lần Anh hùng LLVT nhân dân. Lần 1: Tháng 6/1976. Lần 2: Tháng 8/1989.",
-    },
-    {
-      name: "Đại đội 1",
-      detail:
-        "Được Nhà nước phong tặng 2 lần Anh hùng LLVT nhân dân, ngày 10/02/1970.",
-    },
-    {
-      name: "Đại đội 18 (Nay là Đại đội 16 SMPK 12,7mm)",
-      detail: "Được tuyên dương Anh hùng tháng 10/1976.",
-    },
-  ],
-
-  // Cá nhân anh hùng
-  heroIndividuals: [
-    {
-      name: "Đặng Văn Đâu",
-      date: "Tháng 9/1967",
-    },
-    {
-      name: "Trần Văn Chín",
-      date: "Tháng 5/1972",
-    },
-    {
-      name: "Phạm Văn Đỡ",
-      date: "Tháng 9/1973",
-    },
-    {
-      name: "Nguyễn Minh Quang",
-      date: "Tháng 11/1978",
-    },
-    {
-      name: "Nguyễn Văn Bình",
-      date: "Tháng 01/1983",
-    },
-    {
-      name: "Nguyễn Văn Tròn",
-      date: "Tháng 4/2000",
-    },
+  // Thống kê khen thưởng cá nhân & tập thể
+  heroStats: [
+    { label: "Tập thể Anh hùng LLVTND", value: 21 },
+    { label: "Cá nhân Anh hùng LLVTND", value: 21 },
+    { label: "Phát triển lên Quân hàm cấp Tướng", value: 57 }
   ],
 
   // Link phim tài liệu
-  documentaryLink: "https://youtube.com/watch?v=tn_oiYKkApc",
-  documentaryTitle: "Phim tài liệu về Trung đoàn 4 - Sư đoàn 5",
+  documentaries: [
+    {
+      title: "Tập 1",
+      parts: [
+        { name: "Phần 1", link: "https://youtu.be/5oR9tg2zZSM?si=VBCrE7XsaW9E3z9f" },
+        { name: "Phần 3", link: "https://youtu.be/9JvvOAEN3WU?si=fM16uicP24hrkz-9" },
+        { name: "Phần 4", link: "https://youtu.be/XgeyYksnpLo?si=1QAJsiPhYqVuOn_j" }
+      ]
+    },
+    {
+      title: "Tập 2",
+      parts: [
+        { name: "Phần 1", link: "https://youtu.be/U_tNAYjReoE?si=4PnPX-xK3OeGV3y6" },
+        { name: "Phần 2", link: "https://youtu.be/SZs-cP_hI1Q?si=fBa08MHlvQLlFGBq" }
+      ]
+    },
+    {
+      title: "Tập 3",
+      parts: [
+        { name: "Phần 1", link: "https://youtu.be/W16lys-PitI?si=-q8__vI_OKivnnPN" },
+        { name: "Phần 2", link: "https://youtu.be/BJB65DYpUx0?si=1bobkUYVbgMTzwEj" },
+        { name: "Phần 3", link: "https://youtu.be/dnRk3YYIqy8?si=psJqQ6Or8EHeOnmF" },
+        { name: "Phần 4", link: "https://youtu.be/XqzzjtSumk4?si=oXfw42xUjH7PiLbX" }
+      ]
+    },
+    {
+      title: "Tập 4",
+      parts: [
+        { name: "Phần 1", link: "https://youtu.be/77Zh6G5rUGw?si=i4Rd9W1bgiKMzeFr" },
+        { name: "Phần 2", link: "https://youtu.be/8garhov1psQ?si=4k9UZS88t8YI3pKp" },
+        { name: "Phần 3", link: "https://youtu.be/eBjRe5V5mVE?si=dXRknMnd4RhFnuOO" },
+        { name: "Phần 4", link: "https://youtu.be/FNFpiTR1rik?si=0RxMPuhtPYqCRMmC" }
+      ]
+    },
+    {
+      title: "Tập 5",
+      parts: [
+        { name: "Phần 1", link: "https://youtu.be/xWT7agDDm3I?si=8bMru8vzCCcaOGmr" },
+        { name: "Phần 2", link: "https://youtu.be/ZpXiYansFQk?si=p8ybO9g2vTZ6p9rc" },
+        { name: "Phần 3", link: "https://youtu.be/lfsM8GMqliQ?si=yuz_N7wRYEmmo0bQ" },
+        { name: "Phần 4", link: "https://youtu.be/mMH0waYsp6k?si=21zM3Rq48aRWGA4L" },
+        { name: "Phần 5", link: "https://youtu.be/Bom_Utkm3dg?si=VGy8zTpSqwWPKIUl" },
+        { name: "Phần 6", link: "https://youtu.be/SnG7_VZxlEA?si=wlxFlz6YN1kqsYyF" }
+      ]
+    }
+  ]
 };

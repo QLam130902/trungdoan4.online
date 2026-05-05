@@ -24,6 +24,24 @@ export default function FeedbackListPage() {
   const [dateFrom, setDateFrom] = useState("");
   const [dateTo, setDateTo] = useState("");
 
+  // === Xử lý SĐT ===
+  const [activePhonePopup, setActivePhonePopup] = useState(null);
+  const [copySuccess, setCopySuccess] = useState(null);
+
+  useEffect(() => {
+    const handleClickOutside = () => setActivePhonePopup(null);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  const handlePhoneClick = (e, id, phone) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(phone);
+    setCopySuccess(id);
+    setActivePhonePopup(id);
+    setTimeout(() => setCopySuccess(null), 2000);
+  };
+
   // 1. Lấy dữ liệu phân trang từ API
   const fetchFeedbacks = useCallback(async () => {
     const params = new URLSearchParams();
@@ -201,7 +219,32 @@ export default function FeedbackListPage() {
               <tr key={fb.id}>
                 <td className="td-code" title={fb.trackingCode}>{fb.id}</td>
                 <td className="td-date">{formatDateShort(fb.suggestAt)}</td>
-                <td style={{ whiteSpace: "nowrap" }}>{fb.suggestedBy || "Ẩn danh"}</td>
+                <td style={{ whiteSpace: "nowrap", position: "relative" }}>
+                  <div>{fb.suggestedBy || "Ẩn danh"}</div>
+                  {fb.contactPhone && (
+                    <div 
+                      className="phone-display"
+                      onClick={(e) => handlePhoneClick(e, fb.id, fb.contactPhone)}
+                    >
+                      📞 {fb.contactPhone}
+                    </div>
+                  )}
+                  {activePhonePopup === fb.id && (
+                    <div className="phone-popup" onClick={e => e.stopPropagation()}>
+                      <div className="phone-popup-header">
+                        {copySuccess === fb.id ? "✅ Đã copy" : "Liên hệ"}
+                      </div>
+                      <div className="phone-popup-actions">
+                        <button onClick={() => { navigator.clipboard.writeText(fb.contactPhone); setCopySuccess(fb.id); }}>
+                          📋 Copy số
+                        </button>
+                        <a href={`tel:${fb.contactPhone}`}>
+                          📞 Gọi ngay
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </td>
                 <td className="td-content">{fb.body}</td>
                 <td>
                   {fb.status === 'PENDING' ? (
@@ -245,10 +288,34 @@ export default function FeedbackListPage() {
               </div>
             </div>
             <div className="feedback-card-info-row">
-              <div className="info-item">
-                <span className="icon-wrap">👤</span> {fb.suggestedBy || "Ẩn danh"}
+              <div className="info-item" style={{ flexDirection: "column", alignItems: "flex-start", position: "relative" }}>
+                <div><span className="icon-wrap">👤</span> {fb.suggestedBy || "Ẩn danh"}</div>
+                {fb.contactPhone && (
+                  <div 
+                    className="phone-display"
+                    onClick={(e) => handlePhoneClick(e, fb.id, fb.contactPhone)}
+                    style={{ marginTop: "6px" }}
+                  >
+                    📞 {fb.contactPhone}
+                  </div>
+                )}
+                {activePhonePopup === fb.id && (
+                  <div className="phone-popup" onClick={e => e.stopPropagation()}>
+                    <div className="phone-popup-header">
+                      {copySuccess === fb.id ? "✅ Đã copy" : "Liên hệ"}
+                    </div>
+                    <div className="phone-popup-actions">
+                      <button onClick={() => { navigator.clipboard.writeText(fb.contactPhone); setCopySuccess(fb.id); }}>
+                        📋 Copy số
+                      </button>
+                      <a href={`tel:${fb.contactPhone}`}>
+                        📞 Gọi ngay
+                      </a>
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className="info-item">
+              <div className="info-item" style={{ alignItems: "flex-start" }}>
                 <span className="icon-wrap">🕒</span> {formatDateShort(fb.suggestAt)}
               </div>
             </div>
@@ -299,7 +366,23 @@ export default function FeedbackListPage() {
         {replyModalData && (
           <div style={{ textAlign: "left", fontSize: "14px", lineHeight: "1.6" }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '15px' }}>
-              <div><strong>Người gửi:</strong> <br />{replyModalData.suggestedBy || "Ẩn danh"}</div>
+              <div>
+                <strong>Người gửi:</strong> <br />{replyModalData.suggestedBy || "Ẩn danh"}
+                {replyModalData.contactPhone && (
+                  <div style={{ marginTop: '8px' }}>
+                    <a href={`tel:${replyModalData.contactPhone}`} style={{ color: 'var(--red-600)', textDecoration: 'none', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--red-50)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--red-200)' }}>
+                      📞 {replyModalData.contactPhone}
+                    </a>
+                    <button 
+                      onClick={() => { navigator.clipboard.writeText(replyModalData.contactPhone); alert("Đã copy số điện thoại!"); }}
+                      style={{ marginLeft: '8px', background: 'var(--gray-100)', border: '1px solid var(--gray-300)', borderRadius: '4px', cursor: 'pointer', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', color: 'var(--gray-700)' }}
+                      title="Copy số điện thoại"
+                    >
+                      📋 Copy
+                    </button>
+                  </div>
+                )}
+              </div>
               <div><strong>Ngày gửi:</strong> <br />{new Date(replyModalData.suggestAt).toLocaleString('vi-VN')}</div>
               <div style={{ gridColumn: '1 / -1' }}>
                 <strong>Trạng thái:</strong> <br />

@@ -31,7 +31,7 @@ export default function FeedbackPage() {
   // Hàm hỗ trợ copy vào clipboard (có fallback cho trình duyệt cũ/không an toàn)
   const copyToClipboard = async (text) => {
     if (!text) return false;
-    
+
     // Cách 1: Clipboard API (hiện đại, yêu cầu HTTPS/localhost)
     if (navigator.clipboard && window.isSecureContext) {
       try {
@@ -301,7 +301,7 @@ export default function FeedbackPage() {
                   id="lookupCode"
                   className="input"
                   type="text"
-                  placeholder="Ví dụ: GY-AB12CD"
+                  placeholder="Ví dụ: 300426A"
                   value={lookupCode}
                   onChange={(e) => setLookupCode(e.target.value)}
                 />
@@ -345,18 +345,18 @@ export default function FeedbackPage() {
         <h2>Góp ý đã được ghi nhận</h2>
         <div className="modal-code-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', margin: '15px 0' }}>
           <div className="modal-code" style={{ margin: 0 }}>{submittedCode}</div>
-          <button 
-            type="button" 
+          <button
+            type="button"
             onClick={async () => {
               const success = await copyToClipboard(submittedCode);
               if (success) setIsCopied(true);
             }}
-            style={{ 
-              padding: '8px 12px', 
-              cursor: 'pointer', 
-              borderRadius: '4px', 
+            style={{
+              padding: '8px 12px',
+              cursor: 'pointer',
+              borderRadius: '4px',
               border: 'none',
-              backgroundColor: isCopied ? '#4CAF50' : '#e0e0e0', 
+              backgroundColor: isCopied ? '#4CAF50' : '#e0e0e0',
               color: isCopied ? 'white' : '#333',
               fontWeight: 'bold',
               transition: 'all 0.2s'
@@ -366,7 +366,7 @@ export default function FeedbackPage() {
           </button>
         </div>
         <p className="modal-hint">
-          {isCopied ? <span style={{color: '#4CAF50', fontWeight: 'bold'}}>Mã tra cứu đã được tự động sao chép! </span> : ""}
+          {isCopied ? <span style={{ color: '#4CAF50', fontWeight: 'bold' }}>Mã tra cứu đã được tự động sao chép! </span> : ""}
           Lưu mã này để tra cứu trạng thái xử lý tại tab "Tra cứu trạng thái".
         </p>
         {handlerPhone && (

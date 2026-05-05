@@ -1,0 +1,437 @@
+/* ===== Contact Menu Container ===== */
+.contact-menu-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Backdrop mờ khi mở menu */
+.contact-menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 9998;
+}
+
+/* Nút chính */
+.contact-main-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgb(176, 18, 18);
+  color: rgb(255, 255, 255);
+  border: none;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.contact-main-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.5);
+}
+
+.contact-main-btn:active {
+  transform: scale(0.95);
+}
+
+/* Hiệu ứng rung lắc cho điện thoại */
+@keyframes shake-phone {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-15deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(15deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.icon-phone-shake {
+  animation: shake-phone 2s infinite ease-in-out;
+  transform-origin: center;
+}
+
+.icon-close {
+  animation: rotate-in 0.3s ease;
+}
+
+@keyframes rotate-in {
+  from {
+    transform: rotate(-90deg) scale(0.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ===== Các nút con ===== */
+.contact-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  /* Không thể click khi chưa mở */
+}
+
+.contact-action-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 33px;
+  height: 33px;
+  margin-top: -22px;
+  margin-left: -22px;
+  border-radius: 50%;
+  border: none;
+  background: white;
+  color: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0) translate(0, 0);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.contact-menu-container.open .contact-actions {
+  pointer-events: auto;
+  /* Có thể click khi mở */
+}
+
+.contact-menu-container.open .contact-action-btn {
+  opacity: 1;
+}
+
+.contact-action-btn:hover {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  filter: brightness(1.1);
+}
+
+/* Màu sắc từng nút con */
+.action-welcome {
+  background: var(--gold-500);
+  color: white;
+}
+
+.action-zalo {
+  background: transparent;
+  box-shadow: none;
+}
+
+.action-messenger {
+  background: transparent;
+  box-shadow: none;
+}
+
+.action-phone {
+  background: transparent;
+  box-shadow: none;
+}
+
+.action-zalo:hover,
+.action-messenger:hover,
+.action-phone:hover {
+  box-shadow: none !important;
+}
+
+/* Vị trí bung hình cánh quạt (Radius: 85px) */
+/* Nút 1: Welcome (Góc 0 độ -> thẳng đứng lên trên) */
+.contact-menu-container.open .action-welcome {
+  transform: translate(0px, -85px) scale(1);
+  transition-delay: 0.05s;
+}
+
+.contact-menu-container.open .action-welcome:hover {
+  transform: translate(0px, -85px) scale(1.15);
+}
+
+/* Nút 2: Zalo (Góc ~30 độ) */
+.contact-menu-container.open .action-zalo {
+  transform: translate(-42px, -73px) scale(1);
+  transition-delay: 0.1s;
+}
+
+.contact-menu-container.open .action-zalo:hover {
+  transform: translate(-42px, -73px) scale(1.15);
+}
+
+/* Nút 3: Messenger (Góc ~60 độ) */
+.contact-menu-container.open .action-messenger {
+  transform: translate(-73px, -42px) scale(1);
+  transition-delay: 0.15s;
+}
+
+.contact-menu-container.open .action-messenger:hover {
+  transform: translate(-73px, -42px) scale(1.15);
+}
+
+/* Nút 4: Gọi điện (Góc 90 độ -> sang trái) */
+.contact-menu-container.open .action-phone {
+  transform: translate(-85px, 0px) scale(1);
+  transition-delay: 0.2s;
+}
+
+.contact-menu-container.open .action-phone:hover {
+  transform: translate(-85px, 0px) scale(1.15);
+}
+
+/* ===== Tooltip ===== */
+.action-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+/* Vị trí tooltip cho từng nút để không bị đè */
+.action-welcome .action-tooltip {
+  right: 100%;
+  top: 50%;
+  transform: translate(-8px, -50%);
+}
+
+.action-zalo .action-tooltip {
+  right: 100%;
+  top: 50%;
+  transform: translate(-8px, -50%);
+}
+
+.action-messenger .action-tooltip {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -8px);
+}
+
+.action-phone .action-tooltip {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -8px);
+}
+
+.contact-action-btn:hover .action-tooltip {
+  opacity: 1;
+}
+
+/* ===== Giữ lại CSS của Welcome Modal ===== */
+.welcome-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  padding: 20px;
+}
+
+.welcome-dialog {
+  background: var(--white);
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.welcome-header-fixed {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: linear-gradient(to right, #fdfbfb, #f5f7fa);
+  border-bottom: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+.welcome-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--gold-400);
+}
+
+.welcome-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--red-600);
+  margin: 0 0 4px 0;
+}
+
+.welcome-unit {
+  font-size: 14px;
+  color: var(--gray-500);
+  margin: 0;
+  font-weight: 500;
+}
+
+.welcome-scrollable-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.welcome-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-700);
+  margin-top: 0;
+  margin-bottom: 24px;
+}
+
+.welcome-features {
+  background: var(--gray-50);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--gray-100);
+}
+
+.welcome-features-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin: 0 0 12px 0;
+}
+
+.welcome-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.welcome-feature-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+
+.feature-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.welcome-guarantee {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--gray-800);
+  background: var(--green-50);
+  border: 1px solid var(--green-200);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+}
+
+.guarantee-item span:first-child {
+  font-size: 18px;
+}
+
+.welcome-credit {
+  font-size: 13px;
+  color: var(--gray-500);
+  border-top: 1px dashed var(--gray-300);
+  padding-top: 20px;
+  line-height: 1.6;
+}
+
+.welcome-credit p {
+  margin: 0 0 8px 0;
+}
+
+.welcome-credit p:first-child {
+  font-style: italic;
+  margin-bottom: 12px;
+}
+
+.welcome-footer-fixed {
+  padding: 16px 24px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-200);
+  flex-shrink: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

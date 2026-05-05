@@ -62,18 +62,44 @@
   color: var(--gray-500);
 }
 
+.tradition-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 .tradition-date {
-  font-size: 13px;
-  color: var(--gray-500);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  margin-bottom: 6px;
 }
 
-.tradition-date strong {
-  color: var(--red-500);
+.tradition-date--main {
+  font-size: 15px;
+  color: var(--red-700);
+  background: var(--red-50);
+  padding: 8px 16px;
+  border: 1px solid var(--red-200);
+  border-radius: var(--radius-md);
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+.tradition-date--main strong {
+  color: var(--red-600);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.tradition-date--sub {
+  font-size: 13px;
+  color: var(--gray-500);
+}
+
+.tradition-date--sub strong {
+  color: var(--gray-700);
   font-size: 14px;
 }
 
@@ -182,6 +208,28 @@
   justify-content: center;
   font-size: 11px;
   font-weight: 800;
+}
+
+.tradition-period-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.period-badge {
+  background: linear-gradient(135deg, var(--red-500), var(--red-600));
+  color: var(--white);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 14px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
 }
 
 .achievement-list {
