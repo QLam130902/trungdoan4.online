@@ -384,7 +384,24 @@ export default function FeedbackListPage() {
                 )}
               </div>
               <div><strong>Ngày gửi:</strong> <br />{new Date(replyModalData.suggestAt).toLocaleString('vi-VN')}</div>
-              <div style={{ gridColumn: '1 / -1' }}>
+              
+              <div>
+                <strong>Mã tra cứu:</strong> <br />
+                <div style={{ display: 'flex', alignItems: 'center', marginTop: '4px', gap: '8px' }}>
+                  <span style={{ fontFamily: 'monospace', fontWeight: 'bold', fontSize: '14px', color: 'var(--red-600)', background: 'var(--red-50)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--red-200)' }}>
+                    {replyModalData.trackingCode}
+                  </span>
+                  <button 
+                    onClick={() => { navigator.clipboard.writeText(replyModalData.trackingCode); alert("Đã copy mã tra cứu!"); }}
+                    style={{ background: 'var(--gray-100)', border: '1px solid var(--gray-300)', borderRadius: '4px', cursor: 'pointer', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', color: 'var(--gray-700)' }}
+                    title="Copy mã tra cứu"
+                  >
+                    📋 Copy
+                  </button>
+                </div>
+              </div>
+
+              <div>
                 <strong>Trạng thái:</strong> <br />
                 {replyModalData.status === 'PENDING' ? (
                   <span className="status-select status-progress" style={{ display: 'inline-block', marginTop: '4px' }}>Chưa xử lý</span>
