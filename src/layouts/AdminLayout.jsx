@@ -29,10 +29,10 @@ export default function AdminLayout() {
       <aside className="admin-sidebar">
         <div className="admin-sidebar-top">
           <div className="admin-sidebar-header">
-            <img src={`${import.meta.env.BASE_URL}logof.png`} alt="Logo" className="admin-logo" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Logo" className="admin-logo" />
             <div className="admin-title-wrap">
               <h2>QUẢN TRỊ</h2>
-              <p>Sư đoàn 5</p>
+              <p>Trung đoàn 4</p>
             </div>
           </div>
 

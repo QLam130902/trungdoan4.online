@@ -374,7 +374,7 @@ export default function FeedbackPage() {
             <span>📞</span>
             <span>
               Bạn sẽ nhận được liên lạc từ số: <strong>{handlerPhone}</strong> –
-              Trung tá Nguyễn Văn Tuấn – Trưởng Ban Dân vận, Sư đoàn 5 trong thời gian sớm nhất.
+              Ban Chính trị, Trung đoàn 4 trong thời gian sớm nhất.
             </span>
           </div>
         )}

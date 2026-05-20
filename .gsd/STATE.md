@@ -4,18 +4,20 @@
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
 - **Giai đoạn (Phase):** 1 - Lưu trữ Sư đoàn 5 và khôi phục Trung đoàn 4
-- **Trạng thái (Status):** planning
-- **Kế hoạch (Plan):** Lập kế hoạch lưu trữ nhánh và khôi phục thông tin Trung đoàn 4.
+- **Trạng thái (Status):** Hoàn thành (Complete)
+- **Kế hoạch (Plan):** Đã khôi phục hoàn chỉnh cấu hình và giao diện về Trung đoàn 4.
 
 ## Hành động vừa qua (Last Action)
 
-- Đã khởi tạo lộ trình [ROADMAP.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/ROADMAP.md) và thêm Phase 1 về việc lưu trữ nhánh `sundoan5` và đưa dự án về quy mô Trung đoàn 4/Sư đoàn 5.
+- Đã tạo nhánh lưu trữ `sundoan5` để giữ lại phiên bản Sư đoàn 5.
+- Khôi phục cấu hình tên miền `trungdoan4.io.vn` và backend API.
+- Cập nhật dữ liệu tĩnh truyền thống và sửa đổi các component để sử dụng logo Trung đoàn 4 (`logo.png`), sửa đổi nhãn tên đơn vị.
+- Chạy lệnh build `npm run build` xác nhận ứng dụng biên dịch thành công mà không có lỗi.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Chạy lệnh `/plan 1` hoặc lập kế hoạch chi tiết cho Phase 1 (thực hiện tạo nhánh `sundoan5`, cập nhật các file `.env.production`, `public/CNAME`, logo, và dữ liệu truyền thống).
-2. Tiến hành thực thi mã nguồn sau khi kế hoạch được duyệt.
-3. Xác minh hoạt động của website ở quy mô Trung đoàn 4.
+1. Người dùng chạy `npm run dev` để nghiệm thu thủ công và kiểm tra trực quan giao diện.
+2. Thực hiện deploy lên máy chủ production khi sẵn sàng.
 
 ## Quyết định hiện tại (Active Decisions)
 
@@ -30,9 +32,8 @@
 
 ## Các điểm cần lưu ý (Concerns)
 
-- Cần đảm bảo branch lưu trữ `sundoan5` được tạo chính xác từ commit hiện tại để không bị mất mát dữ liệu Sư đoàn 5.
-- Cần khôi phục chính xác logo cũ (`logo.png`) và dữ liệu cũ của Trung đoàn 4 trong `src/data/traditionData.js`.
+- Cần đảm bảo server API của Trung đoàn 4 tại `https://api.trungdoan4.io.vn` hoạt động bình thường để tránh lỗi khi người dùng gửi góp ý thực tế.
 
 ---
 
-*Last updated: 2026-05-20T14:59:00+07:00*
+*Last updated: 2026-05-20T15:26:00+07:00*

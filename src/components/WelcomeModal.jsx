@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./WelcomeModal.css";
 
-const STORAGE_KEY = "sudoan5_welcome_seen";
+const STORAGE_KEY = "trungdoan4_welcome_seen";
 
 export default function WelcomeModal() {
   const [show, setShow] = useState(false);
@@ -51,13 +51,13 @@ export default function WelcomeModal() {
           {/* Header cố định — không cuộn */}
           <div className="welcome-header-fixed">
             <img
-              src={`${import.meta.env.BASE_URL}logof.png`}
-              alt="Logo Sư đoàn 5"
+              src={`${import.meta.env.BASE_URL}logo.png`}
+              alt="Logo Trung đoàn 4"
               className="welcome-logo"
             />
             <div>
               <h2 className="welcome-title">Hòm thư góp ý trực tuyến</h2>
-              <p className="welcome-unit">Sư đoàn bộ binh 5</p>
+              <p className="welcome-unit">Trung đoàn bộ binh 4</p>
             </div>
           </div>
 
