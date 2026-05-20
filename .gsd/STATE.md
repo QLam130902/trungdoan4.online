@@ -3,21 +3,20 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 1 - Lưu trữ Sư đoàn 5 và khôi phục Trung đoàn 4
-- **Trạng thái (Status):** Hoàn thành (Complete)
-- **Kế hoạch (Plan):** Đã khôi phục hoàn chỉnh cấu hình và giao diện về Trung đoàn 4.
+- **Giai đoạn (Phase):** 2 - Phân nhánh quy mô Trung đoàn 4 (FE & BE) và khôi phục nhánh chính Sư đoàn 5
+- **Trạng thái (Status):** Đang lập kế hoạch (Planning)
+- **Kế hoạch (Plan):** Chưa được lập (Đang lập kế hoạch cho Phase 2)
 
 ## Hành động vừa qua (Last Action)
 
-- Đã tạo nhánh lưu trữ `sundoan5` để giữ lại phiên bản Sư đoàn 5.
-- Khôi phục cấu hình tên miền `trungdoan4.io.vn` và backend API.
-- Cập nhật dữ liệu tĩnh truyền thống và sửa đổi các component để sử dụng logo Trung đoàn 4 (`logo.png`), sửa đổi nhãn tên đơn vị.
-- Chạy lệnh build `npm run build` xác nhận ứng dụng biên dịch thành công mà không có lỗi.
+- Đã hoàn thành khôi phục quy mô Trung đoàn 4 và lưu trữ Sư đoàn 5 trên nhánh `sundoan5`.
+- Đã thêm Phase 2 vào roadmap để phân nhánh riêng biệt quy mô Trung đoàn 4 và trả nhánh chính về Sư đoàn 5.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Người dùng chạy `npm run dev` để nghiệm thu thủ công và kiểm tra trực quan giao diện.
-2. Thực hiện deploy lên máy chủ production khi sẵn sàng.
+1. Tạo kế hoạch triển khai cho Phase 2 (`implementation_plan.md`).
+2. Nhận phê duyệt từ người dùng đối với kế hoạch triển khai Phase 2.
+3. Thực hiện phân nhánh và đưa nhánh chính của FE, BE về quy mô Sư đoàn 5.
 
 ## Quyết định hiện tại (Active Decisions)
 
@@ -25,6 +24,7 @@
 |------------|----------|-------------|-----------|
 | Khảo sát codebase | Sử dụng workflow `/map` | 20/05/2026 | Tạo lập tài liệu cơ sở ban đầu cho dự án |
 | Đổi quy mô dự án | Đưa về Trung đoàn 4 | 20/05/2026 | Lưu trữ Sư đoàn 5 sang branch mới và khôi phục cấu hình Trung đoàn 4 |
+| Đổi cấu trúc nhánh | Nhánh chính Sư đoàn 5, Nhánh phụ Trung đoàn 4 | 20/05/2026 | Tạo nhánh `trungdoan4` ở cả FE và BE; khôi phục nhánh chính `local` về Sư đoàn 5 |
 
 ## Trở ngại (Blockers)
 
@@ -32,8 +32,9 @@
 
 ## Các điểm cần lưu ý (Concerns)
 
-- Cần đảm bảo server API của Trung đoàn 4 tại `https://api.trungdoan4.io.vn` hoạt động bình thường để tránh lỗi khi người dùng gửi góp ý thực tế.
+- Cần cẩn thận khi thao tác chuyển đổi nhánh và khôi phục mã nguồn trên nhánh chính để không làm mất mát các thay đổi thuộc về Trung đoàn 4.
+- Cần có quyền truy cập hoặc thực thi các lệnh trên repo BE (`trungdoan4.server`).
 
 ---
 
-*Last updated: 2026-05-20T15:26:00+07:00*
+*Last updated: 2026-05-20T15:53:00+07:00*
