@@ -2,29 +2,27 @@
 
 ## Vị trí hiện tại (Current Position)
 
-- **Cột mốc (Milestone):** Khảo sát dự án
-- **Giai đoạn (Phase):** 1 - Khảo sát và lập sơ đồ codebase
-- **Trạng thái (Status):** Hoàn thành (Khảo sát xong)
-- **Kế hoạch (Plan):** Khảo sát cấu trúc thư mục, các dependency lỗi thời, luồng dữ liệu và nợ kỹ thuật của dự án.
+- **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
+- **Giai đoạn (Phase):** 1 - Lưu trữ Sư đoàn 5 và khôi phục Trung đoàn 4
+- **Trạng thái (Status):** planning
+- **Kế hoạch (Plan):** Lập kế hoạch lưu trữ nhánh và khôi phục thông tin Trung đoàn 4.
 
 ## Hành động vừa qua (Last Action)
 
-- Đã chạy phân tích cấu trúc dự án `trungdoan4.online`.
-- Đã kiểm tra và thống kê dòng code cho từng thư mục (tổng cộng ~5249 dòng code trên 40 tệp tin).
-- Đã chạy `npm outdated` phát hiện các thư viện lỗi thời (đặc biệt là Vite v5 lên v8 và React v18 lên v19).
-- Đã khởi tạo tài liệu kiến trúc hệ thống [ARCHITECTURE.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/ARCHITECTURE.md) và danh mục công nghệ [STACK.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/STACK.md).
+- Đã khởi tạo lộ trình [ROADMAP.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/ROADMAP.md) và thêm Phase 1 về việc lưu trữ nhánh `sundoan5` và đưa dự án về quy mô Trung đoàn 4/Sư đoàn 5.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Chờ phản hồi và yêu cầu mới từ người dùng.
-2. Nếu có yêu cầu tính năng mới hoặc sửa lỗi, chạy lệnh `/plan` để lập kế hoạch chi tiết trước khi triển khai.
-3. Cân nhắc việc nâng cấp các thư viện lỗi thời (như `vite`, `react`) nếu người dùng yêu cầu tối ưu hệ thống hoặc bảo mật.
+1. Chạy lệnh `/plan 1` hoặc lập kế hoạch chi tiết cho Phase 1 (thực hiện tạo nhánh `sundoan5`, cập nhật các file `.env.production`, `public/CNAME`, logo, và dữ liệu truyền thống).
+2. Tiến hành thực thi mã nguồn sau khi kế hoạch được duyệt.
+3. Xác minh hoạt động của website ở quy mô Trung đoàn 4.
 
 ## Quyết định hiện tại (Active Decisions)
 
 | Quyết định | Lựa chọn | Ngày đưa ra | Ảnh hưởng |
 |------------|----------|-------------|-----------|
 | Khảo sát codebase | Sử dụng workflow `/map` | 20/05/2026 | Tạo lập tài liệu cơ sở ban đầu cho dự án |
+| Đổi quy mô dự án | Đưa về Trung đoàn 4 | 20/05/2026 | Lưu trữ Sư đoàn 5 sang branch mới và khôi phục cấu hình Trung đoàn 4 |
 
 ## Trở ngại (Blockers)
 
@@ -32,9 +30,9 @@
 
 ## Các điểm cần lưu ý (Concerns)
 
-- Dự án sử dụng song song `ExcelJS` và `xlsx`, nhưng logic chính đang dùng `ExcelJS` để xuất file có định dạng phông chữ chuẩn (Times New Roman, size 14).
-- Một số thành phần cũ trong UI (như select Cán bộ xử lý trong `FeedbackPage.jsx`) đang bị ẩn qua CSS (`display: none`), cần xem xét loại bỏ hoàn toàn nếu không sử dụng nữa.
+- Cần đảm bảo branch lưu trữ `sundoan5` được tạo chính xác từ commit hiện tại để không bị mất mát dữ liệu Sư đoàn 5.
+- Cần khôi phục chính xác logo cũ (`logo.png`) và dữ liệu cũ của Trung đoàn 4 trong `src/data/traditionData.js`.
 
 ---
 
-*Last updated: 2026-05-20T14:24:00+07:00*
+*Last updated: 2026-05-20T14:59:00+07:00*
