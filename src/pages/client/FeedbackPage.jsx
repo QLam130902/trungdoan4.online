@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TabToggle from "../../components/TabToggle";
 import Modal from "../../components/Modal";
-import { officers } from "../../data/officers";
+import { unitsHierarchy, getUnitName } from "../../data/unitsData";
 import { createFeedbackCode } from "../../utils/helpers";
 import "./FeedbackPage.css";
 
@@ -14,7 +14,8 @@ export default function FeedbackPage() {
   const [activeTab, setActiveTab] = useState("submit");
   const [isAnonymous, setIsAnonymous] = useState(true);
   const [senderName, setSenderName] = useState("");
-  const [selectedOfficer, setSelectedOfficer] = useState("");
+  const [level1Unit, setLevel1Unit] = useState("");
+  const [level2Unit, setLevel2Unit] = useState("");
   const [feedback, setFeedback] = useState("");
   const [error, setError] = useState("");
   const [submittedCode, setSubmittedCode] = useState("");
@@ -65,6 +66,16 @@ export default function FeedbackPage() {
     event.preventDefault();
     setError("");
 
+    if (!level1Unit) {
+      setError("Vui lòng chọn Tiểu đoàn hoặc nhóm Đại đội trực thuộc Trung đoàn.");
+      return;
+    }
+
+    if (!level2Unit) {
+      setError("Vui lòng chọn Đại đội hoặc Khối trực thuộc tương ứng.");
+      return;
+    }
+
     if (!feedback.trim()) {
       setError("Vui lòng nhập nội dung góp ý.");
       return;
@@ -82,7 +93,7 @@ export default function FeedbackPage() {
       const payload = {
         body: feedback,
         suggestedBy: isAnonymous ? "Ẩn danh" : senderName,
-        handledBy: selectedOfficer || null,
+        unitCode: level2Unit,
         contactPhone: (!isAnonymous && wantsContact && contactPhone.length === 10) ? contactPhone : null,
       };
 
@@ -110,12 +121,12 @@ export default function FeedbackPage() {
       // Tự động copy vào clipboard
       const success = await copyToClipboard(code);
       setIsCopied(success);
-      // (Tạm thời không cập nhật records ảo nữa mà nên có phần gọi api GET để tra cứu sau)
 
       // Xóa trắng form
       setFeedback("");
       setSenderName("");
-      setSelectedOfficer("");
+      setLevel1Unit("");
+      setLevel2Unit("");
       setIsAnonymous(true);
       setWantsContact(false);
       setContactPhone("");
@@ -234,26 +245,45 @@ export default function FeedbackPage() {
                 </div>
               )}
 
-              <div className="field" style={{ display: "none" }}>
-                <label className="label" htmlFor="officer">
-                  Cán bộ xử lý
-                  <span className="optional-tag">không bắt buộc</span>
+              <div className="field">
+                <label className="label" htmlFor="level1Unit">
+                  Chọn đơn vị nhận góp ý <span className="required-star">*</span>
                 </label>
                 <select
-                  id="officer"
+                  id="level1Unit"
                   className="input"
-                  value={selectedOfficer}
-                  onChange={(e) => setSelectedOfficer(e.target.value)}
+                  value={level1Unit}
+                  onChange={(e) => {
+                    setLevel1Unit(e.target.value);
+                    setLevel2Unit("");
+                  }}
+                  style={{ marginBottom: "10px" }}
                 >
-                  <option value="">
-                    -- Gửi đến đơn vị (không chọn cán bộ) --
-                  </option>
-                  {officers.map((officer) => (
-                    <option key={officer.id} value={officer.id}>
-                      {officer.name} — {officer.unit}
+                  <option value="">-- Chọn Tiểu đoàn / Khối trực thuộc --</option>
+                  {unitsHierarchy[0].children.map((item) => (
+                    <option key={item.code} value={item.code}>
+                      {item.name}
                     </option>
                   ))}
                 </select>
+
+                {level1Unit && (
+                  <select
+                    id="level2Unit"
+                    className="input animate-fade-in"
+                    value={level2Unit}
+                    onChange={(e) => setLevel2Unit(e.target.value)}
+                  >
+                    <option value="">-- Chọn cụ thể Đại đội / Khối --</option>
+                    {unitsHierarchy[0].children
+                      .find((item) => item.code === level1Unit)
+                      ?.children.map((sub) => (
+                        <option key={sub.code} value={sub.code}>
+                          {sub.name}
+                        </option>
+                      ))}
+                  </select>
+                )}
               </div>
 
               <div className="field">
@@ -320,6 +350,11 @@ export default function FeedbackPage() {
                     <span>
                       Trạng thái: <strong>{lookupResult.status === "PENDING" ? "Đang chờ xử lý" : (lookupResult.status === "RESOLVED" ? "Đã phản hồi và hoàn tất" : lookupResult.status)}</strong>
                     </span>
+                  </div>
+
+                  <div style={{ marginTop: "10px", paddingLeft: "5px", color: "var(--text-light)" }}>
+                    <span>🏢 Đơn vị nhận: </span>
+                    <strong>{getUnitName(lookupResult.unitCode)}</strong>
                   </div>
 
                   {lookupResult.status === "RESOLVED" && lookupResult.response && (

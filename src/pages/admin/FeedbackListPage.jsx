@@ -3,6 +3,7 @@ import Modal from "../../components/Modal";
 import ExportModal from "../../components/ExportModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { toApiDateTime } from "../../utils/exportUtils";
+import { getUnitName, unitsHierarchy } from "../../data/unitsData";
 import "./FeedbackListPage.css";
 
 const copyToClipboardSafe = (text) => {
@@ -25,12 +26,13 @@ const copyToClipboardSafe = (text) => {
 const cleanPhoneForLink = (phone) => phone ? phone.replace(/[\s\-\.]/g, '') : '';
 
 export default function FeedbackListPage() {
-  const { authFetch } = useAuth();
+  const { authFetch, user } = useAuth();
   const [feedbacks, setFeedbacks] = useState([]);
   const [replyModalData, setReplyModalData] = useState(null);
   const [replyText, setReplyText] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [filterStatus, setFilterStatus] = useState("ALL");
+  const [selectedUnitFilter, setSelectedUnitFilter] = useState("ALL");
   const [showExportModal, setShowExportModal] = useState(false);
 
   // === Phân trang ===
@@ -163,6 +165,16 @@ export default function FeedbackListPage() {
     return `${day}/${month} ${hours}:${mins}`;
   };
 
+  const filteredFeedbacks = feedbacks.filter((fb) => {
+    if (selectedUnitFilter === "ALL") return true;
+    if (selectedUnitFilter.startsWith("TD")) {
+      if (fb.unitCode === selectedUnitFilter) return true;
+      const battalion = unitsHierarchy[0].children.find((item) => item.code === selectedUnitFilter);
+      return battalion && battalion.children.some((sub) => sub.code === fb.unitCode);
+    }
+    return fb.unitCode === selectedUnitFilter;
+  });
+
   return (
     <div className="feedback-list-page">
       <h1 className="page-title">Quản lý góp ý</h1>
@@ -206,6 +218,26 @@ export default function FeedbackListPage() {
             <label>Đến ngày</label>
             <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} />
           </div>
+          {user?.role === "ROLE_ADMIN" && (
+            <div className="date-filter-group" style={{ minWidth: "220px" }}>
+              <label>Đơn vị</label>
+              <select 
+                value={selectedUnitFilter} 
+                onChange={e => setSelectedUnitFilter(e.target.value)}
+                style={{ padding: "8px 12px", border: "1px solid #ddd", borderRadius: "var(--radius-sm)", height: "38px" }}
+              >
+                <option value="ALL">-- Tất cả đơn vị --</option>
+                {unitsHierarchy[0].children.map(battalion => (
+                  <React.Fragment key={battalion.code}>
+                    <option value={battalion.code} style={{ fontWeight: "bold" }}>{battalion.name}</option>
+                    {battalion.children && battalion.children.map(company => (
+                      <option key={company.code} value={company.code}>&nbsp;&nbsp;&nbsp;&nbsp;{company.name}</option>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="date-filter-actions">
             <button className="btn-filter-apply" onClick={handleDateFilter}>Lọc</button>
             {(dateFrom || dateTo) && (
@@ -216,7 +248,7 @@ export default function FeedbackListPage() {
 
         {/* Thông tin tổng hợp */}
         <div className="toolbar-info">
-          <span>{totalElements} góp ý • Trang {currentPage + 1}/{totalPages || 1}</span>
+          <span>Hiển thị {filteredFeedbacks.length}/{totalElements} góp ý • Trang {currentPage + 1}/{totalPages || 1}</span>
         </div>
       </div>
 
@@ -228,13 +260,14 @@ export default function FeedbackListPage() {
               <th>ID</th>
               <th>Ngày nộp</th>
               <th>Người gửi</th>
+              <th>Đơn vị</th>
               <th style={{ width: "100%" }}>Nội dung</th>
               <th>Trạng thái</th>
               <th style={{ whiteSpace: "nowrap", minWidth: "220px", textAlign: "center" }}>Thao tác</th>
             </tr>
           </thead>
           <tbody>
-            {feedbacks.map((fb) => (
+            {filteredFeedbacks.map((fb) => (
               <tr key={fb.id}>
                 <td className="td-code" title={fb.trackingCode}>{fb.id}</td>
                 <td className="td-date">{formatDateShort(fb.suggestAt)}</td>
@@ -264,6 +297,7 @@ export default function FeedbackListPage() {
                     </div>
                   )}
                 </td>
+                <td style={{ whiteSpace: "nowrap" }}>{getUnitName(fb.unitCode)}</td>
                 <td className="td-content">{fb.body}</td>
                 <td>
                   {fb.status === 'PENDING' ? (
@@ -290,7 +324,7 @@ export default function FeedbackListPage() {
 
       {/* ===== MOBILE CARD LIST ===== */}
       <div className="feedback-card-list mobile-only">
-        {feedbacks.map((fb) => (
+        {filteredFeedbacks.map((fb) => (
           <div key={fb.id} className="feedback-card compact">
             <div className="feedback-card-top">
               <span className="feedback-card-id">#{fb.id}</span>
@@ -309,6 +343,7 @@ export default function FeedbackListPage() {
             <div className="feedback-card-info-row">
               <div className="info-item" style={{ flexDirection: "column", alignItems: "flex-start", position: "relative" }}>
                 <div><span className="icon-wrap">👤</span> {fb.suggestedBy || "Ẩn danh"}</div>
+                <div style={{ marginTop: "4px" }}><span className="icon-wrap">🏢</span> {getUnitName(fb.unitCode)}</div>
                 {fb.contactPhone && (
                   <div 
                     className="phone-display"

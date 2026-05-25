@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import Modal from '../../components/Modal';
+import { getUnitName, unitsHierarchy } from '../../data/unitsData';
 
 const UserManagementPage = () => {
   const [users, setUsers] = useState([]);
@@ -17,6 +18,7 @@ const UserManagementPage = () => {
   const [position, setPosition] = useState('');
   const [role, setRole] = useState('ROLE_OFFICER');
   const [phone, setPhone] = useState('');
+  const [unitCode, setUnitCode] = useState('TRUNG_DOAN_4');
 
   const { user: currentUser, authFetch } = useAuth();
   const apiUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
@@ -46,7 +48,7 @@ const UserManagementPage = () => {
       const response = await authFetch(`${apiUrl}/users`, {
         method: 'POST',
         body: JSON.stringify({
-          username, password, fullName, rank, position, role, phone
+          username, password, fullName, rank, position, role, phone, unitCode
         })
       });
       
@@ -55,6 +57,7 @@ const UserManagementPage = () => {
         fetchUsers();
         setUsername(''); setPassword(''); setFullName('');
         setRank(''); setPosition(''); setRole('ROLE_OFFICER'); setPhone('');
+        setUnitCode('TRUNG_DOAN_4');
         setIsCreateModalOpen(false); // Đóng modal sau khi tạo thành công
       } else if (response) {
         const errText = await response.text();
@@ -151,6 +154,20 @@ const UserManagementPage = () => {
             <label className="label">Số điện thoại</label>
             <input type="tel" placeholder="Nhập SĐT liên hệ" value={phone} onChange={e => setPhone(e.target.value)} className="input" />
           </div>
+          <div className="field">
+            <label className="label">Đơn vị công tác</label>
+            <select value={unitCode} onChange={e => setUnitCode(e.target.value)} className="input">
+              <option value="TRUNG_DOAN_4">Trung đoàn Bộ binh 4</option>
+              {unitsHierarchy[0].children.map(battalion => (
+                <React.Fragment key={battalion.code}>
+                  <option value={battalion.code} style={{ fontWeight: 'bold' }}>{battalion.name}</option>
+                  {battalion.children && battalion.children.map(company => (
+                    <option key={company.code} value={company.code}>&nbsp;&nbsp;&nbsp;&nbsp;{company.name}</option>
+                  ))}
+                </React.Fragment>
+              ))}
+            </select>
+          </div>
           <div style={{ gridColumn: '1 / -1', display: 'flex', gap: '10px', marginTop: '10px' }}>
             <button type="button" className="btn-secondary" onClick={() => setIsCreateModalOpen(false)} style={{ flex: 1 }}>Hủy</button>
             <button type="submit" className="btn-primary" style={{ flex: 2 }}>Tạo tài khoản</button>
@@ -168,6 +185,7 @@ const UserManagementPage = () => {
                   <th style={thStyle}>Tài khoản</th>
                   <th style={thStyle}>Họ và tên</th>
                   <th className="hide-on-mobile" style={thStyle}>Cấp bậc / Chức vụ</th>
+                  <th className="hide-on-mobile" style={thStyle}>Đơn vị</th>
                   <th className="hide-on-mobile" style={thStyle}>Quyền</th>
                   <th className="hide-on-mobile" style={thStyle}>Thao tác</th>
                   <th className="show-on-mobile" style={thStyle}>Chi tiết</th>
@@ -179,6 +197,7 @@ const UserManagementPage = () => {
                     <td style={tdStyle}><strong>{u.username}</strong></td>
                     <td style={tdStyle}>{u.fullName}</td>
                     <td className="hide-on-mobile" style={tdStyle}>{u.rank} - {u.position}</td>
+                    <td className="hide-on-mobile" style={tdStyle}>{getUnitName(u.unitCode)}</td>
                     <td className="hide-on-mobile" style={tdStyle}>
                       <span style={{ 
                         padding: '4px 8px', borderRadius: '12px', fontSize: '12px', fontWeight: 'bold',
@@ -216,6 +235,7 @@ const UserManagementPage = () => {
               <div><strong>Cấp bậc:</strong> {selectedUser.rank}</div>
               <div><strong>Chức vụ:</strong> {selectedUser.position}</div>
               <div><strong>Số điện thoại:</strong> {selectedUser.phone || 'Chưa cập nhật'}</div>
+              <div><strong>Đơn vị:</strong> {getUnitName(selectedUser.unitCode)}</div>
               <div>
                 <strong>Quyền: </strong> 
                 <span style={{ 
