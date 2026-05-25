@@ -1,6 +1,6 @@
 # Danh mục Công nghệ (Technology Stack)
 
-> Tự động tạo bởi lệnh `/map` vào ngày 20/05/2026
+> Tự động tạo bởi lệnh `/map` vào ngày 25/05/2026
 
 ## Môi trường chạy (Runtime)
 
@@ -48,7 +48,7 @@ Xem chi tiết trong [package.json](file:///c:/Users/PC/projects/trungdoan4.onli
 
 | Biến môi trường | Ý nghĩa / Mục đích | Nơi thiết lập |
 |-----------------|--------------------|---------------|
-| `VITE_API_BASE_URL` | Địa chỉ API Endpoint của backend | `.env.development` (`http://192.168.1.236:8080`) <br> `.env.production` (`https://api.sudoan5.io.vn`) |
+| `VITE_API_BASE_URL` | Địa chỉ API Endpoint của backend | `.env.development` (`http://192.168.1.236:8080`) <br> `.env.production` (`https://api.trungdoan4.io.vn`) |
 
 ## Phân bổ dòng code (File Size Inventory)
 
@@ -77,4 +77,4 @@ Dưới đây là thống kê số dòng mã nguồn của dự án (xấp xỉ)
 
 ---
 
-*Last updated: 2026-05-20*
+*Last updated: 2026-05-25*

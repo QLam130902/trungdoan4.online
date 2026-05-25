@@ -1,12 +1,12 @@
 # Kiến trúc Hệ thống (System Architecture)
 
-> Tự động tạo bởi lệnh `/map` vào ngày 20/05/2026
+> Tự động tạo bởi lệnh `/map` vào ngày 25/05/2026
 
 ## Tổng quan (Overview)
-Ứng dụng "Hòm thư góp ý trực tuyến Trung đoàn 4" (testhtml-feedback-app) là một ứng dụng Web SPA (Single Page Application) được xây dựng dựa trên thư viện **React** và công cụ đóng gói **Vite**.
+Ứng dụng "Hòm thư góp ý trực tuyến Trung đoàn 4" (testhtml-feedback-app) là một ứng dụng Web SPA (Single Page Application - Ứng dụng trang đơn) được xây dựng dựa trên thư viện **React** và công cụ đóng gói **Vite**.
 
 Ứng dụng phục vụ hai nhóm đối tượng chính:
-1. **Người dùng (Client)**: Gửi các ý kiến đóng góp, phản hồi ẩn danh hoặc công khai tới đơn vị, đồng thời tra cứu trạng thái xử lý các góp ý đó thông qua mã tra cứu độc duy. Đọc thông tin truyền thống của Sư đoàn Bộ binh 5 và tra cứu các câu hỏi thường gặp (FAQ).
+1. **Người dùng (Client)**: Gửi các ý kiến đóng góp, phản hồi ẩn danh hoặc công khai tới đơn vị, đồng thời tra cứu trạng thái xử lý các góp ý đó thông qua mã tra cứu độc duy. Đọc thông tin truyền thống của Trung đoàn Bộ binh 4 và tra cứu các câu hỏi thường gặp (FAQ).
 2. **Quản trị viên / Cán bộ (Admin)**: Đăng nhập vào hệ thống để thống kê số liệu góp ý (qua biểu đồ trực quan), quản lý danh sách góp ý, phản hồi ý kiến của chiến sĩ/thân nhân, quản lý tài khoản cán bộ và xuất báo cáo dữ liệu định dạng Excel.
 
 Sơ đồ hoạt động mức cao:
@@ -21,7 +21,7 @@ Sơ đồ hoạt động mức cao:
 ┌───────────────────────────────────────────────────────────────┐
 │                    API Gateway / Backend                      │
 │             (Sử dụng JWT Bearer Token để xác thực)            │
-│                 https://api.sudoan5.io.vn                     │
+│               https://api.trungdoan4.io.vn                    │
 └───────────────────────────────────────────────────────────────┘
 ```
 
@@ -32,7 +32,7 @@ Sơ đồ hoạt động mức cao:
 - **Vị trí**: `src/pages/client/` và `src/layouts/ClientLayout.jsx`
 - **Các trang chính**:
   - [FeedbackPage.jsx](file:///c:/Users/PC/projects/trungdoan4.online/src/pages/client/FeedbackPage.jsx) (`/`): Form gửi góp ý (cho phép chọn Ẩn danh hoặc Công khai, điền SĐT liên hệ, chọn cán bộ xử lý) và chức năng tra cứu trạng thái xử lý góp ý theo mã tra cứu (`trackingCode`).
-  - [TraditionPage.jsx](file:///c:/Users/PC/projects/trungdoan4.online/src/pages/client/TraditionPage.jsx) (`/truyen-thong`): Trang giới thiệu lịch sử, truyền thống 60 năm xây dựng và chiến đấu của Sư đoàn Bộ binh 5 anh hùng kèm theo danh sách phim tài liệu.
+  - [TraditionPage.jsx](file:///c:/Users/PC/projects/trungdoan4.online/src/pages/client/TraditionPage.jsx) (`/truyen-thong`): Trang giới thiệu lịch sử, truyền thống xây dựng và chiến đấu của Trung đoàn Bộ binh 4 anh hùng kèm theo danh sách phim tài liệu.
   - [FAQPage.jsx](file:///c:/Users/PC/projects/trungdoan4.online/src/pages/client/FAQPage.jsx) (`/faq`): Câu hỏi thường gặp liên quan đến chế độ sinh hoạt, chế độ nghỉ phép, chính sách thân nhân, v.v.
 
 ### 2. Luồng Quản trị (Admin Flow)
@@ -81,4 +81,4 @@ Sơ đồ hoạt động mức cao:
 
 ---
 
-*Last updated: 2026-05-20*
+*Last updated: 2026-05-25*
