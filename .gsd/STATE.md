@@ -3,19 +3,19 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 3 - Phân cấp quản lý ý kiến đóng góp theo đơn vị (Tiểu đoàn & Đại đội)
-- **Nhiệm vụ (Task):** Lập kế hoạch Phase 3 hoàn tất
-- **Trạng thái (Status):** Sẵn sàng thực thi (Ready for execution)
+- **Giai đoạn (Phase):** 3 - Phân cấp quản lý ý kiến đóng góp theo đơn vị (Tiểu đoàn & Đại đội) (Đã hoàn thành)
+- **Nhiệm vụ (Task):** Tất cả nhiệm vụ hoàn thành (All tasks complete)
+- **Trạng thái (Status):** Đã xác minh (Verified)
 
 ## Last Session Summary
-Lập kế hoạch Phase 3 hoàn tất. Đã tạo 3 kế hoạch chi tiết:
-- `3.1-PLAN.md`: Thiết kế database thực thể Unit, cập nhật User, Suggestion và DataSeeder cho Trung đoàn 4.
-- `3.2-PLAN.md`: API phân quyền theo đơn vị, cập nhật JWT Token và API quản lý tài khoản.
-- `3.3-PLAN.md`: Cập nhật giao diện Client chọn đơn vị phân cấp và Admin quản lý.
+Phase 3 thực thi thành công. 3 kế hoạch, 9 nhiệm vụ đã hoàn tất và được kiểm thử thành công.
+- Đã thiết lập bảng dữ liệu đơn vị phân cấp ở Backend và seed dữ liệu Trung đoàn 4 (Tiểu đoàn 1, 2, 3 và các Đại đội, Khối trực thuộc).
+- Cán bộ được phân quyền xem danh sách góp ý dựa trên JWT claim `unitCode`.
+- Frontend cập nhật đầy đủ giao diện client gửi góp ý theo đơn vị và trang Admin lọc góp ý, quản lý tài khoản.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Thực hiện chạy kế hoạch bằng lệnh `/execute 3`.
+1. Dự án trên nhánh `trungdoan4` đã hoàn tất cột mốc chuyển đổi quy mô và phân cấp. Sẵn sàng triển khai thực tế.
 
 ## Quyết định hiện tại (Active Decisions)
 

@@ -42,12 +42,14 @@ updated: 2026-05-20T16:00:00+07:00
 ---
 
 ### Phase 3: Phân cấp quản lý ý kiến đóng góp theo đơn vị (Tiểu đoàn & Đại đội)
-**Status:** ⬜ Not Started
+**Status:** ✅ Complete
 **Objective:** Bổ sung cấu trúc cây đơn vị (Tiểu đoàn 1/2/3 và các Đại đội trực thuộc Tiểu đoàn/Trung đoàn); phân quyền quản lý và hiển thị danh sách góp ý theo phạm vi đơn vị của cán bộ đăng nhập.
 **Depends on:** Phase 2
 
 **Plans:**
-- [ ] TBD (chạy `/plan 3` để khởi tạo kế hoạch chi tiết)
+- [x] Plan 3.1: Cơ sở dữ liệu và Khởi tạo dữ liệu Đơn vị (Backend)
+- [x] Plan 3.2: API Phân quyền theo Đơn vị & Quản lý Tài khoản (Backend)
+- [x] Plan 3.3: Giao diện Gửi góp ý & Trang quản lý phân cấp (Frontend)
 
 ---
 
@@ -57,7 +59,7 @@ updated: 2026-05-20T16:00:00+07:00
 |-------|--------|-------|----------|
 | 1 | ✅ | 1/1 | 2026-05-20 |
 | 2 | ✅ | 1/1 | 2026-05-20 |
-| 3 | ⬜ | 0/0 | TBD |
+| 3 | ✅ | 3/3 | 2026-05-25 |
 
 ---
 
@@ -67,4 +69,4 @@ updated: 2026-05-20T16:00:00+07:00
 |-------|---------|-----------|----------|
 | 1 | 2026-05-20 | 2026-05-20 | < 1h |
 | 2 | 2026-05-20 | 2026-05-20 | < 1h |
-| 3 | TBD | TBD | TBD |
+| 3 | 2026-05-25 | 2026-05-25 | < 1h |
