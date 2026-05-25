@@ -4,19 +4,18 @@
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
 - **Giai đoạn (Phase):** 3 - Phân cấp quản lý ý kiến đóng góp theo đơn vị (Tiểu đoàn & Đại đội)
-- **Nhiệm vụ (Task):** Thiết kế và lập kế hoạch chi tiết (Chờ lệnh `/plan 3`)
-- **Trạng thái (Status):** Đang chuẩn bị kế hoạch (Planning)
+- **Nhiệm vụ (Task):** Lập kế hoạch Phase 3 hoàn tất
+- **Trạng thái (Status):** Sẵn sàng thực thi (Ready for execution)
 
 ## Last Session Summary
-Mapping codebase trên nhánh `trungdoan4` đã hoàn tất.
-- Cập nhật lại toàn bộ tài liệu kiến trúc hệ thống ([ARCHITECTURE.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/ARCHITECTURE.md)) và danh mục công nghệ ([STACK.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/STACK.md)) theo quy mô Trung đoàn 4.
-- Đã xác nhận cấu hình API Endpoint trỏ tới `https://api.trungdoan4.io.vn` trên môi trường Production.
-- Cả hai dự án Frontend và Backend vẫn đang hoạt động ổn định trên nhánh `trungdoan4`.
+Lập kế hoạch Phase 3 hoàn tất. Đã tạo 3 kế hoạch chi tiết:
+- `3.1-PLAN.md`: Thiết kế database thực thể Unit, cập nhật User, Suggestion và DataSeeder cho Trung đoàn 4.
+- `3.2-PLAN.md`: API phân quyền theo đơn vị, cập nhật JWT Token và API quản lý tài khoản.
+- `3.3-PLAN.md`: Cập nhật giao diện Client chọn đơn vị phân cấp và Admin quản lý.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Lập kế hoạch chi tiết cho Phase 3 bằng lệnh `/plan 3`.
-2. Tiến hành thực thi sau khi kế hoạch được phê duyệt.
+1. Thực hiện chạy kế hoạch bằng lệnh `/execute 3`.
 
 ## Quyết định hiện tại (Active Decisions)
 
