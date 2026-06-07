@@ -3,9 +3,9 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 3 - Phân cấp quản lý ý kiến đóng góp theo đơn vị (Tiểu đoàn & Đại đội) (Đã hoàn thành)
-- **Nhiệm vụ (Task):** Tất cả nhiệm vụ hoàn thành (All tasks complete)
-- **Trạng thái (Status):** Đã xác minh (Verified)
+- **Giai đoạn (Phase):** 4 - Khắc phục lỗi hết hạn phiên đăng nhập và tối ưu JWT Token
+- **Nhiệm vụ (Task):** Lập kế hoạch Phase 4 (Chờ lệnh `/plan 4`)
+- **Trạng thái (Status):** Đang chuẩn bị kế hoạch (Planning)
 
 ## Last Session Summary
 Phase 3 thực thi thành công. 3 kế hoạch, 9 nhiệm vụ đã hoàn tất và được kiểm thử thành công.
@@ -15,7 +15,8 @@ Phase 3 thực thi thành công. 3 kế hoạch, 9 nhiệm vụ đã hoàn tất
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Dự án trên nhánh `trungdoan4` đã hoàn tất cột mốc chuyển đổi quy mô và phân cấp. Sẵn sàng triển khai thực tế.
+1. Lập kế hoạch chi tiết cho Phase 4 bằng lệnh `/plan 4`.
+2. Tiến hành thực thi sau khi kế hoạch được phê duyệt.
 
 ## Quyết định hiện tại (Active Decisions)
 
@@ -31,4 +32,4 @@ Phase 3 thực thi thành công. 3 kế hoạch, 9 nhiệm vụ đã hoàn tất
 
 ---
 
-*Last updated: 2026-05-25T15:55:00+07:00*
+*Last updated: 2026-06-07T16:35:00+07:00*

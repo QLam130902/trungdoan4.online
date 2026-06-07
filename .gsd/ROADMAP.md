@@ -70,3 +70,35 @@ updated: 2026-05-20T16:00:00+07:00
 | 1 | 2026-05-20 | 2026-05-20 | < 1h |
 | 2 | 2026-05-20 | 2026-05-20 | < 1h |
 | 3 | 2026-05-25 | 2026-05-25 | < 1h |
+
+---
+
+### Phase 4: Khắc phục lỗi hết hạn phiên đăng nhập và tối ưu JWT Token
+**Status:** ⬜ Not Started
+**Objective:** Điều chỉnh và tăng thời gian sống của JWT token ở Backend, tối ưu hóa cơ chế xác thực ở Frontend để ngăn chặn việc bị đẩy ra khỏi phiên làm việc đột ngột.
+**Depends on:** Phase 3
+
+**Plans:**
+- [ ] TBD (chạy `/plan 4` để khởi tạo kế hoạch chi tiết)
+
+---
+
+## Progress Summary
+
+| Phase | Status | Plans | Complete |
+|-------|--------|-------|----------|
+| 1 | ✅ | 1/1 | 2026-05-20 |
+| 2 | ✅ | 1/1 | 2026-05-20 |
+| 3 | ✅ | 3/3 | 2026-05-25 |
+| 4 | ⬜ | 0/0 | TBD |
+
+---
+
+## Timeline
+
+| Phase | Started | Completed | Duration |
+|-------|---------|-----------|----------|
+| 1 | 2026-05-20 | 2026-05-20 | < 1h |
+| 2 | 2026-05-20 | 2026-05-20 | < 1h |
+| 3 | 2026-05-25 | 2026-05-25 | < 1h |
+| 4 | TBD | TBD | TBD |
