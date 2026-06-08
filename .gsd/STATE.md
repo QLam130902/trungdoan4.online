@@ -3,17 +3,17 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 5 - Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
-- **Nhiệm vụ (Task):** Thiết lập kế hoạch (Run /plan 5 to create)
-- **Trạng thái (Status):** Chưa hoàn thành (Not Started)
+- **Phase (Giai đoạn):** 5 - Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
+- **Nhiệm vụ (Task):** Lập kế hoạch hoàn tất (Planning complete)
+- **Trạng thái (Status):** Sẵn sàng thực thi (Ready for execution)
 
 ## Last Session Summary
-Phase 4 đã tăng thời hạn JWT Token lên 24 giờ và thực hiện một số kiểm tra phân quyền, tuy nhiên người dùng báo cáo lỗi hết hạn token vẫn xảy ra trên hệ thống. Chúng tôi thêm Phase 5 để tập trung điều tra và xử lý triệt để vấn đề này.
+Phase 4 đã được tối ưu hóa ở cả FE & BE, tuy nhiên lỗi hết hạn token vẫn xảy ra trên môi trường thực tế. Phase 5 đã lập kế hoạch chi tiết (Plan 5.1) để xử lý dứt điểm thông qua việc đồng bộ hóa URL bằng React Router `useLocation()`.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Lập kế hoạch Phase 5 bằng lệnh `/plan 5`.
-2. Tiến hành điều tra lỗi trên môi trường thực tế, kiểm tra log, network requests và cơ chế lưu trữ token frontend/backend.
+1. Thực thi kế hoạch bằng lệnh `/execute 5`.
+2. Kiểm tra và xác nhận lỗi được khắc phục thành công.
 
 ## Quyết định hiện tại (Active Decisions)
 
