@@ -3,9 +3,9 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 5 - Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống (Đã hoàn thành)
-- **Nhiệm vụ (Task):** Tất cả nhiệm vụ hoàn thành (All tasks complete)
-- **Trạng thái (Status):** Đã xác minh (Verified)
+- **Giai đoạn (Phase):** 6 - Điều chỉnh tính năng công khai và phân cấp quản lý tài khoản nâng cao
+- **Nhiệm vụ (Task):** Phân tích yêu cầu và lập kế hoạch (Run /plan 6 to create)
+- **Trạng thái (Status):** Chưa bắt đầu (Not Started)
 
 ## Last Session Summary
 Phase 5 đã thực thi thành công. Lỗi kẹt modal "Phiên đăng nhập hết hạn" đè lên màn hình login đã được xử lý triệt để bằng cách:
@@ -15,7 +15,7 @@ Phase 5 đã thực thi thành công. Lỗi kẹt modal "Phiên đăng nhập h�
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Cột mốc "Chuyển đổi Quy mô Dự án" đã hoàn thành tất cả các phase và được xác minh thành công.
+1. Lập kế hoạch chi tiết cho Phase 6, làm rõ các yêu cầu từ user trước khi thực thi.
 
 ## Quyết định hiện tại (Active Decisions)
 

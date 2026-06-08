@@ -6,8 +6,8 @@ updated: 2026-06-08T16:00:00+07:00
 
 # Roadmap
 
-> **Current Phase:** None (Cột mốc hoàn thành)
-> **Status:** complete
+> **Current Phase:** Phase 6: Điều chỉnh tính năng công khai và phân cấp quản lý tài khoản nâng cao
+> **Status:** in progress
 
 ## Must-Haves (from SPEC)
 
@@ -76,6 +76,21 @@ updated: 2026-06-08T16:00:00+07:00
 
 ---
 
+### Phase 6: Điều chỉnh tính năng công khai và phân cấp quản lý tài khoản nâng cao
+**Status:** ⬜ Not Started
+**Objective:** 
+1. Đưa form góp ý về chế độ bắt buộc công khai (không ẩn danh), luôn yêu cầu nhập và xác nhận số điện thoại. 
+2. Phân cấp hệ thống tài khoản: Admin xem tất cả, cấp Tiểu đoàn xem của đơn vị mình, cấp Đại đội xem của đại đội mình, cấp Trung đoàn xem toàn bộ Trung đoàn. Cập nhật chức năng Admin để có thể thay đổi đơn vị và phân quyền cho cá nhân.
+**Depends on:** Phase 5
+
+**Tasks:**
+- [ ] TBD (run /plan 6 to create)
+
+**Verification:**
+- TBD
+
+---
+
 ## Progress Summary
 
 | Phase | Status | Plans | Complete |
@@ -85,6 +100,7 @@ updated: 2026-06-08T16:00:00+07:00
 | 3 | ✅ | 3/3 | 2026-05-25 |
 | 4 | ✅ | 1/1 | 2026-06-08 |
 | 5 | ✅ | 1/1 | 2026-06-08 |
+| 6 | ⬜ | 0/0 | pending |
 
 ---
 
@@ -97,3 +113,4 @@ updated: 2026-06-08T16:00:00+07:00
 | 3 | 2026-05-25 | 2026-05-25 | < 1h |
 | 4 | 2026-06-08 | 2026-06-08 | < 1h |
 | 5 | 2026-06-08 | 2026-06-08 | < 1h |
+| 6 | pending    | pending    | pending  |
