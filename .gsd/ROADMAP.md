@@ -1,13 +1,13 @@
 ---
 milestone: Chuyển đổi Quy mô Dự án
 version: 1.2.0
-updated: 2026-06-08T15:45:00+07:00
+updated: 2026-06-08T16:00:00+07:00
 ---
 
 # Roadmap
 
-> **Current Phase:** Phase 5: Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
-> **Status:** in_progress
+> **Current Phase:** None (Cột mốc hoàn thành)
+> **Status:** complete
 
 ## Must-Haves (from SPEC)
 
@@ -64,15 +64,15 @@ updated: 2026-06-08T15:45:00+07:00
 ---
 
 ### Phase 5: Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
-**Status:** ⬜ Not Started
-**Objective:** Điều tra nguồn gốc lỗi hết hạn token đang diễn ra trên hệ thống, sửa đổi cơ chế lưu trữ và kiểm tra token của cả frontend và backend để đảm bảo tính ổn định của phiên làm việc.
+**Status:** ✅ Complete
+**Objective:** Điều gia nguồn gốc lỗi hết hạn token đang diễn ra trên hệ thống, sửa đổi cơ chế lưu trữ và kiểm tra token của cả frontend và backend để đảm bảo tính ổn định của phiên làm việc.
 **Depends on:** Phase 4
 
-**Tasks:**
-- [ ] TBD (run /plan 5 to create)
+**Plans:**
+- [x] Plan 5.1: Đồng bộ hóa trạng thái hết hạn phiên và tái cấu trúc Provider
 
 **Verification:**
-- TBD
+- [x] Đồng bộ hóa Provider và useLocation() (xem [VERIFICATION.md](file:///.gsd/phases/5/VERIFICATION.md))
 
 ---
 
@@ -84,7 +84,7 @@ updated: 2026-06-08T15:45:00+07:00
 | 2 | ✅ | 1/1 | 2026-05-20 |
 | 3 | ✅ | 3/3 | 2026-05-25 |
 | 4 | ✅ | 1/1 | 2026-06-08 |
-| 5 | ⬜ | 0/1 | TBD |
+| 5 | ✅ | 1/1 | 2026-06-08 |
 
 ---
 
@@ -96,4 +96,4 @@ updated: 2026-06-08T15:45:00+07:00
 | 2 | 2026-05-20 | 2026-05-20 | < 1h |
 | 3 | 2026-05-25 | 2026-05-25 | < 1h |
 | 4 | 2026-06-08 | 2026-06-08 | < 1h |
-| 5 | 2026-06-08 | TBD | TBD |
+| 5 | 2026-06-08 | 2026-06-08 | < 1h |
