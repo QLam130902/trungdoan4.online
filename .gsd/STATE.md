@@ -3,19 +3,17 @@
 ## Vị trí hiện tại (Current Position)
 
 - **Cột mốc (Milestone):** Chuyển đổi Quy mô Dự án
-- **Giai đoạn (Phase):** 4 - Khắc phục lỗi hết hạn phiên đăng nhập và tối ưu JWT Token (Đã hoàn thành)
-- **Nhiệm vụ (Task):** Tất cả nhiệm vụ hoàn thành (All tasks complete)
-- **Trạng thái (Status):** Đã xác minh (Verified)
+- **Giai đoạn (Phase):** 5 - Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
+- **Nhiệm vụ (Task):** Thiết lập kế hoạch (Run /plan 5 to create)
+- **Trạng thái (Status):** Chưa hoàn thành (Not Started)
 
 ## Last Session Summary
-Phase 4 thực thi thành công. 1 kế hoạch, 3 nhiệm vụ đã hoàn tất và được kiểm thử thành công.
-- Tăng thời gian sống JWT token lên 24 giờ và hỗ trợ cấu hình tùy biến.
-- Rà soát cấu hình Spring Security cho endpoint `/suggestions/**` đảm bảo đúng vai trò được phân quyền.
-- Phiên đăng nhập hoạt động ổn định và lâu dài.
+Phase 4 đã tăng thời hạn JWT Token lên 24 giờ và thực hiện một số kiểm tra phân quyền, tuy nhiên người dùng báo cáo lỗi hết hạn token vẫn xảy ra trên hệ thống. Chúng tôi thêm Phase 5 để tập trung điều tra và xử lý triệt để vấn đề này.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Giai đoạn sửa lỗi phiên đăng nhập đã được hoàn thành triệt để. Hệ thống sẵn sàng vận hành.
+1. Lập kế hoạch Phase 5 bằng lệnh `/plan 5`.
+2. Tiến hành điều tra lỗi trên môi trường thực tế, kiểm tra log, network requests và cơ chế lưu trữ token frontend/backend.
 
 ## Quyết định hiện tại (Active Decisions)
 
@@ -31,4 +29,4 @@ Phase 4 thực thi thành công. 1 kế hoạch, 3 nhiệm vụ đã hoàn tất
 
 ---
 
-*Last updated: 2026-06-07T16:35:00+07:00*
+*Last updated: 2026-06-08T15:45:00+07:00*

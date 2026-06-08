@@ -1,13 +1,13 @@
 ---
 milestone: Chuyển đổi Quy mô Dự án
-version: 1.1.0
-updated: 2026-05-20T16:00:00+07:00
+version: 1.2.0
+updated: 2026-06-08T15:45:00+07:00
 ---
 
 # Roadmap
 
-> **Current Phase:** None (Cột mốc hoàn thành)
-> **Status:** complete
+> **Current Phase:** Phase 5: Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
+> **Status:** in_progress
 
 ## Must-Haves (from SPEC)
 
@@ -53,26 +53,6 @@ updated: 2026-05-20T16:00:00+07:00
 
 ---
 
-## Progress Summary
-
-| Phase | Status | Plans | Complete |
-|-------|--------|-------|----------|
-| 1 | ✅ | 1/1 | 2026-05-20 |
-| 2 | ✅ | 1/1 | 2026-05-20 |
-| 3 | ✅ | 3/3 | 2026-05-25 |
-
----
-
-## Timeline
-
-| Phase | Started | Completed | Duration |
-|-------|---------|-----------|----------|
-| 1 | 2026-05-20 | 2026-05-20 | < 1h |
-| 2 | 2026-05-20 | 2026-05-20 | < 1h |
-| 3 | 2026-05-25 | 2026-05-25 | < 1h |
-
----
-
 ### Phase 4: Khắc phục lỗi hết hạn phiên đăng nhập và tối ưu JWT Token
 **Status:** ✅ Complete
 **Objective:** Điều chỉnh và tăng thời gian sống của JWT token ở Backend, tối ưu hóa cơ chế xác thực ở Frontend để ngăn chặn việc bị đẩy ra khỏi phiên làm việc đột ngột.
@@ -80,6 +60,19 @@ updated: 2026-05-20T16:00:00+07:00
 
 **Plans:**
 - [x] Plan 4.1: Tăng thời gian sống của JWT Token & Kiểm tra phân quyền API
+
+---
+
+### Phase 5: Điều tra và khắc phục triệt để lỗi hết hạn token trên hệ thống
+**Status:** ⬜ Not Started
+**Objective:** Điều tra nguồn gốc lỗi hết hạn token đang diễn ra trên hệ thống, sửa đổi cơ chế lưu trữ và kiểm tra token của cả frontend và backend để đảm bảo tính ổn định của phiên làm việc.
+**Depends on:** Phase 4
+
+**Tasks:**
+- [ ] TBD (run /plan 5 to create)
+
+**Verification:**
+- TBD
 
 ---
 
@@ -91,6 +84,7 @@ updated: 2026-05-20T16:00:00+07:00
 | 2 | ✅ | 1/1 | 2026-05-20 |
 | 3 | ✅ | 3/3 | 2026-05-25 |
 | 4 | ✅ | 1/1 | 2026-06-08 |
+| 5 | ⬜ | 0/1 | TBD |
 
 ---
 
@@ -102,3 +96,4 @@ updated: 2026-05-20T16:00:00+07:00
 | 2 | 2026-05-20 | 2026-05-20 | < 1h |
 | 3 | 2026-05-25 | 2026-05-25 | < 1h |
 | 4 | 2026-06-08 | 2026-06-08 | < 1h |
+| 5 | 2026-06-08 | TBD | TBD |
