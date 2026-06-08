@@ -14,8 +14,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
-    <AuthProvider>
-      <HashRouter>
+    <HashRouter>
+      <AuthProvider>
         <Routes>
           {/* Client pages */}
           <Route element={<ClientLayout />}>
@@ -48,7 +48,7 @@ export default function App() {
             />
           </Route>
         </Routes>
-      </HashRouter>
-    </AuthProvider>
+      </AuthProvider>
+    </HashRouter>
   );
 }

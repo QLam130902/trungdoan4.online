@@ -50,7 +50,7 @@ export default function ContactMenu() {
 
           {/* Nút 2: Zalo (Angle 30deg: y = -95, x = -55) */}
           <a
-            href="https://zalo.me/0989496685"
+            href="https://zalo.me/0986561705"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-action-btn action-zalo"
@@ -62,7 +62,7 @@ export default function ContactMenu() {
 
           {/* Nút 3: Messenger (Angle 60deg: y = -55, x = -95) */}
           <a
-            href="https://www.messenger.com/t/100006863434895"
+            href="https://www.messenger.com/t/phuoc.giau.366312"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-action-btn action-messenger"
@@ -74,7 +74,7 @@ export default function ContactMenu() {
 
           {/* Nút 4: Gọi điện (Left: y = 0, x = -110) */}
           <a
-            href="tel:0989496685"
+            href="tel:0986561705"
             className="contact-action-btn action-phone"
             title="Gọi điện"
           >
