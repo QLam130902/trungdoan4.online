@@ -7,32 +7,30 @@
 - **Trạng thái (Status):** planning
 - **Kế hoạch (Plan):** Lập kế hoạch lưu trữ nhánh và khôi phục thông tin Trung đoàn 4.
 
-## Hành động vừa qua (Last Action)
-
-- Đã khởi tạo lộ trình [ROADMAP.md](file:///c:/Users/PC/projects/trungdoan4.online/.gsd/ROADMAP.md) và thêm Phase 1 về việc lưu trữ nhánh `sundoan5` và đưa dự án về quy mô Trung đoàn 4/Sư đoàn 5.
+## Last Session Summary
+Khảo sát và cập nhật bản đồ kiến trúc toàn diện (Codebase mapping qua /map) trên nhánh lưu trữ `sudoan5`:
+- Xác định 40 tệp mã nguồn với 5,755 dòng code trong thư mục `src/`.
+- Nhánh này lưu giữ nguyên bản quy mô Sư đoàn Bộ binh 5 (tên miền `sudoan5.io.vn`, API `https://api.sudoan5.io.vn`).
+- Phân tích 11 điểm tích hợp API (3 API công khai, 8 API xác thực qua JWT Bearer).
+- Nhận diện các điểm kỹ thuật khác biệt so với nhánh `trungdoan4`: Tiếp nhận theo danh sách cán bộ tĩnh (`officers.js`) thay vì cây đơn vị; chưa có bộ lọc đơn vị và chưa có cơ chế kiểm tra token hết hạn client-side.
+- Cập nhật ARCHITECTURE.md, STACK.md đồng bộ chính xác với hiện trạng nhánh `sudoan5`.
 
 ## Các bước tiếp theo (Next Steps)
 
-1. Chạy lệnh `/plan 1` hoặc lập kế hoạch chi tiết cho Phase 1 (thực hiện tạo nhánh `sundoan5`, cập nhật các file `.env.production`, `public/CNAME`, logo, và dữ liệu truyền thống).
-2. Tiến hành thực thi mã nguồn sau khi kế hoạch được duyệt.
-3. Xác minh hoạt động của website ở quy mô Trung đoàn 4.
+1. Lưu trữ và giữ nguyên hiện trạng nhánh `sudoan5` làm bản sao dự phòng lịch sử cho Sư đoàn 5.
+2. Chuyển về nhánh `trungdoan4` hoặc nhánh chính khi muốn tiếp tục phát triển các tính năng tiếp theo của Trung đoàn 4 (Phase 6).
 
 ## Quyết định hiện tại (Active Decisions)
 
 | Quyết định | Lựa chọn | Ngày đưa ra | Ảnh hưởng |
 |------------|----------|-------------|-----------|
-| Khảo sát codebase | Sử dụng workflow `/map` | 20/05/2026 | Tạo lập tài liệu cơ sở ban đầu cho dự án |
-| Đổi quy mô dự án | Đưa về Trung đoàn 4 | 20/05/2026 | Lưu trữ Sư đoàn 5 sang branch mới và khôi phục cấu hình Trung đoàn 4 |
+| Khảo sát codebase | Sử dụng workflow `/map` | 14/09/2026 | Cập nhật tài liệu kiến trúc cho nhánh lưu trữ `sudoan5` |
+| Lưu trữ Sư đoàn 5 | Nhánh `sudoan5` | 20/05/2026 | Đảm bảo bảo tồn đầy đủ dữ liệu truyền thống và cấu hình của Sư đoàn 5 |
 
 ## Trở ngại (Blockers)
 
 *Không có.*
 
-## Các điểm cần lưu ý (Concerns)
-
-- Cần đảm bảo branch lưu trữ `sundoan5` được tạo chính xác từ commit hiện tại để không bị mất mát dữ liệu Sư đoàn 5.
-- Cần khôi phục chính xác logo cũ (`logo.png`) và dữ liệu cũ của Trung đoàn 4 trong `src/data/traditionData.js`.
-
 ---
 
-*Last updated: 2026-05-20T14:59:00+07:00*
+*Last updated: 2026-09-14T14:20:00+07:00*
