@@ -5,6 +5,25 @@ import { useAuth } from "../../contexts/AuthContext";
 import { toApiDateTime } from "../../utils/exportUtils";
 import "./FeedbackListPage.css";
 
+const copyToClipboardSafe = (text) => {
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(() => {});
+    } else {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+    }
+  } catch (err) {
+    console.error("Lỗi copy:", err);
+  }
+};
+
+const cleanPhoneForLink = (phone) => phone ? phone.replace(/[\s\-\.]/g, '') : '';
+
 export default function FeedbackListPage() {
   const { authFetch } = useAuth();
   const [feedbacks, setFeedbacks] = useState([]);
@@ -36,7 +55,7 @@ export default function FeedbackListPage() {
 
   const handlePhoneClick = (e, id, phone) => {
     e.stopPropagation();
-    navigator.clipboard.writeText(phone);
+    copyToClipboardSafe(phone);
     setCopySuccess(id);
     setActivePhonePopup(id);
     setTimeout(() => setCopySuccess(null), 2000);
@@ -235,10 +254,10 @@ export default function FeedbackListPage() {
                         {copySuccess === fb.id ? "✅ Đã copy" : "Liên hệ"}
                       </div>
                       <div className="phone-popup-actions">
-                        <button onClick={() => { navigator.clipboard.writeText(fb.contactPhone); setCopySuccess(fb.id); }}>
+                        <button onClick={() => { copyToClipboardSafe(fb.contactPhone); setCopySuccess(fb.id); }}>
                           📋 Copy số
                         </button>
-                        <a href={`tel:${fb.contactPhone}`}>
+                        <a href={`tel:${cleanPhoneForLink(fb.contactPhone)}`}>
                           📞 Gọi ngay
                         </a>
                       </div>
@@ -305,10 +324,10 @@ export default function FeedbackListPage() {
                       {copySuccess === fb.id ? "✅ Đã copy" : "Liên hệ"}
                     </div>
                     <div className="phone-popup-actions">
-                      <button onClick={() => { navigator.clipboard.writeText(fb.contactPhone); setCopySuccess(fb.id); }}>
+                      <button onClick={() => { copyToClipboardSafe(fb.contactPhone); setCopySuccess(fb.id); }}>
                         📋 Copy số
                       </button>
-                      <a href={`tel:${fb.contactPhone}`}>
+                      <a href={`tel:${cleanPhoneForLink(fb.contactPhone)}`}>
                         📞 Gọi ngay
                       </a>
                     </div>
@@ -370,11 +389,11 @@ export default function FeedbackListPage() {
                 <strong>Người gửi:</strong> <br />{replyModalData.suggestedBy || "Ẩn danh"}
                 {replyModalData.contactPhone && (
                   <div style={{ marginTop: '8px' }}>
-                    <a href={`tel:${replyModalData.contactPhone}`} style={{ color: 'var(--red-600)', textDecoration: 'none', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--red-50)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--red-200)' }}>
+                    <a href={`tel:${cleanPhoneForLink(replyModalData.contactPhone)}`} style={{ color: 'var(--red-600)', textDecoration: 'none', fontWeight: 'bold', display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'var(--red-50)', padding: '4px 8px', borderRadius: '4px', border: '1px solid var(--red-200)' }}>
                       📞 {replyModalData.contactPhone}
                     </a>
                     <button 
-                      onClick={() => { navigator.clipboard.writeText(replyModalData.contactPhone); alert("Đã copy số điện thoại!"); }}
+                      onClick={() => { copyToClipboardSafe(replyModalData.contactPhone); alert("Đã copy số điện thoại!"); }}
                       style={{ marginLeft: '8px', background: 'var(--gray-100)', border: '1px solid var(--gray-300)', borderRadius: '4px', cursor: 'pointer', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', color: 'var(--gray-700)' }}
                       title="Copy số điện thoại"
                     >
@@ -392,7 +411,7 @@ export default function FeedbackListPage() {
                     {replyModalData.trackingCode}
                   </span>
                   <button 
-                    onClick={() => { navigator.clipboard.writeText(replyModalData.trackingCode); alert("Đã copy mã tra cứu!"); }}
+                    onClick={() => { copyToClipboardSafe(replyModalData.trackingCode); alert("Đã copy mã tra cứu!"); }}
                     style={{ background: 'var(--gray-100)', border: '1px solid var(--gray-300)', borderRadius: '4px', cursor: 'pointer', padding: '4px 8px', fontSize: '12px', fontWeight: 'bold', color: 'var(--gray-700)' }}
                     title="Copy mã tra cứu"
                   >
