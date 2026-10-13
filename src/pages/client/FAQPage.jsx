@@ -18,8 +18,8 @@ export default function FAQPage() {
     setOpenIndex((prev) => (prev === index ? null : index));
   };
 
-  const filteredData = activeTab === "all" 
-    ? faqData 
+  const filteredData = activeTab === "all"
+    ? faqData
     : faqData.filter(item => item.category === activeTab);
 
   return (
@@ -73,22 +73,6 @@ export default function FAQPage() {
                     <span className="faq-a-icon">A</span>
                     <div className="faq-content-wrapper">
                       <p>{item.answer}</p>
-                      {item.docRef && (
-                        <div className="faq-doc-ref">
-                          <span className="doc-label">Căn cứ: {item.docRef}</span>
-                          <button 
-                            className="btn-download-doc"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              if (item.fileName) {
-                                window.open(`${import.meta.env.BASE_URL}docs/${item.fileName}`, '_blank');
-                              }
-                            }}
-                          >
-                            📥 Tải văn bản gốc
-                          </button>
-                        </div>
-                      )}
                     </div>
                   </div>
                 </div>

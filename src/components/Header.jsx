@@ -15,7 +15,7 @@ export default function Header() {
     <header className="header">
       <div className="header-inner">
         <img
-          src={`${import.meta.env.BASE_URL}logoqk.png`}
+          src={`${import.meta.env.BASE_URL}logoqk-v2.png`}
           alt="Logo đơn vị"
           className="header-logo header-logo-left"
         />
