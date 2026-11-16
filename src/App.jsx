@@ -5,6 +5,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import FeedbackPage from "./pages/client/FeedbackPage";
 import TraditionPage from "./pages/client/TraditionPage";
 import FAQPage from "./pages/client/FAQPage";
+import LocalContactsPage from "./pages/client/LocalContactsPage";
 import DashboardPage from "./pages/admin/DashboardPage";
 import FeedbackListPage from "./pages/admin/FeedbackListPage";
 import LoginPage from "./pages/admin/LoginPage";
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/" element={<FeedbackPage />} />
             <Route path="/truyen-thong" element={<TraditionPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/dia-phuong" element={<LocalContactsPage />} />
           </Route>
 
           {/* Admin Login */}

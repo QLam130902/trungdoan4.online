@@ -6,9 +6,15 @@ export default function Header() {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Hòm thư góp ý", icon: "📝" },
-    { path: "/truyen-thong", label: "Truyền thống đơn vị", icon: "⭐" },
-    { path: "/faq", label: "Hỏi đáp", icon: "❓" },
+    { path: "/", label: "Hòm thư góp ý", shortLabel: "Góp ý", icon: "📝" },
+    { path: "/truyen-thong", label: "Truyền thống đơn vị", shortLabel: "Truyền thống", icon: "⭐" },
+    { path: "/faq", label: "Hỏi đáp", shortLabel: "Hỏi đáp", icon: "❓" },
+    {
+      path: "/dia-phuong",
+      label: "Cấp ủy & Tôn giáo",
+      shortLabel: "Cấp ủy & Tôn giáo",
+      icon: "🏛️",
+    },
   ];
 
   return (
@@ -41,7 +47,8 @@ export default function Header() {
               className={`nav-link ${location.pathname === item.path ? "active" : ""}`}
             >
               <span className="nav-icon">{item.icon}</span>
-              <span className="nav-label">{item.label}</span>
+              <span className="nav-label nav-label-full">{item.label}</span>
+              <span className="nav-label nav-label-short">{item.shortLabel || item.label}</span>
             </Link>
           ))}
         </div>
