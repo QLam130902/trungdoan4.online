@@ -301,7 +301,7 @@ export default function FeedbackPage() {
                   id="lookupCode"
                   className="input"
                   type="text"
-                  placeholder="Ví dụ: 300426A"
+                  placeholder="Ví dụ: K8P4M9X2 (không phân biệt hoa/thường)"
                   value={lookupCode}
                   onChange={(e) => setLookupCode(e.target.value)}
                 />
