@@ -316,14 +316,23 @@ export default function FeedbackPage() {
               {lookupResult && (
                 <div className="status-result">
                   <div className="status-header">
-                    <span>✅</span>
+                    <span>{lookupResult.status === "COMPLETED" ? "✅" : lookupResult.status === "RESOLVED" ? "🔍" : "📨"}</span>
                     <span>
-                      Trạng thái: <strong>{lookupResult.status === "PENDING" ? "Đang chờ xử lý" : (lookupResult.status === "RESOLVED" ? "Đã phản hồi và hoàn tất" : lookupResult.status)}</strong>
+                      Trạng thái:{" "}
+                      <strong>
+                        {lookupResult.status === "PENDING"
+                          ? "Đã gửi đến đơn vị"
+                          : lookupResult.status === "RESOLVED"
+                          ? "Đơn vị đã tiếp nhận và sẽ kiểm tra"
+                          : lookupResult.status === "COMPLETED"
+                          ? "Hoàn tất xử lý"
+                          : lookupResult.status}
+                      </strong>
                     </span>
                   </div>
 
-                  {lookupResult.status === "RESOLVED" && lookupResult.response && (
-                    <div className="response-box" style={{ marginTop: "15px", padding: "10px", backgroundColor: "#f9f9f9", borderLeft: "4px solid #4CAF50", borderRadius: "4px" }}>
+                  {(lookupResult.status === "RESOLVED" || lookupResult.status === "COMPLETED") && lookupResult.response && (
+                    <div className="response-box" style={{ marginTop: "15px", padding: "10px", backgroundColor: "#f9f9f9", borderLeft: `4px solid ${lookupResult.status === "COMPLETED" ? "#4CAF50" : "#0284c7"}`, borderRadius: "4px" }}>
                       <strong>Kết quả xử lý / Phản hồi:</strong>
                       <p style={{ marginTop: "8px", whiteSpace: "pre-wrap" }}>{lookupResult.response}</p>
                     </div>

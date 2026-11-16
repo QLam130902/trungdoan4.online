@@ -96,7 +96,12 @@ export async function exportToExcel(data, rangeLabel = 'Tất cả') {
       suggestedBy: item.suggestedBy || 'Ẩn danh',
       suggestAt: formatDateVN(item.suggestAt),
       body: item.body || '',
-      status: item.status === 'RESOLVED' ? 'Đã xử lý' : 'Chưa xử lý',
+      status:
+        item.status === 'COMPLETED'
+          ? 'Hoàn tất xử lý'
+          : item.status === 'RESOLVED'
+          ? 'Đơn vị đã tiếp nhận và sẽ kiểm tra'
+          : 'Đã gửi đến đơn vị',
       handledBy: item.handledBy || '',
       handledAt: formatDateVN(item.handledAt),
       response: item.response || '',

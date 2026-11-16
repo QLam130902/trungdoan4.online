@@ -2,7 +2,7 @@ export const faqData = [
   // === NHÓM 1: Chế độ sinh hoạt ===
   {
     category: "sinh-hoat",
-    question: "11 chế độ trong ngày của chiến sĩ gồm những gì?",
+    question: "11 chế độ trong ngày gồm những gì?",
     answer: "Gồm: Treo Quốc kỳ; Thức dậy; Thể dục buổi sáng; Kiểm tra sáng; Học tập; Ăn uống; Lau vũ khí, trang bị; Thể thao, tăng gia sản xuất; Đọc báo, nghe tin; Điểm danh, điểm quân số; Ngủ nghỉ. (Căn cứ Điều lệnh quản lý bộ đội).",
     docRef: "40/VBHN-BQP",
     fileName: "40_VBHN-BQP.doc"

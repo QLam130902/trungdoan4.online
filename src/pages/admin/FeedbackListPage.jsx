@@ -29,6 +29,7 @@ export default function FeedbackListPage() {
   const [feedbacks, setFeedbacks] = useState([]);
   const [replyModalData, setReplyModalData] = useState(null);
   const [replyText, setReplyText] = useState("");
+  const [replyStatus, setReplyStatus] = useState("RESOLVED");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [filterStatus, setFilterStatus] = useState("ALL");
   const [showExportModal, setShowExportModal] = useState(false);
@@ -128,11 +129,12 @@ export default function FeedbackListPage() {
   const openReplyModal = (fb) => {
     setReplyModalData(fb);
     setReplyText(fb.response || "");
+    setReplyStatus(fb.status === "COMPLETED" ? "COMPLETED" : "RESOLVED");
   };
 
-  // 3. Lưu phản hồi
+  // 3. Lưu phản hồi / cập nhật trạng thái
   const submitReply = async () => {
-    if (!replyText.trim()) {
+    if (!replyText.trim() && replyStatus !== "COMPLETED") {
       alert("Vui lòng nhập nội dung phản hồi.");
       return;
     }
@@ -140,7 +142,7 @@ export default function FeedbackListPage() {
     try {
       const res = await authFetch(`${import.meta.env.VITE_API_BASE_URL}/suggestions/${replyModalData.id}/reply`, {
         method: "PUT",
-        body: JSON.stringify({ response: replyText }),
+        body: JSON.stringify({ response: replyText, status: replyStatus }),
       });
       if (res && res.ok) {
         setReplyModalData(null);
@@ -171,13 +173,19 @@ export default function FeedbackListPage() {
       <div className="admin-toolbar">
         {/* Hàng 1: Bộ lọc trạng thái + PageSize + Xuất Excel */}
         <div className="toolbar-row">
-          <div className="status-filter-tabs">
-            {['ALL', 'PENDING', 'RESOLVED'].map(status => (
+          <div className="status-filter-tabs" style={{ flexWrap: 'wrap' }}>
+            {['ALL', 'PENDING', 'RESOLVED', 'COMPLETED'].map(status => (
               <button key={status}
                 className={`filter-tab ${filterStatus === status ? 'active' : ''}`}
                 onClick={() => handleFilterChange(status)}
               >
-                {status === 'ALL' ? 'Tất cả' : status === 'PENDING' ? 'Chưa xử lý' : 'Đã xử lý'}
+                {status === 'ALL'
+                  ? 'Tất cả'
+                  : status === 'PENDING'
+                  ? 'Đã gửi đến đơn vị'
+                  : status === 'RESOLVED'
+                  ? 'Đơn vị đã tiếp nhận và sẽ kiểm tra'
+                  : 'Hoàn tất xử lý'}
               </button>
             ))}
           </div>
@@ -267,15 +275,21 @@ export default function FeedbackListPage() {
                 <td className="td-content">{fb.body}</td>
                 <td>
                   {fb.status === 'PENDING' ? (
-                    <span className="status-badge status-pending">Chưa xử lý</span>
+                    <span className="status-badge status-pending">Đã gửi đến đơn vị</span>
+                  ) : fb.status === 'RESOLVED' ? (
+                    <span className="status-badge status-received">
+                      Đơn vị đã tiếp nhận và sẽ kiểm tra{fb.handledBy ? ` (${fb.handledBy})` : ''}
+                    </span>
                   ) : (
-                    <span className="status-badge status-resolved">Đã xử lý ({fb.handledBy})</span>
+                    <span className="status-badge status-resolved">
+                      Hoàn tất xử lý{fb.handledBy ? ` (${fb.handledBy})` : ''}
+                    </span>
                   )}
                 </td>
                 <td>
                   <div style={{ display: "flex", gap: "6px", justifyContent: "center" }}>
                     <button onClick={() => openReplyModal(fb)} style={{ padding: "6px 12px", backgroundColor: "var(--success)", color: "white", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer", fontWeight: "bold", fontSize: "12px", whiteSpace: "nowrap" }}>
-                      {fb.status === 'RESOLVED' ? '✎ Chỉnh sửa' : '✎ Phản hồi'}
+                      {fb.status === 'PENDING' ? '✎ Phản hồi' : '✎ Chỉnh sửa'}
                     </button>
                     <button onClick={() => deleteFeedback(fb.id)} style={{ padding: "6px 12px", backgroundColor: "var(--danger)", color: "white", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer", fontWeight: "bold", fontSize: "12px", whiteSpace: "nowrap" }}>
                       ✖ Xóa
@@ -295,9 +309,11 @@ export default function FeedbackListPage() {
             <div className="feedback-card-top">
               <span className="feedback-card-id">#{fb.id}</span>
               {fb.status === 'PENDING' ? (
-                <span className="status-badge status-pending small">Chưa xử lý</span>
+                <span className="status-badge status-pending small">Đã gửi đến đơn vị</span>
+              ) : fb.status === 'RESOLVED' ? (
+                <span className="status-badge status-received small">Đơn vị đã tiếp nhận và sẽ kiểm tra</span>
               ) : (
-                <span className="status-badge status-resolved small">Đã xử lý</span>
+                <span className="status-badge status-resolved small">Hoàn tất xử lý</span>
               )}
             </div>
             <div className="feedback-card-main">
@@ -340,7 +356,7 @@ export default function FeedbackListPage() {
             </div>
             <div className="feedback-card-footer-compact">
               <button onClick={() => openReplyModal(fb)} className="feedback-card-action-btn-compact">
-                {fb.status === 'RESOLVED' ? '✎ Chỉnh sửa' : '✎ Phản hồi'}
+                {fb.status === 'PENDING' ? '✎ Phản hồi' : '✎ Chỉnh sửa'}
               </button>
             </div>
           </div>
@@ -380,7 +396,7 @@ export default function FeedbackListPage() {
       {/* ===== REPLY MODAL ===== */}
       <Modal show={!!replyModalData} onClose={() => setReplyModalData(null)}>
         <h2 style={{ marginBottom: "15px", color: "var(--red-600)" }}>
-          {replyModalData?.status === 'RESOLVED' ? `Chỉnh sửa phản hồi #${replyModalData?.id}` : `Chi tiết góp ý #${replyModalData?.id}`}
+          {replyModalData?.status !== 'PENDING' ? `Chỉnh sửa phản hồi #${replyModalData?.id}` : `Chi tiết góp ý #${replyModalData?.id}`}
         </h2>
         {replyModalData && (
           <div style={{ textAlign: "left", fontSize: "14px", lineHeight: "1.6" }}>
@@ -421,11 +437,13 @@ export default function FeedbackListPage() {
               </div>
 
               <div>
-                <strong>Trạng thái:</strong> <br />
+                <strong>Trạng thái hiện tại:</strong> <br />
                 {replyModalData.status === 'PENDING' ? (
-                  <span className="status-select status-progress" style={{ display: 'inline-block', marginTop: '4px' }}>Chưa xử lý</span>
+                  <span className="status-badge status-pending" style={{ display: 'inline-block', marginTop: '4px' }}>Đã gửi đến đơn vị</span>
+                ) : replyModalData.status === 'RESOLVED' ? (
+                  <span className="status-badge status-received" style={{ display: 'inline-block', marginTop: '4px' }}>Đơn vị đã tiếp nhận và sẽ kiểm tra ({replyModalData.handledBy || "Ẩn danh"})</span>
                 ) : (
-                  <span className="status-select status-done" style={{ display: 'inline-block', marginTop: '4px' }}>Đã xử lý bởi {replyModalData.handledBy || "Ẩn danh"}</span>
+                  <span className="status-badge status-resolved" style={{ display: 'inline-block', marginTop: '4px' }}>Hoàn tất xử lý ({replyModalData.handledBy || "Ẩn danh"})</span>
                 )}
               </div>
             </div>
@@ -433,6 +451,50 @@ export default function FeedbackListPage() {
             <div style={{ background: 'var(--gray-50)', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>
               <strong>Nội dung góp ý:</strong>
               <p style={{ marginTop: '8px', whiteSpace: 'pre-wrap' }}>{replyModalData.body}</p>
+            </div>
+
+            <div style={{ marginBottom: "15px" }}>
+              <label style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}>
+                Cập nhật trạng thái xử lý:
+              </label>
+              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+                <button
+                  type="button"
+                  onClick={() => setReplyStatus("RESOLVED")}
+                  style={{
+                    flex: "1 1 200px",
+                    padding: "10px 12px",
+                    borderRadius: "6px",
+                    border: replyStatus === "RESOLVED" ? "2px solid #0284c7" : "1px solid var(--gray-300)",
+                    backgroundColor: replyStatus === "RESOLVED" ? "#e0f2fe" : "white",
+                    color: replyStatus === "RESOLVED" ? "#0369a1" : "var(--gray-700)",
+                    fontWeight: replyStatus === "RESOLVED" ? "bold" : "600",
+                    cursor: "pointer",
+                    fontSize: "13px",
+                    textAlign: "left"
+                  }}
+                >
+                  🔍 Đơn vị đã tiếp nhận và sẽ kiểm tra
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setReplyStatus("COMPLETED")}
+                  style={{
+                    flex: "1 1 160px",
+                    padding: "10px 12px",
+                    borderRadius: "6px",
+                    border: replyStatus === "COMPLETED" ? "2px solid #388e3c" : "1px solid var(--gray-300)",
+                    backgroundColor: replyStatus === "COMPLETED" ? "#e8f5e9" : "white",
+                    color: replyStatus === "COMPLETED" ? "#1b5e20" : "var(--gray-700)",
+                    fontWeight: replyStatus === "COMPLETED" ? "bold" : "600",
+                    cursor: "pointer",
+                    fontSize: "13px",
+                    textAlign: "left"
+                  }}
+                >
+                  ✅ Hoàn tất xử lý
+                </button>
+              </div>
             </div>
 
             <div style={{ marginTop: "15px", marginBottom: "20px" }}>
@@ -458,7 +520,7 @@ export default function FeedbackListPage() {
               <div style={{ display: "flex", gap: "10px" }}>
                 <button className="btn-secondary" onClick={() => setReplyModalData(null)} disabled={isSubmitting}>Đóng</button>
                 <button className="btn-primary" onClick={submitReply} disabled={isSubmitting}>
-                  {isSubmitting ? "Đang lưu..." : (replyModalData?.status === 'RESOLVED' ? "Cập nhật" : "Xác nhận gửi")}
+                  {isSubmitting ? "Đang lưu..." : (replyModalData?.status !== 'PENDING' ? "Cập nhật" : "Xác nhận gửi")}
                 </button>
               </div>
             </div>

@@ -97,6 +97,12 @@
   border-color: #FF8C00;
 }
 
+.status-received {
+  background: #E0F2FE;
+  color: #0369A1;
+  border-color: #0284C7;
+}
+
 .status-resolved {
   background: #E8F5E9;
   color: #1B5E20;

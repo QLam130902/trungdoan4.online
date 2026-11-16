@@ -61,9 +61,9 @@ export default function DashboardPage() {
   // Dữ liệu thẻ thống kê
   const summaryCards = stats ? [
     { label: "Tổng góp ý", value: stats.totalCount, icon: "📝", color: "red" },
-    { label: "Đã xử lý", value: stats.resolvedCount, icon: "✅", color: "green" },
-    { label: "Chờ tiếp nhận", value: stats.pendingCount, icon: "⏳", color: "gold" },
-    { label: "Tỉ lệ xử lý", value: stats.totalCount > 0 ? Math.round((stats.resolvedCount / stats.totalCount) * 100) + "%" : "0%", icon: "📊", color: "sky" },
+    { label: "Đã gửi đến đơn vị", value: stats.pendingCount, icon: "📨", color: "gold" },
+    { label: "Đã tiếp nhận & kiểm tra", value: stats.receivedCount ?? 0, icon: "🔍", color: "sky" },
+    { label: "Hoàn tất xử lý", value: stats.completedCount ?? 0, icon: "✅", color: "green" },
   ] : [];
 
   // Dữ liệu biểu đồ cột (Bar Chart)
@@ -82,8 +82,16 @@ export default function DashboardPage() {
         borderRadius: 4,
       },
       {
-        label: 'Đã xử lý',
-        data: stats.dailyBreakdown.map(d => d.resolved),
+        label: 'Đã tiếp nhận & kiểm tra',
+        data: stats.dailyBreakdown.map(d => d.received ?? 0),
+        backgroundColor: 'rgba(2, 132, 199, 0.7)',
+        borderColor: 'rgba(2, 132, 199, 1)',
+        borderWidth: 1,
+        borderRadius: 4,
+      },
+      {
+        label: 'Hoàn tất xử lý',
+        data: stats.dailyBreakdown.map(d => d.completed ?? 0),
         backgroundColor: 'rgba(5, 150, 105, 0.7)',
         borderColor: 'rgba(5, 150, 105, 1)',
         borderWidth: 1,
@@ -120,11 +128,11 @@ export default function DashboardPage() {
 
   // Dữ liệu biểu đồ tròn (Doughnut Chart)
   const doughnutData = stats ? {
-    labels: ['Đã xử lý', 'Chưa xử lý'],
+    labels: ['Hoàn tất xử lý', 'Đơn vị đã tiếp nhận và sẽ kiểm tra', 'Đã gửi đến đơn vị'],
     datasets: [{
-      data: [stats.resolvedCount, stats.pendingCount],
-      backgroundColor: ['rgba(5, 150, 105, 0.85)', 'rgba(234, 179, 8, 0.85)'],
-      borderColor: ['#059669', '#ca8a04'],
+      data: [stats.completedCount ?? 0, stats.receivedCount ?? 0, stats.pendingCount],
+      backgroundColor: ['rgba(5, 150, 105, 0.85)', 'rgba(2, 132, 199, 0.85)', 'rgba(234, 179, 8, 0.85)'],
+      borderColor: ['#059669', '#0284c7', '#ca8a04'],
       borderWidth: 2,
       hoverOffset: 15
     }]
