@@ -101,12 +101,12 @@ export default function WelcomeModal() {
             <div className="welcome-credit">
               <p>Phát triển bởi:</p>
               <p>
-                <strong>Trung tá Nguyễn Văn Tuấn</strong> – Trưởng Ban Dân vận,
-                Sư đoàn 5
+                <strong>Trung tá Phạm Văn Ước</strong> – Trung đoàn trưởng,
+                Trung đoàn 4, Sư đoàn 5
               </p>
               <p>
-                <strong>Trung tá Võ Phước Giàu</strong> – Phó Chủ nhiệm Chính trị,
-                Trung đoàn 4, Sư đoàn 5
+                <strong>Trung tá Nguyễn Văn Tuấn</strong> – Trưởng Ban Dân vận,
+                Sư đoàn 5
               </p>
               <p>
                 <strong>Hạ sỹ Đỗ Quang Lâm</strong> – Chiến sĩ Đại đội 2, Tiểu
