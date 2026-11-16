@@ -49,8 +49,8 @@ jobs:
         with:
           path: './dist'
 
-      - name: Chờ GitHub đồng bộ Artifact (tránh lỗi Found 0 artifacts)
-        run: sleep 10
+      - name: Chờ GitHub đồng bộ Artifact (tránh lỗi Found 0 artifacts và đợi pages-build-deployment)
+        run: sleep 35
 
       - name: 7. Bấm nút Deploy xuất bản lên Web chính thức
         id: deployment
