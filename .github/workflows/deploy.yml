@@ -3,7 +3,7 @@ name: Deploy Vite App to GitHub Pages
 on:
   # Lệnh này sẽ tự động chạy khi bạn push code lên các nhánh dưới đây:
   push:
-    branches: ["deploy/*"]
+    branches: ["deploy/*", "production-deploy*"]
   
   # Cho phép bạn chạy thủ công kịch bản này từ giao diện GitHub
   workflow_dispatch:
@@ -48,6 +48,9 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+
+      - name: Chờ GitHub đồng bộ Artifact (tránh lỗi Found 0 artifacts)
+        run: sleep 10
 
       - name: 7. Bấm nút Deploy xuất bản lên Web chính thức
         id: deployment
