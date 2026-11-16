@@ -5,7 +5,6 @@ const STORAGE_KEY = "sudoan5_welcome_seen";
 
 export default function ContactMenu() {
   const [showWelcome, setShowWelcome] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const alreadySeen = localStorage.getItem(STORAGE_KEY);
@@ -19,93 +18,26 @@ export default function ContactMenu() {
     setShowWelcome(false);
   };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   const openWelcomeModal = () => {
     setShowWelcome(true);
-    setIsMenuOpen(false);
   };
 
   return (
     <>
-      {/* Floating Action Button (Speed Dial) */}
-      <div className={`contact-menu-container ${isMenuOpen ? 'open' : ''}`}>
-
-        {/* Các nút con */}
-        <div className="contact-actions">
-
-          {/* Nút 1: Welcome Modal (Top: y = -110, x = 0) */}
-          <button
-            className="contact-action-btn action-welcome"
-            onClick={openWelcomeModal}
-            title="Thư chào mừng"
-          >
-            <span className="action-tooltip">Thư chào mừng</span>
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
-            </svg>
-          </button>
-
-          {/* Nút 2: Zalo (Angle 30deg: y = -95, x = -55) */}
-          <a
-            href="https://zalo.me/0989496685"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-action-btn action-zalo"
-            title="Zalo"
-          >
-            <span className="action-tooltip">Zalo</span>
-            <img src={`${import.meta.env.BASE_URL}logo-zalo.png`} alt="Zalo" style={{ width: '33px', height: '33px', objectFit: 'cover', borderRadius: '50%' }} />
-          </a>
-
-          {/* Nút 3: Messenger (Angle 60deg: y = -55, x = -95) */}
-          <a
-            href="https://www.messenger.com/t/100006863434895"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-action-btn action-messenger"
-            title="Messenger"
-          >
-            <span className="action-tooltip">Messenger</span>
-            <img src={`${import.meta.env.BASE_URL}logo-messenger.png`} alt="Messenger" style={{ width: '33px', height: '33px', objectFit: 'cover', borderRadius: '50%' }} />
-          </a>
-
-          {/* Nút 4: Gọi điện (Left: y = 0, x = -110) */}
-          <a
-            href="tel:0989496685"
-            className="contact-action-btn action-phone"
-            title="Gọi điện"
-          >
-            <span className="action-tooltip">Gọi điện</span>
-            <img src={`${import.meta.env.BASE_URL}logo-phone.png`} alt="Gọi điện" style={{ width: '33px', height: '33px', objectFit: 'cover', borderRadius: '50%' }} />
-          </a>
-        </div>
-
-        {/* Nút chính */}
+      {/* Nút Liên hệ / Hỗ trợ trên màn hình chính */}
+      <div className="contact-menu-container">
         <button
           className="contact-main-btn"
-          onClick={toggleMenu}
+          onClick={openWelcomeModal}
           title="Liên hệ / Hỗ trợ"
         >
-          {isMenuOpen ? (
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" className="icon-close">
-              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" className="icon-phone-shake">
-              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 .98-.66.98-1.21v-3.42c0-.54-.45-.99-.99-.99z" />
-            </svg>
-          )}
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" className="icon-phone-shake">
+            <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 00-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.03 21c.76 0 .98-.66.98-1.21v-3.42c0-.54-.45-.99-.99-.99z" />
+          </svg>
         </button>
       </div>
 
-      {/* Overlay đóng menu khi click ra ngoài */}
-      {isMenuOpen && <div className="contact-menu-backdrop" onClick={() => setIsMenuOpen(false)}></div>}
-
-
-      {/* Modal Welcome (Giữ nguyên cấu trúc cũ) */}
+      {/* Modal Welcome */}
       {showWelcome && (
         <div className="welcome-overlay" onClick={handleCloseWelcome} aria-modal="true" role="dialog" style={{ zIndex: 10000 }}>
           <div className="welcome-dialog" onClick={(e) => e.stopPropagation()}>
@@ -132,20 +64,54 @@ export default function ContactMenu() {
 
               <div className="welcome-features">
                 <h3 className="welcome-features-title">Bạn có thể:</h3>
-                <ul className="welcome-feature-list">
-                  <li>
-                    <span className="feature-icon">💬</span>
-                    <span>Phản ánh tình hình sức khỏe, sinh hoạt của chiến sĩ đến Chỉ huy đơn vị</span>
-                  </li>
-                  <li>
-                    <span className="feature-icon">📋</span>
-                    <span>Hỏi về chế độ, chính sách trong đơn vị</span>
-                  </li>
-                  <li>
-                    <span className="feature-icon">🏫</span>
-                    <span>Góp ý về môi trường công tác, học tập, sinh hoạt</span>
-                  </li>
-                </ul>
+                <div className="welcome-action-list">
+                  <a
+                    href="https://zalo.me/0989496685"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="welcome-action-item"
+                  >
+                    <span className="welcome-action-icon">
+                      <img src={`${import.meta.env.BASE_URL}logo-zalo.png`} alt="Zalo" />
+                    </span>
+                    <span className="welcome-action-label">Liên hệ qua Zalo</span>
+                  </a>
+
+                  <a
+                    href="https://www.messenger.com/t/100006863434895"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="welcome-action-item"
+                  >
+                    <span className="welcome-action-icon">
+                      <img src={`${import.meta.env.BASE_URL}logo-messenger.png`} alt="Messenger" />
+                    </span>
+                    <span className="welcome-action-label">Liên hệ qua Messenger</span>
+                  </a>
+
+                  <a
+                    href="tel:0989496685"
+                    className="welcome-action-item"
+                  >
+                    <span className="welcome-action-icon">
+                      <img src={`${import.meta.env.BASE_URL}logo-phone.png`} alt="Số điện thoại" />
+                    </span>
+                    <span className="welcome-action-label">Liên hệ qua số điện thoại</span>
+                  </a>
+
+                  <button
+                    type="button"
+                    className="welcome-action-item"
+                    onClick={handleCloseWelcome}
+                  >
+                    <span className="welcome-action-icon welcome-action-icon-direct">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" />
+                      </svg>
+                    </span>
+                    <span className="welcome-action-label">Gửi góp ý trực tiếp</span>
+                  </button>
+                </div>
               </div>
 
               <div className="welcome-guarantee">
